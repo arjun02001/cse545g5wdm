@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Services;
 
 /// <summary>
-/// Summary description for WebService
+/// Summary description for SQLInjectionDetectionService
 /// </summary>
 [WebService(Namespace = "http://tempuri.org/")]
 [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
@@ -22,26 +20,8 @@ public class SQLInjectionDetectionService : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public bool DetectSQLInjectionByRegex(string input, Regex validator)
-    {
-        //default to find SQLInjection
-        bool match = true;
-        try
-        {
-            match = validator.IsMatch(input, 0);
-            //only way to return false
-            return match;
-        }
-        catch (ArgumentNullException)
-        {
-            //if error return true as safe mode to reject input
-            return true;
-        }
-        catch (ArgumentOutOfRangeException)
-        {
-            //if error return true as safe mode to reject input
-            return true;
-        }
+    public string HelloWorld() {
+        return "Hello World";
     }
     
 }
