@@ -1,6 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Login" ValidateRequest="true"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
 <style type="text/css">
 .heading
 {
@@ -41,8 +43,6 @@
 }
 
 </style>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
     <title>Web Document Management Server</title>
 </head>
 <body>
@@ -66,7 +66,9 @@
         </div>
         <br />
         <div>
-            <asp:Button runat="server" ID="btn_Submit" Text="Submit" Enabled="true" Font-Names="Times New Roman" Font-Size="Medium" Visible="true" />
+            <asp:Button runat="server" ID="btn_Submit" Text="Submit" Enabled="true" 
+                Font-Names="Times New Roman" Font-Size="Medium" Visible="true" 
+                onclick="btn_Submit_Click" />
         </div>
         <div>
             <b>New User?</b> Click <a href="NewUser.aspx">here</a>.
