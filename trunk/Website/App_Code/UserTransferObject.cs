@@ -10,7 +10,7 @@ public class UserTransferObject
 {
     public int userid = 0;
     public string username = "";
-    int role = 0;
+    public int role = 0;
 
 	public UserTransferObject()
 	{

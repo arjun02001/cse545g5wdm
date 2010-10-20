@@ -24,24 +24,24 @@ public class DetectXSSAttemptService : System.Web.Services.WebService {
     [WebMethod]
     public bool IsXSSInjection(string input)
     {
-        if (input.Contains("<applet>") ||
-            input.Contains("<body>") ||
-            input.Contains("<embed>") ||
-            input.Contains("<frame>") ||
-            input.Contains("<script>") ||
-            input.Contains("<frameset>") ||
-            input.Contains("<html>") ||
-            input.Contains("<iframe>") ||
-            input.Contains("<img>") ||
-            input.Contains("<style>") ||
-            input.Contains("<layer>") ||
-            input.Contains("<link>") ||
-            input.Contains("<ilayer>") ||
-            input.Contains("<meta>") ||
-            input.Contains("<object>") ||
-            input.Contains("<src>") ||
-            input.Contains("<lowsrc>") ||
-            input.Contains("<href>"))
+        if (input.Contains("<applet") ||
+            input.Contains("<body") ||
+            input.Contains("<embed") ||
+            input.Contains("<frame") ||
+            input.Contains("<script") ||
+            input.Contains("<frameset") ||
+            input.Contains("<html") ||
+            input.Contains("<iframe") ||
+            input.Contains("<img") ||
+            input.Contains("<style") ||
+            input.Contains("<layer") ||
+            input.Contains("<link") ||
+            input.Contains("<ilayer") ||
+            input.Contains("<meta") ||
+            input.Contains("<object") ||
+            input.Contains("<src") ||
+            input.Contains("<lowsrc") ||
+            input.Contains("<href"))
         {
             return true;
         }

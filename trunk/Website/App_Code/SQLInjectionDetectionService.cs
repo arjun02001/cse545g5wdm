@@ -20,8 +20,8 @@ public class SQLInjectionDetectionService : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public string HelloWorld() {
-        return "Hello World";
+    public bool DetectSQL(string input) {
+        return false;
     }
     
 }
