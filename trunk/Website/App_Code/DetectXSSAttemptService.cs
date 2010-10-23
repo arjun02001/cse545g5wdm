@@ -24,6 +24,7 @@ public class DetectXSSAttemptService : System.Web.Services.WebService {
     [WebMethod]
     public bool IsXSSInjection(string input)
     {
+        input = input.ToLower();
         if (input.Contains("<applet") ||
             input.Contains("<body") ||
             input.Contains("<embed") ||
