@@ -98,7 +98,7 @@ public class LoginService : System.Web.Services.WebService {
         }
 
         //check that the datatable has rows
-        if ((user.Rows.Count == 1) & (user.Columns.Count == 3))
+        if ((user.Rows.Count == 1) && (user.Columns.Count == 3))
         {
             //now fill the UserTransferObject
             UserTransferObject returnedValue = new UserTransferObject();
