@@ -14,4 +14,9 @@ public partial class Default2 : System.Web.UI.Page
     {
 
     }
+
+    protected void DepartmentList_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }

@@ -43,15 +43,16 @@
              </p>
              <p style="margin-left: 200px">
             Role:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                 <asp:DropDownList ID="DropDownList1" runat="server" 
-                     DataSourceID="SqlDataSource1" Height="18px" Width="197px">
+                 <asp:DropDownList ID="RoleList" runat="server" Height="18px" Width="197px">
+                     <asp:ListItem Value="1">Normal</asp:ListItem>
                  </asp:DropDownList>
              </p>
         </div>
         <p style="margin-left: 200px">
             Department:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:DropDownList ID="DepartmentList" runat="server" 
-                DataSourceID="SqlDataSource1" Height="18px" Width="197px">
+                 Height="18px" Width="197px" >
+                <asp:ListItem Value="1">Human Resources</asp:ListItem>
             </asp:DropDownList>
         </p>
         <p style="margin-left: 200px">
