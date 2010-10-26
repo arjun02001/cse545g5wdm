@@ -10,4 +10,8 @@ public partial class Default2 : System.Web.UI.Page
     {
 
     }
+    protected void btn_Submit_Click(object sender, EventArgs e)
+    {
+
+    }
 }

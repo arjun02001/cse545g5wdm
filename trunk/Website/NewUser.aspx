@@ -46,12 +46,17 @@
                  <asp:DropDownList ID="DropDownList1" runat="server" 
                      DataSourceID="SqlDataSource1" Height="18px" Width="197px">
                  </asp:DropDownList>
-                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                     ConnectionString="<%$ ConnectionStrings:wdmConnectionString %>" 
-                     SelectCommand="SELECT [role_name] FROM [Role]"></asp:SqlDataSource>
              </p>
         </div>
+        <p style="margin-left: 200px">
+            Department:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:DropDownList ID="DepartmentList" runat="server" 
+                DataSourceID="SqlDataSource1" Height="18px" Width="197px">
+            </asp:DropDownList>
+        </p>
+        <p style="margin-left: 200px">
         <br />
+        </p>
         <div>
             <p style="margin-left: 320px">
             <asp:Button runat="server" ID="btn_Submit" Text="Register" Enabled="true" 
