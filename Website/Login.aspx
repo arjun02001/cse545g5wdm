@@ -56,7 +56,7 @@
         </div>
         <br />
         <div>
-            Username: 
+            Email ID: 
             <asp:TextBox runat="server" ID="txt_Login" MaxLength="100" Width="200"></asp:TextBox> 
         </div>
         <br />
