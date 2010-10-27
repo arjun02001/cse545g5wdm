@@ -19,7 +19,6 @@ public partial class Login : System.Web.UI.Page
         //validate input
         string username = txt_Login.Text;
         string password = txt_Password.Text;
-        
         //sent to login handler
         LoginHandler(username, password);
     }
@@ -40,11 +39,11 @@ public partial class Login : System.Web.UI.Page
             Session.Add("role", user.role);
             if (user.role == (int)Enumeration.Role.SystemAdministrator)
             {
-                Server.Transfer("cse545g5wdm/DocumentList.aspx");
+                Server.Transfer("cse545g5wdm/SystemAdministrator.aspx");
             }
             else
             {
-                Server.Transfer("cse545g5wdm/Document.aspx");
+                Server.Transfer("cse545g5wdm/DocumentList.aspx");
             }
         }
 
