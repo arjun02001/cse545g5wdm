@@ -72,6 +72,9 @@
                 onclick="btn_Submit_Click" />
         </div>
         <div>
+            <asp:Label runat="server" ID="lbl_Error" Enabled="true" Visible="false" ForeColor="Red" />
+        </div>
+        <div>
             <b>New User?</b> Click <a href="NewUser.aspx">here</a>.
         </div>
     </div>
