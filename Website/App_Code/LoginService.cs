@@ -78,7 +78,7 @@ public class LoginService : System.Web.Services.WebService {
 
         //if pass all these, connect to sql server
         SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
-        SqlCommand command = new SqlCommand("sp_AuthenticateUser", connect);
+        SqlCommand command = new SqlCommand("mfruchtm.sp_AuthenticateUser", connect);
         command.CommandType = System.Data.CommandType.StoredProcedure;
         command.Parameters.Add("@par_username", System.Data.SqlDbType.NChar).Value = username;
         command.Parameters.Add("@par_password", System.Data.SqlDbType.NChar).Value = password;
@@ -105,7 +105,7 @@ public class LoginService : System.Web.Services.WebService {
             //now fill the UserTransferObject
             UserTransferObject returnedValue = new UserTransferObject();
             returnedValue.userid = (int)user.Rows[0]["user_id"];
-            returnedValue.username = (string)user.Rows[0]["password"];
+            returnedValue.username = (string)user.Rows[0]["user_name"];
             returnedValue.role = (int)user.Rows[0]["role_id"];
 
             return returnedValue;
