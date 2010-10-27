@@ -28,7 +28,7 @@ public class LoginService : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public UserTransferObject Login(Regex RegexUsername, Regex RegexPassword, string username, string password )
+    public UserTransferObject Login(Regex RegexPassword, string username, string password )
     {
         UserTransferObject safeMode = new UserTransferObject();
         bool sqlinjection = true;
@@ -38,6 +38,7 @@ public class LoginService : System.Web.Services.WebService {
         //sql and xss injection testing
         SQLInjectionDetectionService detectSQL = new SQLInjectionDetectionService();
         DetectXSSAttemptService detectXSS = new DetectXSSAttemptService();
+        EmailSyntax emailcheck = new EmailSyntax();
         sqlinjection = detectSQL.DetectSQL(username);
         if (sqlinjection)
         {
@@ -62,11 +63,12 @@ public class LoginService : System.Web.Services.WebService {
             return safeMode;
         }
 
-        regexfiltered = followsRegex(RegexUsername, username);
-        if(!regexfiltered)
+        regexfiltered = emailcheck.VerifyEmail(username);
+        if (!regexfiltered)
         {
             return safeMode;
         }
+        
 
         regexfiltered = followsRegex(RegexPassword, password);
         if (!regexfiltered)
