@@ -9,8 +9,7 @@ using System.Data.SqlClient.SqlGen;
 using System.Data.SqlTypes;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Web;
-using System.Web.Services;
+
 using System.Data;
 using System.Configuration;
 
