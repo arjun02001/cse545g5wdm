@@ -43,9 +43,15 @@
              </p>
              <p style="margin-left: 200px">
             Role:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                 <asp:DropDownList ID="RoleList" runat="server" Height="18px" Width="197px">
+                 <asp:DropDownList ID="RoleList" runat="server" Height="18px" Width="197px" 
+                     DataSourceID="sql_wdm" DataTextField="role_name" DataValueField="role_name">
                      <asp:ListItem Value="1">Normal</asp:ListItem>
                  </asp:DropDownList>
+                 <asp:SqlDataSource ID="sql_wdm" runat="server" 
+                     ConnectionString="Data Source=www.mfruchtm.net;User ID=group5; Password=wR5xUFuS" 
+                     ProviderName="System.Data.SqlClient" 
+                     SelectCommand="sp_GetRoles" SelectCommandType="StoredProcedure">
+                 </asp:SqlDataSource>
              </p>
         </div>
         <p style="margin-left: 200px">

@@ -37,13 +37,16 @@ public partial class Login : System.Web.UI.Page
         LoginService login = new LoginService();
         user = login.Login(passwordRegex, username, password);
 
+        //if userid is found and login attempts not yet 5
         if (user.userid != 0 && ((int)Session["loginAttempts"] < 5))
         {
+            //add user variables
             lbl_Error.Visible = false;
             Session.Add("userid", user.userid);
             Session.Add("username", user.username);
             Session.Add("role", user.role);
             Session.Remove("loginAttempts");
+            //decide what kind of user, check if sysadmin
             if (user.role == (int)Enumeration.Role.SystemAdministrator)
             {
                 Server.Transfer("cse545g5wdm/SystemAdministrator.aspx");
@@ -55,6 +58,7 @@ public partial class Login : System.Web.UI.Page
         }
         else
         {
+            //failed login, still have login attempts display so, otherwise tell them session is gone
             if ((int)Session["loginAttempts"] < 5)
             {
                 lbl_Error.Text = "Invalid username or password. You have " + (5 - (int)Session["loginAttempts"]).ToString() + " attempts remaining.";
