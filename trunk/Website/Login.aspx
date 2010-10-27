@@ -63,7 +63,7 @@
         <div>
             Password:
             <asp:TextBox runat="server" ID="txt_Password" MaxLength="100" Width="200" TextMode="Password" ></asp:TextBox>
-            <asp:RegularExpressionValidator runat="server" ID="rev_password" ValidationExpression="([A-z]|[0-9]){100}" Enabled="true" ControlToValidate="txt_Password"/>
+            <asp:RegularExpressionValidator runat="server" ID="rev_password" ValidationExpression="([A-z]|[0-9]){6,100}" Enabled="true" ControlToValidate="txt_Password" ErrorMessage="Not a valid password."/>
         </div>
         <br />
         <div>
