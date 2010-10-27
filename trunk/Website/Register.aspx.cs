@@ -22,7 +22,7 @@ public partial class Register : System.Web.UI.Page
             String department = DepartmentList.Text;
             String username = txt_UserName.Text;
 
-            Register rs = new Register();
+            RegisterService rs = new RegisterService();
             bool returnVal = rs.RegisterNewUser(username, password, confirmPass, role, department);
 
             if (returnVal)
