@@ -18,6 +18,23 @@ public partial class Login : System.Web.UI.Page
             Session.Add("loginAttempts", (object)0);
         }
         txt_Login.Focus();
+        //handles the case the user go backs to the login page while logged in
+        try
+        {
+            if ((int)Session["role"] == (int)Enumeration.Role.SystemAdministrator)
+            {
+                Server.Transfer("cse545g5wdm/SystemAdministrator.aspx");
+            }
+            else
+            {
+                Server.Transfer("cse545g5wdm/DocumentList.aspx");
+            }
+        }
+        catch (Exception)
+        {
+
+        }
+
     }
     protected void btn_Submit_Click(object sender, EventArgs e)
     {
