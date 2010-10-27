@@ -11,7 +11,7 @@
   <div class="heading">
         Web Document Management
     </div>
-    <form id="Register" runat="server">
+    <form id="FormRegister" runat="server">
     <div>
     
             <p style="margin-left: 200px">
