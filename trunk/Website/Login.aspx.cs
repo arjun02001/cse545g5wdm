@@ -13,6 +13,10 @@ public partial class Login : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         FormsAuthentication.Initialize();
+        if(Session.IsNewSession)
+        {
+            Session.Add("loginAttempts", (object)0);
+        }
     }
     protected void btn_Submit_Click(object sender, EventArgs e)
     {
@@ -25,6 +29,7 @@ public partial class Login : System.Web.UI.Page
 
     private void LoginHandler(string username, string password)
     {
+        Session["loginAttempts"] = (object)((int)Session["loginAttempts"] + 1);
         //validate password
         rev_password.Validate();
         Regex passwordRegex = new Regex(rev_password.ValidationExpression);
@@ -32,11 +37,13 @@ public partial class Login : System.Web.UI.Page
         LoginService login = new LoginService();
         user = login.Login(passwordRegex, username, password);
 
-        if (user.userid != 0)
+        if (user.userid != 0 && ((int)Session["loginAttempts"] < 5))
         {
+            lbl_Error.Visible = false;
             Session.Add("userid", user.userid);
             Session.Add("username", user.username);
             Session.Add("role", user.role);
+            Session.Remove("loginAttempts");
             if (user.role == (int)Enumeration.Role.SystemAdministrator)
             {
                 Server.Transfer("cse545g5wdm/SystemAdministrator.aspx");
@@ -44,6 +51,18 @@ public partial class Login : System.Web.UI.Page
             else
             {
                 Server.Transfer("cse545g5wdm/DocumentList.aspx");
+            }
+        }
+        else
+        {
+            if ((int)Session["loginAttempts"] < 5)
+            {
+                lbl_Error.Text = "Invalid username or password. You have " + (5 - (int)Session["loginAttempts"]).ToString() + " attempts remaining.";
+                lbl_Error.Visible = true;
+            }
+            else
+            {
+                lbl_Error.Text = "You have exceeded your allowed login attempts.  Come back in a few minutes.";
             }
         }
 
