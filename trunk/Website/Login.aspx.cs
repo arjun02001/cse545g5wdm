@@ -17,6 +17,7 @@ public partial class Login : System.Web.UI.Page
         {
             Session.Add("loginAttempts", (object)0);
         }
+        txt_Login.Focus();
     }
     protected void btn_Submit_Click(object sender, EventArgs e)
     {
