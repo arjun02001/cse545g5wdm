@@ -75,7 +75,7 @@
             <asp:Label runat="server" ID="lbl_Error" Enabled="true" Visible="false" ForeColor="Red" />
         </div>
         <div>
-            <b>New User?</b> Click <a href="NewUser.aspx">here</a>.
+            <b>New User?</b> Click <a href="Register.aspx">here</a>.
         </div>
     </div>
     <div class="copyright">
