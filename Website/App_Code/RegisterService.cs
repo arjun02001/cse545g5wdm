@@ -78,11 +78,12 @@ public class RegisterService : System.Web.Services.WebService {
 
         //if pass all these, connect to sql server
         SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
-        SqlCommand command = new SqlCommand("group5.sp_NewUser", connect);
+        SqlCommand command = new SqlCommand("group5.sp_AddNewUser", connect);
         command.CommandType = System.Data.CommandType.StoredProcedure;
         command.Parameters.Add("@par_username", System.Data.SqlDbType.NChar).Value = emailid;
         command.Parameters.Add("@par_password", System.Data.SqlDbType.NChar).Value = password;
-        command.Parameters.Add("@par_request", System.Data.SqlDbType.NChar).Value = request;
+        command.Parameters.Add("@par_request", System.Data.SqlDbType.NVarChar).Value = request;
+        command.Parameters.Add("@par_department", System.Data.SqlDbType.Int).Value = 1;
         SqlDataAdapter adapter = new SqlDataAdapter(command);
 
 
@@ -92,6 +93,7 @@ public class RegisterService : System.Web.Services.WebService {
             connect.Open();
             adapter.Fill(user);
             connect.Close();
+            safeMode = true;
         }
         catch (InvalidOperationException e)
         {
