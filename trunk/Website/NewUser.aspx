@@ -47,19 +47,25 @@
                      DataSourceID="sql_wdm" DataTextField="role_name" DataValueField="role_name">
                      <asp:ListItem Value="1">Normal</asp:ListItem>
                  </asp:DropDownList>
-                 <asp:SqlDataSource ID="sql_wdm" runat="server" 
+                 <asp:SqlDataSource ID="sql_wdm_role" runat="server" 
                      ConnectionString="Data Source=www.mfruchtm.net;User ID=group5; Password=wR5xUFuS" 
                      ProviderName="System.Data.SqlClient" 
-                     SelectCommand="sp_GetRoles" SelectCommandType="StoredProcedure">
+                     SelectCommand="sp_GetRoles" SelectCommandType="StoredProcedure" 
+                     EnableCaching="True">
                  </asp:SqlDataSource>
              </p>
         </div>
         <p style="margin-left: 200px">
             Department:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:DropDownList ID="DepartmentList" runat="server" 
-                 Height="18px" Width="197px" >
+                 Height="18px" Width="197px" DataSourceID="sql_wdm_departments" 
+                DataTextField="dept_name" DataValueField="dept_name" >
                 <asp:ListItem Value="1">Human Resources</asp:ListItem>
             </asp:DropDownList>
+            <asp:SqlDataSource ID="sql_wdm_departments" runat="server" 
+                ConnectionString="Data Source=www.mfruchtm.net;User ID=group5;Password=wR5xUFuS" 
+                ProviderName="System.Data.SqlClient" 
+                SelectCommand="SELECT [dept_name] FROM [Department]"></asp:SqlDataSource>
         </p>
         <p style="margin-left: 200px">
         <br />
