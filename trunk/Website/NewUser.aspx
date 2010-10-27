@@ -29,11 +29,16 @@
             <p style="margin-left: 200px">
                 &nbsp;Password:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:TextBox runat="server" ID="txt_Password" MaxLength="100" Width="200" TextMode="Password"></asp:TextBox>
+                <asp:RegularExpressionValidator runat="server" ID="rev_Password" Enabled="true" ValidationExpression="([A-z]|[0-9]){6,100}" ControlToValidate="txt_Password" Text="Password needs to be at least 6 characters." />
             </p>
             <p style="margin-left: 200px">
 &&nbsp;Confirm Password:&nbsp;&nbsp;
-                <asp:TextBox runat="server" ID="txt_ConfirmPassword" MaxLength="100" 
+                <asp:TextBox runat="server" ID="txt_ConfirmPassword" MaxLength="100"  TextMode="Password"
                     Width="200"></asp:TextBox>
+                <asp:RegularExpressionValidator runat="server" ID="rev_ConfirmPassword" Enabled="true" ValidationExpression="([A-z]|[0-9]){6,100}" ControlToValidate="txt_ConfirmPassword" Text="Password needs to be at least 6 characters." /> 
+            </p>
+            <p style="margin-left: 200px">
+                <asp:CustomValidator runat="server" ID="cv_PasswordMatching" OnServerValidate="cv_PasswordMatching_Validate" Text="Passwords do no match." Display="Dynamic" ForeColor="Red" />
             </p>
         </div>
          <div>
@@ -44,7 +49,7 @@
              <p style="margin-left: 200px">
             Role:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                  <asp:DropDownList ID="RoleList" runat="server" Height="18px" Width="197px" 
-                     DataSourceID="sql_wdm" DataTextField="role_name" DataValueField="role_name">
+                     DataSourceID="sql_wdm_role" DataTextField="role_name" DataValueField="role_name">
                      <asp:ListItem Value="1">Normal</asp:ListItem>
                  </asp:DropDownList>
                  <asp:SqlDataSource ID="sql_wdm_role" runat="server" 
