@@ -14,6 +14,10 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+    }
+
+    private void FetchUsers()
+    {
         try
         {
             SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
@@ -28,7 +32,6 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
         {
             //TODO
         }
-       
     }
 
     private void ToggleCheckState(bool checkState)
@@ -70,27 +73,68 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
 
     private void TakeAction(string action)
     {
-        foreach (GridViewRow row in user_GridView.Rows)
+        try
         {
-            CheckBox cb = (CheckBox)row.FindControl("userSelector_CheckBox");
-            if (cb != null && cb.Checked)
+            foreach (GridViewRow row in user_GridView.Rows)
             {
-                string user_name = user_GridView.DataKeys[row.RowIndex].Value.ToString();
-                if (action.ToLower().Equals("access"))
-                    GrantAccess(user_name);
-                else
-                    DenyAccess(user_name);
+                CheckBox cb = (CheckBox)row.FindControl("userSelector_CheckBox");
+                if (cb != null && cb.Checked)
+                {
+                    string user_name = row.Cells[0].Text;
+                    string position = row.Cells[2].Text;
+                    if (action.ToLower().Equals("access"))
+                        GrantAccess(user_name.Trim(), position.Trim());
+                    else
+                        DenyAccess(user_name.Trim());
+                }
             }
+        }
+        catch (Exception ex)
+        {
+            //TODO
         }
     }
 
-    private void GrantAccess(string user_name)
+    private void GrantAccess(string user_name, string position)
     {
-        //TODO: db query to change the role to what the user demanded
+        try
+        {
+            string query = "UPDATE [User] SET role_id = " + position + " WHERE user_name = " + "'" + user_name + "'";
+            SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+            SqlCommand command = new SqlCommand(query, connect);
+            command.Connection.Open();
+            command.ExecuteReader();
+            command.Connection.Close();
+            command.Connection.Dispose();
+            FetchUsers();
+        }
+        catch (Exception)
+        {
+            //TODO
+        }
     }
 
     private void DenyAccess(string user_name)
     {
-        //TODO: db query to delete the user
+        try
+        {
+            string query = "DELETE FROM [User] WHERE user_name = " + "'" + user_name + "'";
+            SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+            SqlCommand command = new SqlCommand(query, connect);
+            command.Connection.Open();
+            command.ExecuteReader();
+            command.Connection.Close();
+            command.Connection.Dispose();
+            FetchUsers();
+        }
+        catch (Exception)
+        {
+            //TODO
+        }
+    }
+
+    protected void fetchUsers_Button_Click(object sender, EventArgs e)
+    {
+        FetchUsers();
     }
 }
