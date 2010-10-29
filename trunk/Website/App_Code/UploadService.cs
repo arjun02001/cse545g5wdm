@@ -25,7 +25,7 @@ public class UploadService : System.Web.Services.WebService {
     {
 
         Boolean fileOK = false;
-        String path = Server.MapPath("");
+        String path = Server.MapPath("Files");
 
         String result;
 
@@ -39,6 +39,7 @@ public class UploadService : System.Web.Services.WebService {
                 if (fileExtension == allowedExtensions[i])
                 {
                     fileOK = true;
+                    break;
                 }
             }
         }
