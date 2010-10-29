@@ -51,32 +51,16 @@
         Web Document Management
     </div>
     <div class="loginbox">
-        <div class="centertext">
-            Login
-        </div>
         <br />
-        <div>
-            Email ID: 
-            <asp:TextBox runat="server" ID="txt_Login" MaxLength="100" Width="200"></asp:TextBox> 
-        </div>
+        <asp:Login ID="lgn_Login" runat="server" CreateUserText="New User? Click Here" CreateUserUrl="~/Register.aspx"
+         DisplayRememberMe="true" FailureText="Not a valid username or password." MembershipProvider="QuickStartMembershipSqlProvider"
+         UserNameLabelText="Email ID:" UserNameRequiredErrorMessage="An email id is required."
+         OnLoggingIn="lgn_Login_OnLoggingIn"
+         OnLoggedIn="lgn_Login_LoggedIn">
+        </asp:Login>
         <br />
-        <div>
-            Password:
-            <asp:TextBox runat="server" ID="txt_Password" MaxLength="100" Width="200" TextMode="Password" ></asp:TextBox>
-            <asp:RegularExpressionValidator runat="server" ID="rev_password" ValidationExpression="([A-z]|[0-9]){6,100}" Enabled="true" ControlToValidate="txt_Password" ErrorMessage="Not a valid password."/>
-        </div>
-        <br />
-        <div>
-            <asp:Button runat="server" ID="btn_Submit" Text="Submit" Enabled="true" 
-                Font-Names="Times New Roman" Font-Size="Medium" Visible="true" 
-                onclick="btn_Submit_Click" />
-        </div>
-        <div>
-            <asp:Label runat="server" ID="lbl_Error" Enabled="true" Visible="false" ForeColor="Red" />
-        </div>
-        <div>
-            <b>New User?</b> Click <a href="Register.aspx">here</a>.
-        </div>
+        <asp:ValidationSummary ID="valS_LoginSummary" runat="server" 
+            ValidationGroup="lgn_Login" />
     </div>
     <div class="copyright">
          Group 5 Arizona State University CSE 545 Fall 2010©
