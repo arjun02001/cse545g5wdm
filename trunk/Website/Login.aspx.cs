@@ -17,7 +17,7 @@ public partial class Login : System.Web.UI.Page
         {
             Session.Add("loginAttempts", (object)0);
         }
-        txt_Login.Focus();
+        lgn_Login.Focus();
         //handles the case the user go backs to the login page while logged in
         try
         {
@@ -36,21 +36,22 @@ public partial class Login : System.Web.UI.Page
         }
 
     }
-    protected void btn_Submit_Click(object sender, EventArgs e)
+
+    protected void lgn_Login_OnLoggingIn(object sender, LoginCancelEventArgs e)
     {
-        //validate input
-        string username = txt_Login.Text;
-        string password = txt_Password.Text;
-        //sent to login handler
-        LoginHandler(username, password);
+        
+    }
+
+    protected void lgn_Login_LoggedIn(object sender, EventArgs e)
+    {
+        LoginHandler(lgn_Login.UserName, lgn_Login.Password);
     }
 
     private void LoginHandler(string username, string password)
     {
         Session["loginAttempts"] = (object)((int)Session["loginAttempts"] + 1);
         //validate password
-        rev_password.Validate();
-        Regex passwordRegex = new Regex(rev_password.ValidationExpression);
+        Regex passwordRegex = new Regex("([A-z]|[0-9]){6,100}");
         UserTransferObject user = new UserTransferObject();
         LoginService login = new LoginService();
         user = login.Login(passwordRegex, username, password);
@@ -59,7 +60,6 @@ public partial class Login : System.Web.UI.Page
         if (user.userid != 0 && ((int)Session["loginAttempts"] < 5))
         {
             //add user variables
-            lbl_Error.Visible = false;
             Session.Add("userid", user.userid);
             Session.Add("username", user.username);
             Session.Add("role", user.role);
@@ -74,19 +74,7 @@ public partial class Login : System.Web.UI.Page
                 Server.Transfer("cse545g5wdm/DocumentList.aspx");
             }
         }
-        else
-        {
-            //failed login, still have login attempts display so, otherwise tell them session is gone
-            if ((int)Session["loginAttempts"] < 5)
-            {
-                lbl_Error.Text = "Invalid username or password. You have " + (5 - (int)Session["loginAttempts"]).ToString() + " attempts remaining.";
-                lbl_Error.Visible = true;
-            }
-            else
-            {
-                lbl_Error.Text = "You have exceeded your allowed login attempts.  Come back in a few minutes.";
-            }
-        }
 
     }
+
 }
