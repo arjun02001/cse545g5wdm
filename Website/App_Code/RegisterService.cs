@@ -28,7 +28,7 @@ public class RegisterService : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public bool RegisterNewUser(string emailid, string password, string confirmpassword, string role, string department)
+    public bool RegisterNewUser(string emailid, string password, string confirmpassword, int role, int department)
     {
         String request = "New User";
         bool safeMode = false;
@@ -37,7 +37,7 @@ public class RegisterService : System.Web.Services.WebService {
         bool xssinjection = true;
         bool regexfiltered = false;
 
-        string[] strFields = { emailid, password, confirmpassword, role, department };
+        string[] strFields = { emailid, password, confirmpassword };
 
         //sql and xss injection testing
         SQLInjectionDetectionService detectSQL = new SQLInjectionDetectionService();
@@ -83,7 +83,8 @@ public class RegisterService : System.Web.Services.WebService {
         command.Parameters.Add("@par_username", System.Data.SqlDbType.NChar).Value = emailid;
         command.Parameters.Add("@par_password", System.Data.SqlDbType.NChar).Value = password;
         command.Parameters.Add("@par_request", System.Data.SqlDbType.NVarChar).Value = request;
-        command.Parameters.Add("@par_department", System.Data.SqlDbType.Int).Value = 1;
+        command.Parameters.Add("@par_department", System.Data.SqlDbType.Int).Value = department;
+        command.Parameters.Add("@par_requestedrole", SqlDbType.Int).Value = role;
         SqlDataAdapter adapter = new SqlDataAdapter(command);
 
 
@@ -91,7 +92,7 @@ public class RegisterService : System.Web.Services.WebService {
         try
         {
             connect.Open();
-            adapter.Fill(user);
+            command.ExecuteNonQuery();
             connect.Close();
             safeMode = true;
         }
