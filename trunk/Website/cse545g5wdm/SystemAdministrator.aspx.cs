@@ -118,7 +118,22 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
     {
         try
         {
-            string query = "DELETE FROM [User] WHERE user_name = " + "'" + user_name + "'";
+            string user_id = GetUserId(user_name);
+            DeleteUser(user_id, "User_Dept");
+            DeleteUser(user_id, "User");
+            
+        }
+        catch (Exception ex)
+        {
+            //TODO
+        }
+    }
+
+    private void DeleteUser(string user_id, string table)
+    {
+        try
+        {
+            string query = "DELETE FROM [" + table + "] WHERE user_id = " + "'" + user_id + "'";
             SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
             SqlCommand command = new SqlCommand(query, connect);
             command.Connection.Open();
@@ -127,9 +142,30 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
             command.Connection.Dispose();
             FetchUsers();
         }
+        catch (Exception ex)
+        {
+            
+        }
+    }
+
+    private string GetUserId(string user_name)
+    {
+        try
+        {
+            string query = "SELECT user_id FROM [User] WHERE user_name = " + "'" + user_name + "'";
+            SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+            SqlCommand command = new SqlCommand(query, connect);
+            command.Connection.Open();
+            SqlDataReader myReader = command.ExecuteReader();
+            myReader.Read();
+            string user_id = myReader.GetValue(0).ToString();
+            command.Connection.Close();
+            command.Connection.Dispose();
+            return user_id;
+        }
         catch (Exception)
         {
-            //TODO
+            return string.Empty;
         }
     }
 

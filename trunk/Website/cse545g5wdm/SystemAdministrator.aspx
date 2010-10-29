@@ -37,7 +37,7 @@
         <Columns>
             <asp:BoundField DataField="user_name" HeaderText="Username" />
             <asp:BoundField DataField="request" HeaderText="Request" />
-            <asp:BoundField DataField="position" HeaderText="Position" />
+            <asp:BoundField DataField="requested_position" HeaderText="Position Requested" />
             <asp:TemplateField HeaderText="Select">
                 <ItemTemplate>
                     <asp:CheckBox ID="userSelector_CheckBox" runat="server" />
