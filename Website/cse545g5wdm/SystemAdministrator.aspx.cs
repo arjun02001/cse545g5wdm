@@ -21,16 +21,16 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
         try
         {
             SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
-            SqlCommand command = new SqlCommand("SELECT * FROM [User] WHERE role_id = '1'", connect);
+            SqlCommand command = new SqlCommand("SELECT  FROM [User] WHERE role_id = '1'", connect);
             command.Connection.Open();
             user_GridView.DataSource = command.ExecuteReader();
-            user_GridView.DataBind();
+            //user_GridView.DataBind();
             command.Connection.Close();
             command.Connection.Dispose();
         }
         catch (Exception)
         {
-            //TODO
+            Server.Transfer("../Error.aspx");
         }
     }
 
@@ -47,7 +47,7 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            //TODO
+            Server.Transfer("../Error.aspx");
         }
     }
 
@@ -91,7 +91,7 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            //TODO
+            Server.Transfer("../Error.aspx");
         }
     }
 
@@ -110,7 +110,7 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
         }
         catch (Exception)
         {
-            //TODO
+            Server.Transfer("../Error.aspx");
         }
     }
 
@@ -125,7 +125,7 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            //TODO
+            Server.Transfer("../Error.aspx");
         }
     }
 
@@ -144,7 +144,7 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            
+            Server.Transfer("../Error.aspx");
         }
     }
 
