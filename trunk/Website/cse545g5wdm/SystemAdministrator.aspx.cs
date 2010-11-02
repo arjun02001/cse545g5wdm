@@ -22,7 +22,7 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
         try
         {
             SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
-            SqlCommand command = new SqlCommand("SELECT  FROM [User] WHERE role_id = '1'", connect);
+            SqlCommand command = new SqlCommand("SELECT * FROM [User] WHERE role_id = '1'", connect);
             command.Connection.Open();
             user_GridView.DataSource = command.ExecuteReader();
             //user_GridView.DataBind();
