@@ -31,15 +31,19 @@ public partial class Register : System.Web.UI.Page
         DropDownList RoleList = (DropDownList)cuw_Register.CreateUserStep.ContentTemplateContainer.FindControl("RoleList");
         DropDownList DepartmentList = (DropDownList)cuw_Register.CreateUserStep.ContentTemplateContainer.FindControl("DepartmentList");
         TextBox txt_ConfirmPassword = (TextBox)cuw_Register.CreateUserStep.ContentTemplateContainer.FindControl("txt_ConfirmPassword");
+        TextBox txt_Request = (TextBox)cuw_Register.CreateUserStep.ContentTemplateContainer.FindControl("txt_Request");
         String password = cuw_Register.Password;
         String confirmPass = txt_ConfirmPassword.Text;
         //need to add one after we remove temp
         int role = RoleList.SelectedIndex+2;
         int department = DepartmentList.SelectedIndex+1;
         String username = cuw_Register.UserName;
+        String request = txt_Request.Text;
 
         RegisterService rs = new RegisterService();
-        bool returnVal = rs.RegisterNewUser(username, password, confirmPass, role, department);
+        bool returnVal = rs.RegisterNewUser(username, password, confirmPass, request, role, department);
+        //make user a temp role
+        Roles.AddUserToRole(username, "Temp");
 
         if (returnVal)
         {
@@ -49,6 +53,7 @@ public partial class Register : System.Web.UI.Page
         {
 
         }
+
         Server.Transfer("~/Login.aspx");
     }
 

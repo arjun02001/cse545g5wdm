@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Web;
 using System.Web.Services;
 using System.Data.Sql;
@@ -28,9 +29,10 @@ public class RegisterService : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public bool RegisterNewUser(string emailid, string password, string confirmpassword, int role, int department)
+    public bool RegisterNewUser(string emailid, string password, string confirmpassword, string request, int role, int department)
     {
-        String request = "New User";
+        //prevent xss injection
+        Server.HtmlEncode(request);
         bool safeMode = false;
         bool emailSyntaxValidation = true;
         bool sqlinjection = true;
