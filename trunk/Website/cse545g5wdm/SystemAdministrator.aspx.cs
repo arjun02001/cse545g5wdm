@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -99,13 +100,31 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
     {
         try
         {
-            string query = "UPDATE [User] SET role_id = " + position + " WHERE user_name = " + "'" + user_name + "'";
             SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
-            SqlCommand command = new SqlCommand(query, connect);
+            SqlCommand command = new SqlCommand("group5.sp_ModifyUserRole", connect);
+            SqlParameter returnValue = new SqlParameter();
+            returnValue.Direction = System.Data.ParameterDirection.ReturnValue;
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            int updateruserid = (int)Session["userid"];
+            command.Parameters.Add(new SqlParameter("@par_userupdateid", SqlDbType.Int)).Value = updateruserid;
+            command.Parameters.Add(new SqlParameter("@par_username", SqlDbType.NChar)).Value = user_name;
             command.Connection.Open();
-            command.ExecuteReader();
+            SqlDataReader returnValueReader = command.ExecuteReader(); 
             command.Connection.Close();
             command.Connection.Dispose();
+
+            //1 if occured
+            //0 if failed
+            int result = Convert.ToInt32(returnValue.Value);
+            if (result == 1)
+            {
+
+            }
+            else
+            {
+
+            }
+
             FetchUsers();
         }
         catch (Exception)
