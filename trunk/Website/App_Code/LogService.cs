@@ -6,6 +6,10 @@ using System.Text;
 using System.Web;
 using System.Web.Security;
 using System.Web.Services;
+using System.Web.Services.Description;
+using System.Web.Services.Configuration;
+using System.Web.Services.Discovery;
+using System.Web.Services.Protocols;
 
 /// <summary>
 /// Summary description for LogService
@@ -23,6 +27,7 @@ public class LogService : System.Web.Services.WebService {
     }
 
     [WebMethod]
+    [SoapDocumentMethod(OneWay = true)]
     public bool LogAction(string action)
     {
         string filepath = "log.txt";
