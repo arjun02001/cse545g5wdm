@@ -56,8 +56,8 @@
         </tr>
         <tr>
             <td>
-                <asp:Button ID="Button1" runat="server" Text="Upload" Visible="true" 
-                nclick="Upload_Button_Click" />
+                <asp:Button ID="btn_Upload" runat="server" Text="Upload" Visible="true" 
+                 OnClick="Upload_Button_Click" />
             </td>
         </tr>
         
