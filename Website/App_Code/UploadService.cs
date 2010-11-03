@@ -9,9 +9,6 @@ using System.Data.SqlTypes;
 using System.Web;
 using System.Web.Services;
 using System.Web.UI.WebControls;
-using Microsoft.Office.Core;
-using Microsoft.Office.Interop;
-using Microsoft.Office.Interop.Word;
 
 /// <summary>
 /// Summary description for UploadService
