@@ -97,7 +97,10 @@
                 </tr>
             </table>
             <asp:CheckBox ID="cb_Confirm" runat="server" Text="Confirm Deletion" />
-            <asp:Button ID="btn_Delete" runat="server" Text="Delete Document" />    
+            <asp:Button ID="btn_Delete" runat="server" Text="Delete Document" OnClick="btn_Delete_Click" />
+            <div>
+                <asp:Label id="lbl_Error" runat="server" Visible="false" ForeColor="Red"></asp:Label>   
+            </div> 
         </div>
     </div>
     </form>

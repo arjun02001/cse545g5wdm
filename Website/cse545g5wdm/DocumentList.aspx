@@ -64,6 +64,9 @@
     </div>
     <div>
         <div class="navigationbox">
+        <div class="smallheading">
+            Navigation
+        </div>
             <ul>
                 <li><asp:HyperLink ID="hl_DocumentList" runat="server" NavigateUrl="~/cse545g5wdm/DocumentList.aspx" Text="Document List"></asp:HyperLink> </li>
                 <li><asp:HyperLink ID="hl_Upload" runat="server" NavigateUrl="~/cse545g5wdm/Upload.aspx" Text="Upload Document"></asp:HyperLink></li>
