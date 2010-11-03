@@ -18,9 +18,11 @@ using System.Web.UI.WebControls;
 [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
 // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
 // [System.Web.Script.Services.ScriptService]
-public class UploadService : System.Web.Services.WebService {
+public class UploadService : System.Web.Services.WebService
+{
 
-    public UploadService () {
+    public UploadService()
+    {
 
         //Uncomment the following line if using designed components 
         //InitializeComponent(); 
@@ -39,7 +41,7 @@ public class UploadService : System.Web.Services.WebService {
                 System.IO.Path.GetExtension(fileUploadDoc.FileName).ToLower();
         if (fileUploadDoc.HasFile)
         {
-            String[] allowedExtensions = { ".pdf",".doc",".txt",".docx", ".rtf" };
+            String[] allowedExtensions = { ".pdf", ".doc", ".txt", ".docx", ".rtf" };
             for (int i = 0; i < allowedExtensions.Length; i++)
             {
                 if (fileExtension == allowedExtensions[i])
@@ -54,22 +56,22 @@ public class UploadService : System.Web.Services.WebService {
         int fileLength = uploadedFile.ContentLength;
 
         //check for msword
-        if(uploadedFile.ContentType == "application/msword")
+        if (uploadedFile.ContentType == "application/msword")
         {
             fileOK = true;
         }
         //check for pdf
-        if(uploadedFile.ContentType == "application/pdf")
+        if (uploadedFile.ContentType == "application/pdf")
         {
             fileOK = true;
         }
         //check for plain text
-        if(uploadedFile.ContentType == "text/plain")
+        if (uploadedFile.ContentType == "text/plain")
         {
             fileOK = true;
         }
         //check for rich text
-        if(uploadedFile.ContentType == "application/rtf")
+        if (uploadedFile.ContentType == "application/rtf")
         {
             fileOK = true;
         }
@@ -130,6 +132,6 @@ public class UploadService : System.Web.Services.WebService {
         result = "No error";
         return result;
     }
-    
+
 }
 
