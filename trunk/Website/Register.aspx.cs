@@ -28,6 +28,7 @@ public partial class Register : System.Web.UI.Page
     protected void cuw_Register_Created(object sender, EventArgs e)
     {
         //continue with add new user
+        LogService logAction = new LogService();
         DropDownList RoleList = (DropDownList)cuw_Register.CreateUserStep.ContentTemplateContainer.FindControl("RoleList");
         DropDownList DepartmentList = (DropDownList)cuw_Register.CreateUserStep.ContentTemplateContainer.FindControl("DepartmentList");
         TextBox txt_ConfirmPassword = (TextBox)cuw_Register.CreateUserStep.ContentTemplateContainer.FindControl("txt_ConfirmPassword");
@@ -47,11 +48,11 @@ public partial class Register : System.Web.UI.Page
 
         if (returnVal)
         {
-
+            logAction.LogAction(DateTime.Now.ToString() + ": A new user account has been created by the name of " + username + ".\n");   
         }
         else
         {
-
+            logAction.LogAction(DateTime.Now.ToString() + ": A new user account failed to be created due to an error in RegisterService.\n");
         }
 
         Server.Transfer("~/Login.aspx");
