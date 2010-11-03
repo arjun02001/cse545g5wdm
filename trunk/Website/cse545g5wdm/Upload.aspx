@@ -4,12 +4,41 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Web Document Management - Upload</title>
 </head>
+<style type="text/css">
+.uploadbox
+{
+	border-bottom-color:Black;
+	border-bottom-style:solid;
+	border-bottom-width:medium;
+	border-left-color:Black;
+	border-left-style:solid;
+	border-left-width:medium;
+	border-top-color:Black;
+	border-top-style: solid;
+	border-top-width:medium;
+	border-right-color:Black;
+	border-right-style:solid;
+	border-right-width:medium;
+	width: auto;
+	margin: 0px 40% 0px 40%;
+}
+.heading
+{
+	text-align:center;
+	font-family:Arial;
+	font-style:normal;
+	font-size:xx-large;
+}
+</style>
 <body>
-    <form id="UploadDocument" runat="server">
+    <form id="UploadDocument" runat="server" method="post" enctype="multipart/form-data">
+    <div class="heading">
+        Upload Documents
+    </div>
     <div>
-    <table>
+    <table class="uploadbox">
     <tr>
     <td> Document Name
     </td>
@@ -25,15 +54,15 @@
         <asp:FileUpload ID="FileUploadPath" runat="server" />
         </td>
         </tr>
-        
+        <tr>
+            <td>
+                <asp:Button ID="Button1" runat="server" Text="Upload" Visible="true" 
+                nclick="Upload_Button_Click" />
+            </td>
+        </tr>
         
         
         </table>
-        
-       <br>
-          <asp:Button ID="Upload_Button" runat="server" Text="Upload" Visible="true" 
-            onclick="Upload_Button_Click" />
-            
     </div>
     </form>
 </body>

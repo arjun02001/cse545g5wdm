@@ -1,9 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Data;
+using System.Data.Sql;
+using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Web;
 using System.Web.Services;
 using System.Web.UI.WebControls;
+using Microsoft.Office.Core;
+using Microsoft.Office.Interop;
+using Microsoft.Office.Interop.Word;
 
 /// <summary>
 /// Summary description for UploadService
@@ -21,40 +29,83 @@ public class UploadService : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public string UploadFileService(String documentName, FileUpload fileUploadDoc)
+    public string UploadFileService(String documentName, FileUpload fileUploadDoc, int userid)
     {
 
         Boolean fileOK = false;
+        Boolean extensionOK = false;
         String path = Server.MapPath("Files");
 
         String result;
-
+        String fileExtension =
+                System.IO.Path.GetExtension(fileUploadDoc.FileName).ToLower();
         if (fileUploadDoc.HasFile)
         {
-            String fileExtension =
-                System.IO.Path.GetExtension(fileUploadDoc.FileName).ToLower();
-            String[] allowedExtensions = { ".gif", ".png", ".jpeg", ".jpg",".pdf",".doc",".txt",".docx" };
+            String[] allowedExtensions = { ".pdf",".doc",".txt",".docx", ".rtf" };
             for (int i = 0; i < allowedExtensions.Length; i++)
             {
                 if (fileExtension == allowedExtensions[i])
                 {
-                    fileOK = true;
+                    extensionOK = true;
                     break;
                 }
             }
         }
 
+        HttpPostedFile uploadedFile = fileUploadDoc.PostedFile;
+        int fileLength = uploadedFile.ContentLength;
+
+        //check for msword
+        if(uploadedFile.ContentType == "application/msword")
+        {
+            fileOK = true;
+        }
+        //check for pdf
+        if(uploadedFile.ContentType == "application/pdf")
+        {
+            fileOK = true;
+        }
+        //check for plain text
+        if(uploadedFile.ContentType == "text/plain")
+        {
+            fileOK = true;
+        }
+        //check for rich text
+        if(uploadedFile.ContentType == "application/rtf")
+        {
+            fileOK = true;
+        }
+
+
         if (fileOK)
         {
             try
             {
-                fileUploadDoc.PostedFile.SaveAs(path
-                    + fileUploadDoc.FileName);
-                result = "File uploaded!";
+                byte[] docData = new byte[fileLength];
+                uploadedFile.InputStream.Read(docData, 0, fileLength);
+
+                //upload the file
+                SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+                SqlCommand uploadCommand = new SqlCommand("group5.sp_AddNewDocument", connect);
+                uploadCommand.CommandType = CommandType.StoredProcedure;
+                uploadCommand.Parameters.Add(new SqlParameter("@par_userid", SqlDbType.Int)).Value = userid;
+                uploadCommand.Parameters.Add(new SqlParameter("@par_title", SqlDbType.NChar)).Value = documentName;
+                uploadCommand.Parameters.Add(new SqlParameter("@par_doc_type", SqlDbType.NChar)).Value = fileExtension;
+                uploadCommand.Parameters.Add(new SqlParameter("@par_doc", SqlDbType.VarBinary, fileLength)).Value = docData;
+
+                connect.Open();
+                uploadCommand.ExecuteNonQuery();
+                connect.Close();
+                connect.Dispose();
+                uploadCommand.Dispose();
             }
             catch (Exception ex)
             {
                 result = "File could not be uploaded.";
+            }
+            catch (SqlException)
+            {
+                result = "Internal server error.";
             }
         }
         else

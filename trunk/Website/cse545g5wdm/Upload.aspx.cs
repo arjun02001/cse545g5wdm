@@ -16,6 +16,14 @@ public partial class Upload : System.Web.UI.Page
         String fileName = txt_fileName.Text;
         FileUpload filePath = FileUploadPath;
         UploadService uploadServiceObj = new UploadService();
-        String returnVal  = uploadServiceObj.UploadFileService(fileName, filePath);
+        try
+        {
+            String returnVal = uploadServiceObj.UploadFileService(fileName, filePath, (int)Session["userid"]);
+        }
+        catch (HttpException)
+        {
+            //no userid means no login, get this guy out of here
+            Server.Transfer("~/Login.aspx");
+        }
     }
 }
