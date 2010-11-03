@@ -69,13 +69,13 @@ public partial class Login : System.Web.UI.Page
             if (user.role == (int)Enumeration.Role.SystemAdministrator)
             {
                 //record login
-                logService.LogAction(DateTime.Now.ToString() + "User " + (string)Session["username"] + " has logged in as System Administrator.\n");
+                logService.LogAction(DateTime.Now.ToString() + ": User " + (string)Session["username"] + " has logged in as System Administrator.\n");
                 Server.Transfer("cse545g5wdm/SystemAdministrator.aspx");
             }
             else
             {
                 //record login
-                logService.LogAction(DateTime.Now.ToString() + "User " + (string)Session["username"] + " has logged on as a standard user.\n");
+                logService.LogAction(DateTime.Now.ToString() + ": User " + (string)Session["username"] + " has logged on as a standard user.\n");
                 Server.Transfer("cse545g5wdm/DocumentList.aspx");
             }
         }
@@ -84,11 +84,11 @@ public partial class Login : System.Web.UI.Page
             //record failures
             if ((int)Session["loginAttempts"] >= 5)
             {
-                logService.LogAction(DateTime.Now.ToString() + "Unknown user has exceeded their login attempts.\n");
+                logService.LogAction(DateTime.Now.ToString() + ": Unknown user has exceeded their login attempts.\n");
             }
             else
             {
-                logService.LogAction(DateTime.Now.ToString() + "Unknow user has failed to login.\n");
+                logService.LogAction(DateTime.Now.ToString() + ": Unknow user has failed to login.\n");
             }
         }
 

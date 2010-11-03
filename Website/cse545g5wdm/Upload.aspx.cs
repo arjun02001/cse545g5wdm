@@ -27,12 +27,21 @@ public partial class Upload : System.Web.UI.Page
     }
     protected void Upload_Button_Click(object sender, EventArgs e)
     {
+        LogService logAction = new LogService();
         String fileName = txt_fileName.Text;
         FileUpload filePath = FileUploadPath;
         UploadService uploadServiceObj = new UploadService();
         try
         {
             String returnVal = uploadServiceObj.UploadFileService(fileName, filePath, (int)Session["userid"]);
+            if (returnVal == "Success.")
+            {
+                logAction.LogAction(DateTime.Now.ToString() + ": User " + (string)Session["username"] + " successfully uploaded a file.\n");
+            }
+            else
+            {
+                logAction.LogAction(DateTime.Now.ToString() + ": User " + (string)Session["username"] + " failed to upload a file due to " + returnVal + ".\n");
+            }
         }
         catch (HttpException)
         {

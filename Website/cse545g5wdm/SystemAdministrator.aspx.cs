@@ -33,7 +33,7 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
         }
         catch (Exception)
         {
-            Server.Transfer("../Error.aspx");
+            Server.Transfer("~/Error.aspx");
         }
     }
 
@@ -50,7 +50,7 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Server.Transfer("../Error.aspx");
+            Server.Transfer("~/Error.aspx");
         }
     }
 
@@ -100,6 +100,7 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
 
     private void GrantAccess(string user_name, string position)
     {
+        LogService logAction = new LogService();
         try
         {
             SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
@@ -118,11 +119,11 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
             int result = Convert.ToInt32(returnValue.Value);
             if (result == 1)
             {
-
+                logAction.LogAction(DateTime.Now.ToString() + ": Administrator " + (string)Session["username"] + " has approved the request of user " + user_name + ".\n");
             }
             else
             {
-
+                logAction.LogAction(DateTime.Now.ToString() + ": Administrator " + (string)Session["username"] + " approved a request but there was a database failure.\n");
             }
 
             command.CommandText = "group5.sp_GetRoleUsername";
@@ -135,6 +136,9 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
             command.Connection.Dispose();
             command.Dispose();
 
+
+            //remove temporary role
+            Roles.RemoveUserFromRole(user_name, "Temp");
             int role = (int)dataRole.Rows[0]["role_id"];
 
             switch (role)
@@ -186,6 +190,7 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
 
     private void DeleteUser(int user_id, string table)
     {
+        LogService logAction = new LogService();
         try
         {
             string query = "DELETE FROM [" + table + "] WHERE user_id = " + "'" + user_id + "'";
@@ -195,11 +200,13 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
             command.ExecuteReader();
             command.Connection.Close();
             command.Connection.Dispose();
+            logAction.LogAction(DateTime.Now.ToString() + ": Administrator " + (string)Session["username"] + " has denied a user request.\n");
 
             FetchUsers();
         }
         catch (Exception ex)
         {
+            logAction.LogAction(DateTime.Now.ToString() + ": Administrator " + (string)Session["username"] + " has denied a user request, but the action failed due to database error.\n");
             Server.Transfer("~/Error.aspx");
         }
     }

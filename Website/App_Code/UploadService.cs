@@ -77,7 +77,7 @@ public class UploadService : System.Web.Services.WebService
         }
 
 
-        if (fileOK)
+        if (fileOK && extensionOK)
         {
             try
             {
@@ -129,7 +129,7 @@ public class UploadService : System.Web.Services.WebService
             result = "Cannot accept files of this type.";
         }
 
-        result = "No error";
+        result = "Sucess.";
         return result;
     }
 
