@@ -49,6 +49,7 @@ public partial class Login : System.Web.UI.Page
 
     private void LoginHandler(string username, string password)
     {
+        LogService logService = new LogService();
         Session["loginAttempts"] = (object)((int)Session["loginAttempts"] + 1);
         //validate password
         Regex passwordRegex = new Regex("([A-z]|[0-9]){6,100}");
@@ -67,11 +68,27 @@ public partial class Login : System.Web.UI.Page
             //decide what kind of user, check if sysadmin
             if (user.role == (int)Enumeration.Role.SystemAdministrator)
             {
+                //record login
+                logService.LogAction(DateTime.Now.ToString() + "User " + (string)Session["username"] + " has logged in as System Administrator.\n");
                 Server.Transfer("cse545g5wdm/SystemAdministrator.aspx");
             }
             else
             {
+                //record login
+                logService.LogAction(DateTime.Now.ToString() + "User " + (string)Session["username"] + " has logged on as a standard user.\n");
                 Server.Transfer("cse545g5wdm/DocumentList.aspx");
+            }
+        }
+        else
+        {
+            //record failures
+            if ((int)Session["loginAttempts"] >= 5)
+            {
+                logService.LogAction(DateTime.Now.ToString() + "Unknown user has exceeded their login attempts.\n");
+            }
+            else
+            {
+                logService.LogAction(DateTime.Now.ToString() + "Unknow user has failed to login.\n");
             }
         }
 
