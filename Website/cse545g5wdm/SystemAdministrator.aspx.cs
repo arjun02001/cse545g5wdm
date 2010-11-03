@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.Security;
 using System.Web.UI.WebControls;
 using System.Data.Sql;
 using System.Data.SqlClient;
@@ -110,9 +111,7 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
             command.Parameters.Add(new SqlParameter("@par_userupdateid", SqlDbType.Int)).Value = updateruserid;
             command.Parameters.Add(new SqlParameter("@par_username", SqlDbType.NChar)).Value = user_name;
             command.Connection.Open();
-            SqlDataReader returnValueReader = command.ExecuteReader(); 
-            command.Connection.Close();
-            command.Connection.Dispose();
+            SqlDataReader returnValueReader = command.ExecuteReader();
 
             //1 if occured
             //0 if failed
@@ -126,11 +125,46 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
 
             }
 
+            command.CommandText = "group5.sp_GetRoleUsername";
+            command.Parameters.Clear();
+            command.Parameters.Add(new SqlParameter("@par_username", SqlDbType.NChar)).Value = user_name;
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+            DataTable dataRole = new DataTable();
+            dataAdapter.Fill(dataRole);
+            command.Connection.Close();
+            command.Connection.Dispose();
+            command.Dispose();
+
+            int role = (int)dataRole.Rows[0]["role_id"];
+
+            switch (role)
+            {
+                case 2:
+                    Roles.AddUserToRole(user_name, "Guest");
+                    break;
+                case 3:
+                    Roles.AddUserToRole(user_name, "SystemAdministrator");
+                    break;
+                case 4:
+                    Roles.AddUserToRole(user_name, "Employee");
+                    break;
+                case 5:
+                    Roles.AddUserToRole(user_name, "CorporateExecutive");
+                    break;
+                case 6:
+                    Roles.AddUserToRole(user_name, "CEO");
+                    break;
+            }
+
             FetchUsers();
+        }
+        catch (InvalidOperationException)
+        {
+            Server.Transfer("~/Error.aspx");
         }
         catch (Exception)
         {
-            Server.Transfer("../Error.aspx");
+            Server.Transfer("~/Error.aspx");
         }
     }
 
@@ -138,6 +172,7 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
     {
         try
         {
+            Membership.DeleteUser(user_name);
             int user_id = GetUserId(user_name);
             DeleteUser(user_id, "User_Dept");
             DeleteUser(user_id, "User");
@@ -160,6 +195,7 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
             command.ExecuteReader();
             command.Connection.Close();
             command.Connection.Dispose();
+
             FetchUsers();
         }
         catch (Exception ex)
