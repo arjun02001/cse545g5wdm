@@ -22,10 +22,11 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
         try
         {
             SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
-            SqlCommand command = new SqlCommand("SELECT * FROM [User] WHERE role_id = '1'", connect);
+            SqlCommand command = new SqlCommand("group5.sp_GetTempUsers", connect);
+            command.CommandType = CommandType.StoredProcedure;
             command.Connection.Open();
             user_GridView.DataSource = command.ExecuteReader();
-            //user_GridView.DataBind();
+            user_GridView.DataBind();
             command.Connection.Close();
             command.Connection.Dispose();
         }
@@ -137,7 +138,7 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
     {
         try
         {
-            string user_id = GetUserId(user_name);
+            int user_id = GetUserId(user_name);
             DeleteUser(user_id, "User_Dept");
             DeleteUser(user_id, "User");
             
@@ -148,7 +149,7 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
         }
     }
 
-    private void DeleteUser(string user_id, string table)
+    private void DeleteUser(int user_id, string table)
     {
         try
         {
@@ -167,24 +168,25 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
         }
     }
 
-    private string GetUserId(string user_name)
+    private int GetUserId(string user_name)
     {
         try
         {
-            string query = "SELECT user_id FROM [User] WHERE user_name = " + "'" + user_name + "'";
             SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
-            SqlCommand command = new SqlCommand(query, connect);
+            SqlCommand command = new SqlCommand("group5.sp_GetUserID", connect);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@par_email", SqlDbType.NChar)).Value = user_name;
             command.Connection.Open();
             SqlDataReader myReader = command.ExecuteReader();
             myReader.Read();
-            string user_id = myReader.GetValue(0).ToString();
+            int user_id = Convert.ToInt32(myReader.GetValue(0));
             command.Connection.Close();
             command.Connection.Dispose();
             return user_id;
         }
         catch (Exception)
         {
-            return string.Empty;
+            return 0;
         }
     }
 
