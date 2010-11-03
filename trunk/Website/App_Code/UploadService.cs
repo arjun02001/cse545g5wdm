@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using System.IO;
 using System.Web;
 using System.Web.Services;
 using System.Web.UI.WebControls;
@@ -96,9 +97,25 @@ public class UploadService : System.Web.Services.WebService {
                 connect.Dispose();
                 uploadCommand.Dispose();
             }
-            catch (Exception ex)
+            catch (ArgumentNullException)
             {
-                result = "File could not be uploaded.";
+                result = "No file found.";
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                result = "Argument out of range.";
+            }
+            catch (IOException)
+            {
+                result = "IO operation not possible.";
+            }
+            catch (NotSupportedException)
+            {
+                result = "Operation not supported";
+            }
+            catch (ObjectDisposedException)
+            {
+                result = "File already disposed of";
             }
             catch (SqlException)
             {
@@ -110,7 +127,7 @@ public class UploadService : System.Web.Services.WebService {
             result = "Cannot accept files of this type.";
         }
 
-
+        result = "No error";
         return result;
     }
     
