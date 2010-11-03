@@ -31,8 +31,6 @@ public class RegisterService : System.Web.Services.WebService {
     [WebMethod]
     public bool RegisterNewUser(string emailid, string password, string confirmpassword, string request, int role, int department)
     {
-        //prevent xss injection
-        Server.HtmlEncode(request);
         bool safeMode = false;
         bool emailSyntaxValidation = true;
         bool sqlinjection = true;
@@ -77,6 +75,10 @@ public class RegisterService : System.Web.Services.WebService {
         {
             return false;
         }
+
+        //use html encode to prevent xss
+        emailid = detectXSS.EncodeString(emailid);
+        request = detectXSS.EncodeString(request);
 
         //if pass all these, connect to sql server
         SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);

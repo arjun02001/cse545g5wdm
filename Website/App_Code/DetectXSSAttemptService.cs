@@ -53,10 +53,9 @@ public class DetectXSSAttemptService : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public StringBuilder EncodeInputHTML(string input)
+    public String EncodeString(string input)
     {
-        StringBuilder output =  new StringBuilder( HttpUtility.HtmlEncode(input));
-        return output;
+        return Server.HtmlEncode(input);
     }
 
     [WebMethod]
