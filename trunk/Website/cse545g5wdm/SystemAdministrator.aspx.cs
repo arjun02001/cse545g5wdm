@@ -200,7 +200,7 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Server.Transfer("../Error.aspx");
+            Server.Transfer("~/Error.aspx");
         }
     }
 
