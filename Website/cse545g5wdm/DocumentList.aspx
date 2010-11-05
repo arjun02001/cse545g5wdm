@@ -6,7 +6,7 @@
         List of Documents
     </div>
     
-    <div class="basicbox">
+    <div class="navigationbox">
         <asp:GridView ID="GridView2" runat="server">
             
         </asp:GridView>
