@@ -84,7 +84,7 @@
                     <td align="left">
                         <asp:DropDownList ID="ddl_ChooseDocument" runat="server" 
                             DataSourceID="wdm_authored_documents" DataTextField="doc_title" 
-                            DataValueField="doc_title"></asp:DropDownList>
+                            DataValueField="doc_id"></asp:DropDownList>
                         <asp:SqlDataSource ID="wdm_authored_documents" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:wdmConnectionString %>" 
                             SelectCommand="sp_GetAuthoredDocuments" SelectCommandType="StoredProcedure">

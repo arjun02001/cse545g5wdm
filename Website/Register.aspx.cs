@@ -22,11 +22,16 @@ public partial class Register : System.Web.UI.Page
 
     protected void cuw_Register_Error(object sender, CreateUserErrorEventArgs e)
     {
+        Label lbl_Error = (Label)cuw_Register.CreateUserStep.ContentTemplateContainer.FindControl("lbl_Error");
+        lbl_Error.Text = e.CreateUserError.ToString();
+        lbl_Error.Visible = true;
         e.ToString();
     }
 
     protected void cuw_Register_Created(object sender, EventArgs e)
     {
+        Label lbl_Error = (Label)cuw_Register.CreateUserStep.ContentTemplateContainer.FindControl("lbl_Error");
+        lbl_Error.Visible = false;
         //continue with add new user
         LogService logAction = new LogService();
         DropDownList RoleList = (DropDownList)cuw_Register.CreateUserStep.ContentTemplateContainer.FindControl("RoleList");
