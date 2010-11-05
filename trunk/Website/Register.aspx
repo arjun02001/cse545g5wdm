@@ -39,6 +39,7 @@
                                         <td align="center">
                                             <asp:Label ID="lbl_Error" runat="server" Visible="false" ForeColor="Red"></asp:Label>
                                         </td>
+                                       
                                     </tr>
                                     <tr>
                                         <td align="right">
@@ -95,7 +96,8 @@
                                         <td align="left">
                                             <asp:DropDownList ID="RoleList" runat="server" DataSourceID="SqlDataSource1" 
                                                 DataTextField="role_name" DataValueField="role_name" Height="18px" 
-                                                Width="197px" OnDataBound="RoleList_DataBound">
+                                                Width="197px" OnDataBound="RoleList_DataBound" 
+                                                onselectedindexchanged="RoleList_SelectedIndexChanged">
                                             </asp:DropDownList>
                                             <asp:RequiredFieldValidator ID="rfv_RoleList" runat="server" ControlToValidate="RoleList"
                                             ErrorMessage="Choose a Role" ValidationGroup="CreateUserWizard">*</asp:RequiredFieldValidator>               
@@ -117,7 +119,18 @@
                                 </table>  
                             </ContentTemplate>
                         </asp:CreateUserWizardStep>
-                        <asp:CompleteWizardStep runat="server" />
+                        <asp:CompleteWizardStep runat="server" >
+                       <ContentTemplate>
+                           <td align="center">
+                                            <asp:Label ID="lbl_Result" runat="server" Visible="false" ForeColor="Black"></asp:Label>
+                            </td>
+                            <td align="center">
+                                            <asp:HyperLink ID="Login" runat="server" NavigateUrl="~/Login.aspx" Text="Login"></asp:HyperLink>
+   
+                            </td>
+                       </ContentTemplate>
+                      
+                        </asp:CompleteWizardStep>
                     </WizardSteps>
                 </asp:CreateUserWizard>       
             <div>
