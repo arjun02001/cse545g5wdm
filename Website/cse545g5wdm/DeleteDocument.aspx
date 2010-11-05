@@ -3,10 +3,12 @@
 
 <asp:Content ID="content1" ContentPlaceHolderID="content1" runat="server">
     <form id="frmDeleteDocument" >
-   
+     <div class="heading">
+        Delete Document
+    </div>
 		<center>
-         <div class="navigationbox">
-            <table width="100%" border="0">
+         <div class="uploadbox">
+            <table width="100%" border="">
                 <tr>
                     <td align="right" width="50%">
                         <asp:Label ID="lbl_ChooseDocument" runat="server" Text="Choose Document" AssociatedControlID="ddl_ChooseDocument"></asp:Label>
