@@ -58,7 +58,7 @@ a:hover {
 /* Header */
 
 #header {
-	width: 940px;
+	width: 960px;
 	height: 148px;
 	margin: 0 auto;
 }
@@ -411,7 +411,7 @@ a:hover {
 	text-align:center;
 	font-family:Arial;
 	font-style:normal;
-	font-size:xx-large;
+	font-size:large;
 }
 .smallheading
 {
@@ -594,3 +594,22 @@ tr.footer td {
    border: 1px solid #ddd;
    padding: 4px 12px;
    }
+   
+   .uploadbox
+{
+	float:none;
+	border-bottom-color:Black;
+	border-bottom-style:solid;
+	border-bottom-width:medium;
+	border-left-color:Black;
+	border-left-style:solid;
+	border-left-width:medium;
+	border-top-color:Black;
+	border-top-style: solid;
+	border-top-width:medium;
+	border-right-color:Black;
+	border-right-style:solid;
+	border-right-width:medium;
+	width: auto;
+	margin: 0px 40% 0px 40%;
+}
