@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.Sql;
+using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -30,45 +35,31 @@ public class LogService : System.Web.Services.WebService {
     [SoapDocumentMethod(OneWay = true)]
     public bool LogAction(string action)
     {
-        string filepath = "log.txt";
         try
         {
-            //creates a file if it does not exist
-            File.AppendAllText(filepath, action, new UTF8Encoding());
+            SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+            SqlCommand command = new SqlCommand("group5.sp_AddLog", connect);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@par_text", SqlDbType.NChar)).Value = action;
+
+            connect.Open();
+            command.ExecuteNonQuery();
+            connect.Close();
+            command.Dispose();
         }
-        catch (UnauthorizedAccessException)
+        catch (SqlException)
         {
             return false;
         }
-        catch (ArgumentNullException)
+        catch (ConfigurationErrorsException)
         {
             return false;
         }
-        catch (PathTooLongException)
-        {
-            return false;
-        }
-        catch (DirectoryNotFoundException)
-        {
-            return false;
-        }
-        catch (NotSupportedException)
-        {
-            return false;
-        }
-        catch (FileNotFoundException)
-        {
-            return false;
-        }
-        catch (System.Security.SecurityException)
+        catch(InvalidOperationException)
         {
             return false;
         }
         catch (ArgumentException)
-        {
-            return false;
-        }
-        catch (IOException)
         {
             return false;
         }
