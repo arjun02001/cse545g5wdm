@@ -16,8 +16,9 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        
     }
-
+    
     private void FetchUsers()
     {
         try
