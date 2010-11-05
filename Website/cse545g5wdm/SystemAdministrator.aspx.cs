@@ -118,7 +118,7 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
             command.Connection.Close();
             command.Dispose();
 
-            logAction.LogAction(DateTime.Now.ToString() + ": Administrator " + (string)Session["username"] + " has approved the request of user " + user_name + ".\n");
+            logAction.LogAction("Administrator " + (string)Session["username"] + " has approved the request of user " + user_name + ".");
   
             SqlCommand getRole = new SqlCommand("group5.sp_GetRoleUsername", connect);
             getRole.CommandType = CommandType.StoredProcedure;
@@ -195,13 +195,13 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
             command.ExecuteReader();
             command.Connection.Close();
             command.Connection.Dispose();
-            logAction.LogAction(DateTime.Now.ToString() + ": Administrator " + (string)Session["username"] + " has denied a user request.\n");
+            logAction.LogAction("Administrator " + (string)Session["username"] + " has denied a user request.");
 
             FetchUsers();
         }
         catch (Exception ex)
         {
-            logAction.LogAction(DateTime.Now.ToString() + ": Administrator " + (string)Session["username"] + " has denied a user request, but the action failed due to database error.\n");
+            logAction.LogAction("Administrator " + (string)Session["username"] + " has denied a user request, but the action failed due to database error.");
             Server.Transfer("~/Error.aspx");
         }
     }

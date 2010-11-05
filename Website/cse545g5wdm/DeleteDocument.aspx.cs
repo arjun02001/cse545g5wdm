@@ -24,35 +24,43 @@ public partial class cse545g5wdm_DeleteDocument : System.Web.UI.Page
 
     protected void btn_Delete_Click(object sender, EventArgs e)
     {
-        LogService logAction = new LogService();
-        string result = "Failure.";
-        if (cb_Confirm.Checked)
+        if (ddl_ChooseDocument.SelectedItem != null)
         {
-            DeleteDocumentService deleteDocument = new DeleteDocumentService();
-            ListItem selectedItem = ddl_ChooseDocument.SelectedItem;
-            int itemvalue = Int32.Parse(selectedItem.Value);
-            result = deleteDocument.DeleteDocument(ddl_ChooseDocument.SelectedValue);
+            LogService logAction = new LogService();
+            string result = "Failure.";
+            if (cb_Confirm.Checked)
+            {
+                DeleteDocumentService deleteDocument = new DeleteDocumentService();
+                ListItem selectedItem = ddl_ChooseDocument.SelectedItem;
+                int itemvalue = Int32.Parse(selectedItem.Value);
+                result = deleteDocument.DeleteDocument(ddl_ChooseDocument.SelectedValue);
 
-        }
+            }
 
-        //handle failure
-        if (result == "Failure.")
-        {
-            lbl_Error.Visible = true;
-            lbl_Error.Text = "Could not delete document.";
-        }
-        //update documents
-        if (result == "Success.")
-        {
-            logAction.LogAction(DateTime.Now.ToString() + ": User has deleted the document " + ddl_ChooseDocument.SelectedValue + ".\n");
-            lbl_Error.Visible = false;
-            ddl_ChooseDocument.DataBind();
+            //handle failure
+            if (result == "Failure.")
+            {
+                lbl_Error.Visible = true;
+                lbl_Error.Text = "Could not delete document.";
+            }
+            //update documents
+            if (result == "Success.")
+            {
+                logAction.LogAction("User has deleted the document " + ddl_ChooseDocument.SelectedValue + ".");
+                lbl_Error.Visible = false;
+                ddl_ChooseDocument.DataBind();
+            }
+            else
+            {
+                logAction.LogAction("User attempted to delete the documnt " + ddl_ChooseDocument.SelectedValue + " but an error prevented that.");
+                lbl_Error.Text = "Selection is not confirmed.";
+                lbl_Error.Visible = true;
+            }
         }
         else
         {
-            logAction.LogAction(DateTime.Now.ToString() + ": User attempted to delete the documnt " + ddl_ChooseDocument.SelectedValue + " but an error prevented that.\n");
-            lbl_Error.Text = "Selection is not confirmed.";
             lbl_Error.Visible = true;
+            lbl_Error.Text = "No document selected.";
         }
     }
 }

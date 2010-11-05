@@ -36,11 +36,11 @@ public partial class Upload : System.Web.UI.Page
             String returnVal = uploadServiceObj.UploadFileService(fileName, filePath, (int)Session["userid"]);
             if (returnVal == "Success.")
             {
-                logAction.LogAction(DateTime.Now.ToString() + ": User " + (string)Session["username"] + " successfully uploaded a file.\n");
+                logAction.LogAction("User " + (string)Session["username"] + " successfully uploaded a file.");
             }
             else
             {
-                logAction.LogAction(DateTime.Now.ToString() + ": User " + (string)Session["username"] + " failed to upload a file due to " + returnVal + ".\n");
+                logAction.LogAction("User " + (string)Session["username"] + " failed to upload a file due to " + returnVal + ".");
             }
         }
         catch (HttpException)
