@@ -63,38 +63,13 @@
             </ul>
     </div>
     <div class="basicbox">
-    
-        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" 
-            CellPadding="4" DataSourceID="SqlDataSource1" ForeColor="#333333" 
-            GridLines="None">
-            <RowStyle BackColor="#EFF3FB" />
-            <Columns>
-                <asp:BoundField DataField="doc_title" HeaderText="Document" 
-                    SortExpression="doc_title" />
-                <asp:BoundField DataField="doc_create_time" HeaderText="Creation Time" 
-                    SortExpression="doc_create_time" />
-                <asp:BoundField DataField="doc_last_access" HeaderText="Last Accessed" 
-                    SortExpression="doc_last_access" />
-                <asp:BoundField DataField="doc_type" HeaderText="Type" 
-                    SortExpression="doc_type" />
-                <asp:BoundField DataField="user_name" HeaderText="Author" 
-                    SortExpression="user_name" />
-                <asp:CheckBoxField HeaderText="Click" />
-            </Columns>
-            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-            <EditRowStyle BackColor="#2461BF" />
-            <AlternatingRowStyle BackColor="White" />
+        <asp:GridView ID="GridView2" runat="server">
+            
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-            ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
-            SelectCommand="SELECT [Document].doc_title, [Document].doc_create_time, [Document].doc_last_access, [Document].doc_type, [User].user_name FROM [Document] INNER JOIN [User] ON [Document].user_id = [User].user_id">
-        </asp:SqlDataSource>
-    
-    </div>
-    &nbsp;&nbsp;
+        .</div>
+    &nbsp;<br />
+    <br />
+    &nbsp;
     <asp:Button ID="Button_CheckOut" runat="server" Text="Check Out" Visible="true" 
                  OnClick="CheckOut_Button_Click" />
     </form>
