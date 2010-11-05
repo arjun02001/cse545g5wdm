@@ -2,17 +2,16 @@
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="content1" runat="server">
-
-
     <form id="frmDeleteDocument" >
    
 		<center>
          <div class="navigationbox">
             <table width="100%" border="0">
                 <tr>
-                    <td align="right" width="10%">
+                    <td align="right" width="50%">
                         <asp:Label ID="lbl_ChooseDocument" runat="server" Text="Choose Document" AssociatedControlID="ddl_ChooseDocument"></asp:Label>
-
+                     </td>
+                     <td align="right" width="50%">
                         <asp:DropDownList ID="ddl_ChooseDocument" runat="server" 
                             DataSourceID="wdm_authored_documents" DataTextField="doc_title" 
                             DataValueField="doc_id"></asp:DropDownList>
@@ -27,20 +26,20 @@
                     </td>
                 </tr>
             <tr>
-            <td>
-            <asp:CheckBox ID="cb_Confirm" runat="server" Text="Confirm Deletion" />
-            </td>
+                    <td align="right" width="100%">
+                          <asp:CheckBox ID="cb_Confirm" runat="server" Text="Confirm Deletion" />
+                    </td>
             </tr>
             <tr>
-            <td>
-            <asp:Button ID="btn_Delete" runat="server" Text="Delete Document" OnClick="btn_Delete_Click" />
-            </td>
+                    <td align="right" width="100%">
+                         <asp:Button ID="btn_Delete" runat="server" Text="Delete Document" OnClick="btn_Delete_Click" />
+                     </td>
             </tr>
-            <div>
+            
             </table>
                 <asp:Label id="lbl_Error" runat="server" Visible="false" ForeColor="Red"></asp:Label>   
             </div> 
-        </div>
+       
         
    </center>
     </form>
