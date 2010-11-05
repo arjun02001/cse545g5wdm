@@ -75,6 +75,42 @@
     <div class="basicbox">
     
     </div>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
+            CellPadding="4" DataSourceID="SqlDataSource1" ForeColor="#333333" 
+            GridLines="None">
+            <RowStyle BackColor="#EFF3FB" />
+            <Columns>
+                <asp:BoundField DataField="doc_title" HeaderText="Document" 
+                    SortExpression="doc_title" />
+                <asp:BoundField DataField="doc_create_time" HeaderText="Data Uploaded" 
+                    SortExpression="doc_create_time" />
+                <asp:BoundField DataField="doc_last_access" HeaderText="Data Modified Recently" 
+                    SortExpression="doc_last_access" />
+                <asp:BoundField DataField="doc_type" HeaderText="Document Type" 
+                    SortExpression="doc_type" />
+                <asp:BoundField DataField="user_name" HeaderText="Author" 
+                    SortExpression="user_name" />
+                <asp:CheckBoxField HeaderText="Click" />
+            </Columns>
+            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+            <EditRowStyle BackColor="#2461BF" />
+            <AlternatingRowStyle BackColor="White" />
+        </asp:GridView>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+            ConnectionString="<%$ ConnectionStrings:wdmConnectionString %>" 
+            SelectCommand="SELECT [Document].doc_title, [Document].doc_create_time, [Document].doc_last_access, [Document].doc_type, [User].user_name FROM [Document] INNER JOIN [User] ON [Document].user_id = [User].user_id">
+        </asp:SqlDataSource>
+    </p>
     </form>
 </body>
 </html>
