@@ -82,7 +82,7 @@
         &nbsp;</p>
     <p>
         &nbsp;</p>
-    <p style="height: 125px; width: 1049px">
+    <p style="height: 212px; width: 1055px">
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
             CellPadding="4" DataSourceID="SqlDataSource1" ForeColor="#333333" 
             GridLines="None">
@@ -113,11 +113,8 @@
             SelectCommand="SELECT [Document].doc_title, [Document].doc_create_time, [Document].doc_last_access, [Document].doc_type, [User].user_name FROM [Document] INNER JOIN [User] ON [Document].user_id = [User].user_id">
         </asp:SqlDataSource>
     </p>
-    <p>
-        &nbsp;</p>
-    <p>
-        &nbsp;</p>
-    <asp:Button ID="Button1" runat="server" Text="Check Out" />
+    <asp:Button ID="Button_CheckOut" runat="server" Text="Check Out" Visible="true" 
+                 OnClick="CheckOut_Button_Click" />
     </form>
 </body>
 </html>
