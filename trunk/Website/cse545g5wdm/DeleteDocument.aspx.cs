@@ -29,6 +29,8 @@ public partial class cse545g5wdm_DeleteDocument : System.Web.UI.Page
         if (cb_Confirm.Checked)
         {
             DeleteDocumentService deleteDocument = new DeleteDocumentService();
+            ListItem selectedItem = ddl_ChooseDocument.SelectedItem;
+            int itemvalue = Int32.Parse(selectedItem.Value);
             result = deleteDocument.DeleteDocument(ddl_ChooseDocument.SelectedValue);
 
         }

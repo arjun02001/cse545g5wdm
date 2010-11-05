@@ -32,7 +32,13 @@
                                 <table border="0" style="font-size: 100%; font-family: Verdana">
                                     <tr>
                                         <td align="center" colspan="2" style="font-weight: bold; color: white; background-color: #5d7b9d">
-                                            Sign Up for Your New Account</td>
+                                            Sign Up for Your New Account                  
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">
+                                            <asp:Label ID="lbl_Error" runat="server" Visible="false" ForeColor="Red"></asp:Label>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td align="right">

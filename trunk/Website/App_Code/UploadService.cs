@@ -129,7 +129,7 @@ public class UploadService : System.Web.Services.WebService
             result = "Cannot accept files of this type.";
         }
 
-        result = "Sucess.";
+        result = "Success.";
         return result;
     }
 
