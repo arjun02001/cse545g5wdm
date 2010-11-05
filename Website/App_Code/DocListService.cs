@@ -12,129 +12,44 @@ using System.Web.Services;
 using System.Web.UI.WebControls;
 
 /// <summary>
-/// Summary description for UploadService
+/// Summary description for DocumentListService
 /// </summary>
 [WebService(Namespace = "http://tempuri.org/")]
 [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
 // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
 // [System.Web.Script.Services.ScriptService]
-public class UploadService : System.Web.Services.WebService
+public class DocListService : System.Web.Services.WebService
 {
 
-    public UploadService()
+    public DocListService()
     {
-
         //Uncomment the following line if using designed components 
         //InitializeComponent(); 
     }
 
     [WebMethod]
-    public string UploadFileService(String documentName, FileUpload fileUploadDoc, int userid)
+    public string DocumentListService(int userid)
     {
+        String result = "Failure.";
 
-        Boolean fileOK = false;
-        Boolean extensionOK = false;
-        String path = Server.MapPath("Files");
+        SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+        SqlCommand doclist = new SqlCommand("group5.StoredProcedure3", connect);
+        doclist.CommandType = CommandType.StoredProcedure;
+        doclist.Parameters.Add(new SqlParameter("@par_userid", SqlDbType.Int)).Value = userid;
 
-        String result;
-        String fileExtension =
-                System.IO.Path.GetExtension(fileUploadDoc.FileName).ToLower();
-        if (fileUploadDoc.HasFile)
+        try
         {
-            String[] allowedExtensions = { ".pdf", ".doc", ".txt", ".docx", ".rtf" };
-            for (int i = 0; i < allowedExtensions.Length; i++)
-            {
-                if (fileExtension == allowedExtensions[i])
-                {
-                    extensionOK = true;
-                    break;
-                }
-            }
+            connect.Open();
+            doclist.ExecuteNonQuery();
+            connect.Close();
+            result = "Success.";
+        }
+        catch (SqlException)
+        {
+            result = "Failed to delete document.";
         }
 
-        HttpPostedFile uploadedFile = fileUploadDoc.PostedFile;
-        int fileLength = uploadedFile.ContentLength;
-
-        //check for msword
-        if (uploadedFile.ContentType == "application/msword")
-        {
-            fileOK = true;
-        }
-        //check for msword 2007+
-        if (uploadedFile.ContentType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-        {
-            fileOK = true;
-        }
-        //check for pdf
-        if (uploadedFile.ContentType == "application/pdf")
-        {
-            fileOK = true;
-        }
-        //check for plain text
-        if (uploadedFile.ContentType == "text/plain")
-        {
-            fileOK = true;
-        }
-        //check for rich text
-        if (uploadedFile.ContentType == "application/rtf")
-        {
-            fileOK = true;
-        }
-
-
-        if (fileOK && extensionOK)
-        {
-            try
-            {
-                byte[] docData = new byte[fileLength];
-                uploadedFile.InputStream.Read(docData, 0, fileLength);
-
-                //upload the file
-                SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
-                SqlCommand uploadCommand = new SqlCommand("group5.sp_AddNewDocument", connect);
-                uploadCommand.CommandType = CommandType.StoredProcedure;
-                uploadCommand.Parameters.Add(new SqlParameter("@par_userid", SqlDbType.Int)).Value = userid;
-                uploadCommand.Parameters.Add(new SqlParameter("@par_title", SqlDbType.NChar)).Value = documentName + fileExtension;
-                uploadCommand.Parameters.Add(new SqlParameter("@par_doc_type", SqlDbType.NChar)).Value = fileExtension;
-                uploadCommand.Parameters.Add(new SqlParameter("@par_doc", SqlDbType.VarBinary, fileLength)).Value = docData;
-
-                connect.Open();
-                uploadCommand.ExecuteNonQuery();
-                connect.Close();
-                connect.Dispose();
-                uploadCommand.Dispose();
-            }
-            catch (ArgumentNullException)
-            {
-                result = "No file found.";
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                result = "Argument out of range.";
-            }
-            catch (IOException)
-            {
-                result = "IO operation not possible.";
-            }
-            catch (NotSupportedException)
-            {
-                result = "Operation not supported";
-            }
-            catch (ObjectDisposedException)
-            {
-                result = "File already disposed of";
-            }
-            catch (SqlException)
-            {
-                result = "Internal server error.";
-            }
-        }
-        else
-        {
-            result = "Cannot accept files of this type.";
-        }
-
-        result = "Success.";
+        
         return result;
     }
 
