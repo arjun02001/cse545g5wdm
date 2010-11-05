@@ -113,6 +113,11 @@
             SelectCommand="SELECT [Document].doc_title, [Document].doc_create_time, [Document].doc_last_access, [Document].doc_type, [User].user_name FROM [Document] INNER JOIN [User] ON [Document].user_id = [User].user_id">
         </asp:SqlDataSource>
     </p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <asp:Button ID="Button1" runat="server" Text="Check Out" />
     </form>
 </body>
 </html>
