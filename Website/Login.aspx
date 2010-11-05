@@ -54,10 +54,14 @@
         <br />
         <asp:Login ID="lgn_Login" runat="server" CreateUserText="New User? Click Here" CreateUserUrl="~/Register.aspx"
          DisplayRememberMe="true" FailureText="Not a valid username or password." MembershipProvider="QuickStartMembershipSqlProvider"
-         UserNameLabelText="Email ID:" UserNameRequiredErrorMessage="An email id is required."
+         UserNameLabelText="Email ID:" UserNameRequiredErrorMessage="An email id is required." use
          OnLoggingIn="lgn_Login_OnLoggingIn"
          OnLoggedIn="lgn_Login_LoggedIn">
+         
         </asp:Login>
+        
+            <asp:Label ID="lbl_AttemptError" runat="server" Visible="false" ForeColor="Red"></asp:Label>
+           
         <br />
         <asp:ValidationSummary ID="valS_LoginSummary" runat="server" 
             ValidationGroup="lgn_Login" />
