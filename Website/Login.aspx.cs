@@ -27,7 +27,10 @@ public partial class Login : System.Web.UI.Page
             }
             else
             {
-                Server.Transfer("cse545g5wdm/DocumentList.aspx");
+                if ((int)Session["role"] != (int)Enumeration.Role.Temp)
+                {
+                    Server.Transfer("cse545g5wdm/DocumentList.aspx");
+                }
             }
         }
         catch (Exception)
