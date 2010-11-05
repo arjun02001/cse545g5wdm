@@ -441,23 +441,21 @@ a:hover {
 }
 .navigationbox
 {
-	float:left;
-	left: 50%;
-	
-position:relative;
-	
+	float:none;
 	border-bottom-color:Black;
 	border-bottom-style:solid;
-	border-bottom-width:thin;
+	border-bottom-width:medium;
 	border-left-color:Black;
 	border-left-style:solid;
-	border-left-width:thin;
+	border-left-width:medium;
 	border-top-color:Black;
 	border-top-style: solid;
-	border-top-width:thin;
+	border-top-width:medium;
 	border-right-color:Black;
 	border-right-style:solid;
-	border-right-width:thin;
+	border-right-width:medium;
+	width: auto;
+	margin: 0px 32% 0px 30%;
 
 }
 
@@ -611,5 +609,5 @@ tr.footer td {
 	border-right-style:solid;
 	border-right-width:medium;
 	width: auto;
-	margin: 0px 40% 0px 40%;
+	margin: 0px 40% 0px 32%;
 }
