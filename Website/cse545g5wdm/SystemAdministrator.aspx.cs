@@ -114,28 +114,22 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
             command.Parameters.Add(new SqlParameter("@par_username", SqlDbType.NChar)).Value = user_name;
             command.Connection.Open();
             SqlDataReader returnValueReader = command.ExecuteReader();
+            returnValueReader.Close();
+            command.Connection.Close();
+            command.Dispose();
 
-            //1 if occured
-            //0 if failed
-            int result = Convert.ToInt32(returnValue.Value);
-            if (result == 1)
-            {
-                logAction.LogAction(DateTime.Now.ToString() + ": Administrator " + (string)Session["username"] + " has approved the request of user " + user_name + ".\n");
-            }
-            else
-            {
-                logAction.LogAction(DateTime.Now.ToString() + ": Administrator " + (string)Session["username"] + " approved a request but there was a database failure.\n");
-            }
-
-            command.CommandText = "group5.sp_GetRoleUsername";
-            command.Parameters.Clear();
-            command.Parameters.Add(new SqlParameter("@par_username", SqlDbType.NChar)).Value = user_name;
-            SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+            logAction.LogAction(DateTime.Now.ToString() + ": Administrator " + (string)Session["username"] + " has approved the request of user " + user_name + ".\n");
+  
+            SqlCommand getRole = new SqlCommand("group5.sp_GetRoleUsername", connect);
+            getRole.CommandType = CommandType.StoredProcedure;
+            getRole.Parameters.Clear();
+            getRole.Parameters.Add(new SqlParameter("@par_username", SqlDbType.NChar)).Value = user_name;
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(getRole);
             DataTable dataRole = new DataTable();
             dataAdapter.Fill(dataRole);
-            command.Connection.Close();
-            command.Connection.Dispose();
-            command.Dispose();
+            getRole.Connection.Close();
+            getRole.Connection.Dispose();
+            getRole.Dispose();
 
 
             //remove temporary role
