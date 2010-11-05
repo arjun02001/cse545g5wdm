@@ -5,6 +5,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+<style type="text/css">
+.logheading
+{
+    text-align:center;
+	font-family:Arial;
+	font-style:normal;
+	font-size:larger;
+}
+.basicbox
+{
+	border-bottom-color:Black;
+	border-bottom-style:solid;
+	border-bottom-width:medium;
+	border-left-color:Black;
+	border-left-style:solid;
+	border-left-width:medium;
+	border-top-color:Black;
+	border-top-style: solid;
+	border-top-width:medium;
+	border-right-color:Black;
+	border-right-style:solid;
+	border-right-width:medium;
+	width: auto;
+	margin: 0px 40% 0px 40%;
+}
+</style>
 </head>
 <body>
     <form id="SystemAdmin" runat="server">
@@ -58,6 +84,33 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Button ID="denyAccess_Button" runat="server" 
         onclick="denyAccess_Button_Click" Text="Deny Access" />
+    <div class="logheading">
+        System Log
+    </div>
+    <div class="basicbox">
+    <asp:GridView ID="log_GridView" runat="server" AutoGenerateColumns="False" 
+            CellPadding="4" ForeColor="#333333" GridLines="None"
+        HorizontalAlign="Center" DataKeyNames="logid" DataSourceID="sql_log">
+        <RowStyle BackColor="#FFFBD6" ForeColor="#333333" />
+        <Columns>
+        
+            <asp:BoundField DataField="logid" HeaderText="logid" InsertVisible="False" 
+                ReadOnly="True" SortExpression="logid" />
+            <asp:BoundField DataField="text" HeaderText="text" SortExpression="text" />
+            <asp:BoundField DataField="date" HeaderText="date" SortExpression="date" />
+        
+        </Columns>
+        <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+        <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
+        <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="Navy" />
+        <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+        <AlternatingRowStyle BackColor="White" />    
+    </asp:GridView> 
+        <asp:SqlDataSource ID="sql_log" runat="server" 
+            ConnectionString="<%$ ConnectionStrings:wdmConnectionString %>" 
+            SelectCommand="sp_GetAllLogs" SelectCommandType="StoredProcedure">
+        </asp:SqlDataSource>
+    </div>
     </form>
 </body>
 </html>
