@@ -8,7 +8,7 @@
     </div>
 		<center>
          <div class="uploadbox">
-            <table width="100%" border="">
+            <table width="100%" border="-1">
                 <tr>
                     <td align="right" width="50%">
                         <asp:Label ID="lbl_ChooseDocument" runat="server" Text="Choose Document" AssociatedControlID="ddl_ChooseDocument"></asp:Label>
