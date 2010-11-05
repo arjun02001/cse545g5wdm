@@ -79,13 +79,13 @@ public partial class Login : System.Web.UI.Page
             if (user.role == (int)Enumeration.Role.SystemAdministrator)
             {
                 //record login
-                logService.LogAction(DateTime.Now.ToString() + ": User " + (string)Session["username"] + " has logged in as System Administrator.\n");
+                logService.LogAction("User " + (string)Session["username"] + " has logged in as System Administrator.");
                 Server.Transfer("cse545g5wdm/SystemAdministrator.aspx");
             }
             else
             {
                 //record login
-                logService.LogAction(DateTime.Now.ToString() + ": User " + (string)Session["username"] + " has logged on as a standard user.\n");
+                logService.LogAction("User " + (string)Session["username"] + " has logged on as a standard user.");
                 Server.Transfer("cse545g5wdm/DocumentList.aspx");
             }
         }
@@ -94,14 +94,14 @@ public partial class Login : System.Web.UI.Page
             //record failures
             if ((int)Session["loginAttempts"] >= 5)
             {
-                logService.LogAction(DateTime.Now.ToString() + ": Unknown user has exceeded their login attempts.\n");
+                logService.LogAction(DateTime.Now.ToString() + ": Unknown user has exceeded their login attempts.");
                
                 lbl_AttemptError.Text = ("Unknown user has exceeded their login attempts.").ToString();
                 lbl_AttemptError.Visible = true;
             }
             else
             {
-                logService.LogAction(DateTime.Now.ToString() + ": Unknow user has failed to login.\n");
+                logService.LogAction("Unknown user has failed to login.\n");
                 lbl_AttemptError.Text = ("Unknow user has failed to login.").ToString();
                 lbl_AttemptError.Visible = true;
             }
