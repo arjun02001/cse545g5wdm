@@ -28,7 +28,7 @@ public class DocListService : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public string DocumentListService(int userid)
+    public DataSet DocumentListService(int userid)
     {
         String result = "Failure.";
 
@@ -37,11 +37,15 @@ public class DocListService : System.Web.Services.WebService
         doclist.CommandType = CommandType.StoredProcedure;
         doclist.Parameters.Add(new SqlParameter("@par_userid", SqlDbType.Int)).Value = userid;
 
+        DataSet ds = new DataSet();
         try
         {
             connect.Open();
-            doclist.ExecuteNonQuery();
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.SelectCommand = doclist;
+            da.Fill(ds);
             connect.Close();
+            
             result = "Success.";
         }
         catch (SqlException)
@@ -49,8 +53,7 @@ public class DocListService : System.Web.Services.WebService
             result = "Failed to delete document.";
         }
 
-        
-        return result;
+        return ds;
     }
 
 }
