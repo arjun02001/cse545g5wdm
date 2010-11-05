@@ -53,7 +53,14 @@ public partial class Login : System.Web.UI.Page
     private void LoginHandler(string username, string password)
     {
         LogService logService = new LogService();
-        Session["loginAttempts"] = (object)((int)Session["loginAttempts"] + 1);
+        if (Session["loginAttempts"] == null)
+        {
+            Session["loginAttempts"] = (object)((int) 1);
+        }
+        else
+        {
+            Session["loginAttempts"] = (object)((int)Session["loginAttempts"] + 1);
+        }
         //validate password
         Regex passwordRegex = new Regex("([A-z]|[0-9]){6,100}");
         UserTransferObject user = new UserTransferObject();
@@ -88,10 +95,15 @@ public partial class Login : System.Web.UI.Page
             if ((int)Session["loginAttempts"] >= 5)
             {
                 logService.LogAction(DateTime.Now.ToString() + ": Unknown user has exceeded their login attempts.\n");
+               
+                lbl_AttemptError.Text = ("Unknown user has exceeded their login attempts.").ToString();
+                lbl_AttemptError.Visible = true;
             }
             else
             {
                 logService.LogAction(DateTime.Now.ToString() + ": Unknow user has failed to login.\n");
+                lbl_AttemptError.Text = ("Unknow user has failed to login.").ToString();
+                lbl_AttemptError.Visible = true;
             }
         }
 
