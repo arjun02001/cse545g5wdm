@@ -1,0 +1,46 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPageLogin.master.cs" Inherits="cse545g5wdm_MasterPageLogin" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+    
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+
+
+<link href="../style.css" rel="stylesheet" type="text/css" media="screen" />
+
+    
+</head>
+
+
+<body>
+    
+    
+    <form id="loginMasterPage" runat="server">
+    <br />
+  <asp:ContentPlaceHolder id="header" runat="server">
+  <div class="heading" >Web Document Management</div>
+    </asp:ContentPlaceHolder>  
+        <br /> <br /> <br /> <br />
+<asp:ContentPlaceHolder id="content1" runat="server">
+    </asp:ContentPlaceHolder>
+    
+    <asp:ContentPlaceHolder id = "footer" runat ="server">
+    <br />
+    <br />
+     <div class="asu_footer">
+         Group 5 Arizona State University CSE 545 Fall 2010©
+     </div>
+    </asp:ContentPlaceHolder>
+    
+    </form>
+  
+</body>
+</html>
+
