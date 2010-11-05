@@ -84,7 +84,7 @@
     <p style="height: 125px; width: 1049px">
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
             CellPadding="4" DataSourceID="SqlDataSource1" ForeColor="#333333" 
-            GridLines="None" onselectedindexchanged="GridView1_SelectedIndexChanged">
+            GridLines="None">
             <RowStyle BackColor="#EFF3FB" />
             <Columns>
                 <asp:BoundField DataField="doc_title" HeaderText="doc_title" 
