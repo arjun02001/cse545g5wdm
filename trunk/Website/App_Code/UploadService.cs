@@ -60,6 +60,11 @@ public class UploadService : System.Web.Services.WebService
         {
             fileOK = true;
         }
+        //check for msword 2007+
+        if (uploadedFile.ContentType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+        {
+            fileOK = true;
+        }
         //check for pdf
         if (uploadedFile.ContentType == "application/pdf")
         {
