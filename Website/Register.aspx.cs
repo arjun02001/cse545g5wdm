@@ -53,14 +53,21 @@ public partial class Register : System.Web.UI.Page
 
         if (returnVal)
         {
-            logAction.LogAction(DateTime.Now.ToString() + ": A new user account has been created by the name of " + username + ".\n");   
+            logAction.LogAction(DateTime.Now.ToString() + ": A new user account has been created by the name of " + username + ".\n");
+            Label lbl_Result = (Label)cuw_Register.CompleteStep.ContentTemplateContainer.FindControl("lbl_Result");
+            lbl_Result.Text = ("The User is created " + username).ToString();
+            lbl_Result.Visible = true;
+        
         }
         else
         {
             logAction.LogAction(DateTime.Now.ToString() + ": A new user account failed to be created due to an error in RegisterService.\n");
+            Label lbl_Result = (Label)cuw_Register.CompleteStep.ContentTemplateContainer.FindControl("lbl_Result");
+            lbl_Result.Text = ("The User is not created").ToString();
+            lbl_Result.Visible = true;
         }
-
-        Server.Transfer("~/Login.aspx");
+        
+        //Server.Transfer("~/Login.aspx");
     }
 
     protected void cuw_Register_Creating(object sender, LoginCancelEventArgs e)
@@ -68,4 +75,8 @@ public partial class Register : System.Web.UI.Page
         Validate("CreateUserWizard");
     }
 
+    protected void RoleList_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }
