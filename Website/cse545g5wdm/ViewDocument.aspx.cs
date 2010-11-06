@@ -18,68 +18,52 @@ public partial class cse545g5wdm_ViewDocument : System.Web.UI.Page
     }
     protected void btn_View_Click(object sender, EventArgs e)
     {
-        if (ddl_ChooseDocument.SelectedItem != null)
+        try
         {
-            LogService logAction = new LogService();
             ListItem selectedItem = ddl_ChooseDocument.SelectedItem;
             int itemvalue = Int32.Parse(selectedItem.Value);
-
-            string query = "SELECT * FROM Document WHERE doc_id = " + itemvalue + "";
-            SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
-            SqlCommand command = new SqlCommand(query, connect);
-            command.Connection.Open();
-            SqlDataReader myReader = command.ExecuteReader();
-            myReader.Read();
-
-            string extenstion = myReader["doc_type"].ToString().Substring(1).Trim();
-            byte[] data = (byte[])myReader["doc"];
-
+            ViewDocumentService vds = new ViewDocumentService();
+            vds = vds.GetFileService(itemvalue);
+            byte[] data = vds.Data;
+            string extension = vds.Extension.ToLower();
             string mime = string.Empty;
-            if (extenstion.Equals("pdf"))
+            if (extension.Equals("pdf"))
             {
                 mime = "application/pdf";
                 Response.AddHeader("Content-Disposition", "attachment;filename=wdm.pdf");
             }
-            if (extenstion.Equals("doc"))
+            if (extension.Equals("doc"))
             {
                 mime = "application/ms-word";
                 Response.AddHeader("Content-Disposition", "attachment;filename=wdm.doc");
             }
-            if (extenstion.Equals("txt"))
+            if (extension.Equals("txt"))
             {
                 mime = "text/plain";
                 Response.AddHeader("Content-Disposition", "attachment;filename=wdm.txt");
             }
-            if (extenstion.Equals("docx"))
+            if (extension.Equals("docx"))
             {
                 mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
                 Response.AddHeader("Content-Disposition", "attachment;filename=wdm.docx");
             }
-            if (extenstion.Equals("rtf"))
+            if (extension.Equals("rtf"))
             {
                 mime = "application/rtf";
                 Response.AddHeader("Content-Disposition", "attachment;filename=wdm.rtf");
             }
-            lbl_Error.Visible = false;
-            logAction.LogAction("User " + Session["username"] + " has opened the document " + selectedItem.Text + ".");
             Response.Clear();
             Response.Buffer = true;
             Response.ContentType = mime;
-
-
-
             Response.BinaryWrite(data);
             Response.Charset = "";
             Response.Flush();
             Response.Clear();
             Response.End();
-            command.Connection.Close();
-            command.Connection.Dispose();
         }
-        else
+        catch (Exception ex)
         {
-            lbl_Error.Visible = true;
-            lbl_Error.Text = "No document selected.";
+
         }
     }
 }
