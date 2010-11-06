@@ -133,7 +133,7 @@ public class UploadService : System.Web.Services.WebService
         {
             result = "Cannot accept files of this type.";
         }
-
+        DataTable s = new DataTable();
         result = "Success.";
         return result;
     }

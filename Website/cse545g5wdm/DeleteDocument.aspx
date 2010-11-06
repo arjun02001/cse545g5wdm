@@ -2,7 +2,6 @@
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="content1" runat="server">
-    <form id="frmDeleteDocument" >
      <div class="heading">
         Delete Document
     </div>
@@ -44,6 +43,5 @@
        
         
    </center>
-    </form>
 
 </asp:Content>
