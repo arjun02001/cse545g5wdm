@@ -31,6 +31,7 @@
                 <li><asp:HyperLink ID="hl_Delete" runat="server" NavigateUrl="~/cse545g5wdm/DeleteDocument.aspx" Text="Delete Document"></asp:HyperLink></li>
                 <li><asp:HyperLink ID="h1_ViewDocument" runat="server" NavigateUrl="~/cse545g5wdm/ViewDocument.aspx" Text="View Document"></asp:HyperLink></li>
                 <li><asp:HyperLink ID="hl_ShareDocument" runat="server" NavigateUrl="~/cse545g5wdm/ShareDocument.aspx" Text="Share Document"></asp:HyperLink></li>
+                <li><asp:HyperLink ID="h1_Logout" runat="server" NavigateUrl="~/Logout.aspx" Text="Logout"></asp:HyperLink></li>
 			</ul>
 		</div>
 		
