@@ -20,6 +20,10 @@ public partial class cse545g5wdm_DeleteDocument : System.Web.UI.Page
         {
             Server.Transfer("~/cse545g5wdm/DocumentList.aspx");
         }
+        if(Roles.IsUserInRole("SystemAdministrator"))
+        {
+            Server.Transfer("~/cse545g5wdm/SystemAdministrator.aspx");
+        }
     }
 
     protected void btn_Delete_Click(object sender, EventArgs e)

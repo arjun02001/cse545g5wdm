@@ -18,7 +18,8 @@ public class Enumeration
         LogisticsAndSupply = 2,
         ITSupport = 3,
         Sales = 4,
-        ResearchAndDevelopment = 5
+        ResearchAndDevelopment = 5,
+        Corporate = 6
     }
 
     public enum Role : int
