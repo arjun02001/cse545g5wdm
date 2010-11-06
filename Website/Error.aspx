@@ -11,7 +11,7 @@
     <p>
 &nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Label ID="Label1" runat="server" 
-            Text="AN UNEXPECTED ERROR OCCURRED. PLEASE TRY AGAIN LATER."></asp:Label>
+            Text="AN UNEXPECTED ERROR OCCURRED. YOU HAVE BEEN LOGGED OUT. PLEASE TRY AGAIN LATER."></asp:Label>
     </p>
     <div>
     
