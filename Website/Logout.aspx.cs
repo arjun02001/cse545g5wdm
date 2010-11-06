@@ -30,13 +30,11 @@ public partial class Logout : System.Web.UI.Page
             FormsAuthentication.SignOut();
             Roles.DeleteCookie();
             Session.Clear();
-            Server.Transfer("Login.aspx");
         }
-        catch (Exception)
+        catch (Exception ex)
         {
             Server.Transfer("Error.aspx");
         }
-        
-        
+        Server.Transfer("Login.aspx");
     }
 }
