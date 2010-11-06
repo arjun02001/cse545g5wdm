@@ -15,20 +15,28 @@ public partial class Logout : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
-        SqlCommand command = new SqlCommand("group5.sp_UserLogout", connect);
-        command.CommandType = System.Data.CommandType.StoredProcedure;
-        command.Parameters.Add(new SqlParameter("@par_userid", System.Data.SqlDbType.Int)).Value = (int)Session["userid"];
-        connect.Open();
-        command.ExecuteNonQuery();
-        connect.Close();
-        connect.Dispose();
-        LogService logService = new LogService();
-        logService.LogAction("User " + (string)Session["username"] + " has logged out.");
-        FormsAuthentication.SignOut();
-        Roles.DeleteCookie();
-        Session.Clear();
-        Server.Transfer("Login.aspx");
+        try
+        {
+            SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+            SqlCommand command = new SqlCommand("group5.sp_UserLogout", connect);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@par_userid", System.Data.SqlDbType.Int)).Value = (int)Session["userid"];
+            connect.Open();
+            command.ExecuteNonQuery();
+            connect.Close();
+            connect.Dispose();
+            LogService logService = new LogService();
+            logService.LogAction("User " + (string)Session["username"] + " has logged out.");
+            FormsAuthentication.SignOut();
+            Roles.DeleteCookie();
+            Session.Clear();
+            Server.Transfer("Login.aspx");
+        }
+        catch (Exception)
+        {
+            Server.Transfer("Error.aspx");
+        }
+        
         
     }
 }
