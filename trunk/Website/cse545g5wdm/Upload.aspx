@@ -2,7 +2,7 @@
 
 
 <asp:Content ID="content1" ContentPlaceHolderID="content1" runat ="server">
-    <form id="UploadDocument"  method="post" enctype="multipart/form-data">
+    <form id="UploadDocument" method="post" enctype="multipart/form-data">
     <div class="heading">
         Upload Documents
     </div>
