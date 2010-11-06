@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Data.SqlClient.SqlGen;
 using System.Data.SqlTypes;
 using System.Configuration;
+using System.Data;
 
 /// <summary>
 /// Summary description for ViewDocumentService
@@ -45,16 +46,18 @@ public class ViewDocumentService : System.Web.Services.WebService {
         try
         {
             ViewDocumentService vds = new ViewDocumentService();
-            string query = "SELECT * FROM Document WHERE doc_id = " + itemvalue + "";
             SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
-            SqlCommand command = new SqlCommand(query, connect);
-            command.Connection.Open();
-            SqlDataReader myReader = command.ExecuteReader();
-            myReader.Read();
-            vds.Data = (byte[])myReader["doc"];
-            vds.Extension = myReader["doc_type"].ToString().Substring(1).Trim();
-            command.Connection.Close();
-            command.Connection.Dispose();
+            SqlCommand command = new SqlCommand("group5.sp_GetDocumentData", connect);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@doc_id", System.Data.SqlDbType.Int)).Value = itemvalue;
+            DataTable dt = new DataTable();
+            connect.Open();
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.SelectCommand = command;
+            da.Fill(dt);
+            connect.Close();
+            vds.Data = (byte[])dt.Rows[0]["doc"];
+            vds.Extension = dt.Rows[0]["doc_type"].ToString().Substring(1).Trim();
             return vds;
         }
         catch (Exception ex)
