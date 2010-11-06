@@ -20,6 +20,7 @@ public partial class cse545g5wdm_ViewDocument : System.Web.UI.Page
     {
         try
         {
+            LogService logService = new LogService();
             ListItem selectedItem = ddl_ChooseDocument.SelectedItem;
             int itemvalue = Int32.Parse(selectedItem.Value);
             ViewDocumentService vds = new ViewDocumentService();
@@ -60,6 +61,7 @@ public partial class cse545g5wdm_ViewDocument : System.Web.UI.Page
             Response.Flush();
             Response.Clear();
             Response.End();
+            logService.LogAction(DateTime.Now.ToString() + ": User " + (string)Session["username"] + " has opened the document " + selectedItem.Text + ".\n");
         }
         catch (Exception ex)
         {
