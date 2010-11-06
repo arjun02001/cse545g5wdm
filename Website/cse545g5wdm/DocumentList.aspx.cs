@@ -22,7 +22,7 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
             return;
         }
 
-        DocListService doclistService = new DocListService();
+        /*DocListService doclistService = new DocListService();
         if (Session["userid"] != null)
         {
             userid = (int)Session["userid"];
@@ -39,7 +39,7 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
         else
         {
             Server.Transfer("~/Login.aspx");
-        }
+        }*/
 
     }
 
