@@ -2,11 +2,11 @@
 
 <asp:Content ContentPlaceHolderID="content1" ID="contentView" Visible="true" runat="server">
     <form id="frmDocumentList">
-    <div class="heading">
-        List of Documents
-    </div>
+        <div class="heading">
+            List of Documents
+        </div>
     
-    <div class="navigationbox">
+    <!--div class="navigationbox">
         <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" 
             DataSourceID="sql_related_documents">
             <Columns>
@@ -25,7 +25,13 @@
                     Type="Int32" />
             </SelectParameters>
         </asp:SqlDataSource>
-        .</div>
+        .</div -->
+        <div class="navigationbox">
+            <asp:GridView ID="GridView1" runat="server">
+                <Columns>
+                </Columns>
+            </asp:GridView>
+        </div>
     &nbsp;<br />
     <br />
     &nbsp;
