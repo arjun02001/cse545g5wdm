@@ -26,24 +26,27 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
             return;
         }
 
-        /*DocListService doclistService = new DocListService();
-        if (Session["userid"] != null)
+        if (!this.IsPostBack)
         {
-            userid = (int)Session["userid"];
+            DocListService doclistService = new DocListService();
+            if (Session["userid"] != null)
+            {
+                userid = (int)Session["userid"];
 
-            //userid = 41;
-            Console.WriteLine(userid);
-            DataSet ds = doclistService.DocumentListService(userid);
+                //userid = 41;
+                Console.WriteLine(userid);
+                DataSet ds = doclistService.DocumentListService(userid);
 
-            GridView2.DataSource = ds;
-            GridView2.DataBind();
-            GridView2.Visible = true;
-            GridView2.EmptyDataText = "No record found in database";
+                GridView2.DataSource = ds;
+                GridView2.DataBind();
+                GridView2.Visible = true;
+                GridView2.EmptyDataText = "No record found in database";
+            }
+            else
+            {
+                Server.Transfer("~/Login.aspx");
+            }
         }
-        else
-        {
-            Server.Transfer("~/Login.aspx");
-        }*/ 
 
     }
 
