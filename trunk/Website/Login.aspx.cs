@@ -13,9 +13,9 @@ public partial class Login : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         FormsAuthentication.Initialize();
-        /*Response.ExpiresAbsolute = DateTime.Now.AddDays(-1d);
+        Response.ExpiresAbsolute = DateTime.Now.AddDays(-1d);
         Response.Expires = -1500;
-        Response.CacheControl = "no-cache";*/
+        Response.CacheControl = "no-cache";
         if(Session.IsNewSession)
         {
             Session.Add("loginAttempts", (object)0);
