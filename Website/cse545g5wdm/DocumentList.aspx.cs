@@ -37,10 +37,10 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
                 Console.WriteLine(userid);
                 DataSet ds = doclistService.DocumentListService(userid);
 
-                GridView2.DataSource = ds;
-                GridView2.DataBind();
-                GridView2.Visible = true;
-                GridView2.EmptyDataText = "No record found in database";
+                GridView1.DataSource = ds;
+                GridView1.DataBind();
+                GridView1.Visible = true;
+                GridView1.EmptyDataText = "No record found in database";
             }
             else
             {
