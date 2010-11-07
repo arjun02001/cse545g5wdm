@@ -53,7 +53,18 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
     protected void CheckOut_Button_Click(object sender, EventArgs e)
     {
         //Server.Transfer("~/Login.aspx");
-        HttpContext.Current.Response.Write("<script>alert('" + userid + "');history.back()</script>");
+        //HttpContext.Current.Response.Write("<script>alert('" + userid + "');history.back()</script>");
+        //HttpContext.Current.Response.End(); 
+        string str = "";
+        for (int i = 0; i <= GridView1.Rows.Count - 1; i++)
+        {
+            CheckBox cbox = (CheckBox)GridView1.Rows[i].FindControl("chkClick");
+            if (cbox.Checked == true)
+            {
+                str += i + " ";
+            }
+        }
+        HttpContext.Current.Response.Write("<script>alert('" + str + "');history.back()</script>");
         HttpContext.Current.Response.End(); 
     }
 }

@@ -31,7 +31,7 @@
                 <Columns>
                 <asp:TemplateField ShowHeader="False" HeaderText="Click">
                     <ItemTemplate>
-                        <asp:CheckBox ID="CheckBox1" runat="server"></asp:CheckBox>
+                        <asp:CheckBox ID="chkClick" runat="server"></asp:CheckBox>
                     
                     </ItemTemplate>
                 </asp:TemplateField>
