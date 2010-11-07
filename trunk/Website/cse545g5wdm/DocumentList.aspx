@@ -29,6 +29,12 @@
         <div class="navigationbox">
             <asp:GridView ID="GridView1" runat="server">
                 <Columns>
+                <asp:TemplateField ShowHeader="False" HeaderText="Click">
+                    <ItemTemplate>
+                        <asp:CheckBox ID="CheckBox1" runat="server"></asp:CheckBox>
+                    
+                    </ItemTemplate>
+                </asp:TemplateField>
                 </Columns>
             </asp:GridView>
         </div>
