@@ -19,7 +19,7 @@
                             DataValueField="doc_id"></asp:DropDownList>
                         <asp:SqlDataSource ID="wdm_authored_documents" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:wdmConnectionString %>" 
-                            SelectCommand="sp_GetAuthoredDocuments" SelectCommandType="StoredProcedure">
+                            SelectCommand="sp_GetDocumentsToRead" SelectCommandType="StoredProcedure">
                             <SelectParameters>
                                 <asp:SessionParameter DefaultValue="0" Name="par_userid" SessionField="userid" 
                                     Type="Int32" />
