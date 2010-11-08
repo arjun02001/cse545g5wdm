@@ -1,6 +1,6 @@
 <%@ Page Title="Web Document Management - Share Document" Language="C#" MasterPageFile="~/cse545g5wdm/SiteMasterPage.master" AutoEventWireup="true" CodeFile="ShareDocument.aspx.cs" Inherits="cse545g5wdm_ShareDocument" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="topMenu" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="content1" Runat="Server">
     <div class="heading">
         Share Document
     </div>
