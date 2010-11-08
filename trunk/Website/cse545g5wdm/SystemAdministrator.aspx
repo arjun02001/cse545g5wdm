@@ -28,7 +28,7 @@
 	border-right-style:solid;
 	border-right-width:medium;
 	width: auto;
-	margin: 0px 40% 0px 40%;
+	margin: 0px 10% 0px 10%;
 }
 </style>
 </head>
