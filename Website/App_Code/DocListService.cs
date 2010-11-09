@@ -92,10 +92,7 @@ public class DocListService : System.Web.Services.WebService
         {
             Server.Transfer("~/Login.aspx");
         }
-        if (da != null)
-        {
-
-        }
+       
         
         return docId;
     }
