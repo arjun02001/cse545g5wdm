@@ -38,10 +38,12 @@ public class DocListService : System.Web.Services.WebService
         doclist.Parameters.Add(new SqlParameter("@par_userid", SqlDbType.Int)).Value = userid;
 
         DataSet ds = new DataSet();
+        
+        SqlDataAdapter da = new SqlDataAdapter();
         try
         {
             connect.Open();
-            SqlDataAdapter da = new SqlDataAdapter();
+            
             da.SelectCommand = doclist;
             da.Fill(ds);
             connect.Close();
@@ -52,8 +54,50 @@ public class DocListService : System.Web.Services.WebService
         {
             result = "Failed to delete document.";
         }
+        if (da != null)
+        {
+            
+        }
 
         return ds;
+    }
+
+    [WebMethod]
+    public int DocumentListData(int userid,string doc_title)
+    {
+
+        SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+        SqlCommand doclist = new SqlCommand("group5.StoredProcedure2", connect);
+        doclist.CommandType = CommandType.StoredProcedure;
+        doclist.Parameters.Add(new SqlParameter("@par_userid", SqlDbType.Int)).Value = userid;
+        doclist.Parameters.Add(new SqlParameter("@par_doc_title", SqlDbType.NChar)).Value = doc_title;
+
+        DataTable dataTableDocument = new DataTable();
+
+        SqlDataAdapter da = new SqlDataAdapter(doclist);
+        int docId = 0;
+        try
+        {
+            connect.Open();
+            da.Fill(dataTableDocument);
+            
+            if (dataTableDocument.Rows.Count == 1)
+            {
+                docId = (int)dataTableDocument.Rows[0]["doc_id"];
+            }
+
+            connect.Close();
+        }
+        catch (SqlException)
+        {
+            Server.Transfer("~/Login.aspx");
+        }
+        if (da != null)
+        {
+
+        }
+        
+        return docId;
     }
 
 }
