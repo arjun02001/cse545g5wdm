@@ -6,7 +6,7 @@
             List of Documents
         </div>
     
-     <div class="navigationbox">
+    <!--div class="navigationbox">
         <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" 
             DataSourceID="sql_related_documents">
             <Columns>
@@ -14,8 +14,8 @@
                     SortExpression="doc_title" />
                 <asp:BoundField DataField="doc_id" HeaderText="doc_id" ReadOnly="True" 
                     SortExpression="doc_id" />
-            </Columns> 
-          
+            </Columns>
+            
         </asp:GridView>
         <asp:SqlDataSource ID="sql_related_documents" runat="server" 
             ConnectionString="<%$ ConnectionStrings:wdmConnectionString %>" 
@@ -25,8 +25,8 @@
                     Type="Int32" />
             </SelectParameters>
         </asp:SqlDataSource>
-     </div>
-        <!--<div class="navigationbox">
+        .</div -->
+        <div class="navigationbox">
             <asp:GridView ID="GridView1" runat="server">
                 <Columns>
                 <asp:TemplateField ShowHeader="False" HeaderText="Click">
@@ -37,7 +37,7 @@
                 </asp:TemplateField>
                 </Columns>
             </asp:GridView>
-        </div> !-->
+        </div>
     &nbsp;<br />
     <br />
     &nbsp;
