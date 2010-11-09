@@ -31,15 +31,17 @@
                 <li><asp:HyperLink ID="hl_Delete" runat="server" NavigateUrl="~/cse545g5wdm/DeleteDocument.aspx" Text="Delete Document"></asp:HyperLink></li>
                 <li><asp:HyperLink ID="h1_ViewDocument" runat="server" NavigateUrl="~/cse545g5wdm/ViewDocument.aspx" Text="View Document"></asp:HyperLink></li>
                 <li><asp:HyperLink ID="hl_ShareDocument" runat="server" NavigateUrl="~/cse545g5wdm/ShareDocument.aspx" Text="Share Document"></asp:HyperLink></li>
-                <li><asp:HyperLink ID="h1_Logout" runat="server" NavigateUrl="~/Logout.aspx" Text="Logout"></asp:HyperLink></li>
-			</ul>
+                <li><asp:HyperLink ID="h1_Update" runat="server" NavigateUrl="~/cse545g5wdm/UpdateWDM.aspx" Text="Update"></asp:HyperLink></li>
+                <li><asp:HyperLink ID="h1_checkIn" runat="server" NavigateUrl="~/cse545g5wdm/Checkin.aspx" Text="Check In"></asp:HyperLink></li>
+                <li><asp:HyperLink ID="h1_logout" runat="server" NavigateUrl="~/Logout.aspx" Text="Logout"></asp:HyperLink></li>
+          	</ul>
+			
 		</div>
 		
 		
 	</div>
 
-   </asp:ContentPlaceHolder>
-   
+   </asp:ContentPlaceHolder> 
 <asp:ContentPlaceHolder id="content1" runat="server" >
     </asp:ContentPlaceHolder>
     
