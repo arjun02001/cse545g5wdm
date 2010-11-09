@@ -35,6 +35,7 @@ public partial class cse545g5wdm_ShareDocument : System.Web.UI.Page
         //no point if no access given
         if (cb_Read.Checked || cb_Update.Checked || cb_Check.Checked)
         {
+            LogService logAction = new LogService();
             try
             {
                 string result = shareDocument.ShareDocument(txt_Username.Text.Trim(), (int)Session["userid"],
@@ -43,11 +44,13 @@ public partial class cse545g5wdm_ShareDocument : System.Web.UI.Page
 
                 if (result == "Success.")
                 {
+                    logAction.LogAction("User " + (string)Session["username"] + " shared a document with " + txt_Username.Text.Trim() + ".");
                     lbl_Error.Visible = false;
                     lbl_Success.Visible = true;
                 }
                 else
                 {
+                    logAction.LogAction("User " + (string)Session["username"] + " tried to share a document, but failed in the database for reason: " + result);
                     lbl_Error.Visible = true;
                     lbl_Error.Text = result;
                 }
