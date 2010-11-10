@@ -33,6 +33,10 @@ public class CheckOut : System.Web.Services.WebService {
             {
                 docId[i] = ds.DocumentListData(userID, docName[i]);
             }
+            else
+            {
+                break;
+            }
         }
         for (int i = 0; i < docId.Length; i++)
         {
@@ -56,6 +60,9 @@ public class CheckOut : System.Web.Services.WebService {
                     Server.Transfer("~/Error.aspx");
                 }
             }
+            else {
+                break;
+                }
         }
 
         return "Document Checked Out";
