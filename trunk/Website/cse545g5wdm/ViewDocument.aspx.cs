@@ -33,27 +33,27 @@ public partial class cse545g5wdm_ViewDocument : System.Web.UI.Page
             if (extension.Equals("pdf"))
             {
                 mime = "application/pdf";
-                Response.AddHeader("Content-Disposition", "attachment;filename=wdm.pdf");
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + vds.FileName + "");
             }
             if (extension.Equals("doc"))
             {
                 mime = "application/ms-word";
-                Response.AddHeader("Content-Disposition", "attachment;filename=wdm.doc");
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + vds.FileName + "");
             }
             if (extension.Equals("txt"))
             {
                 mime = "text/plain";
-                Response.AddHeader("Content-Disposition", "attachment;filename=wdm.txt");
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + vds.FileName + "");
             }
             if (extension.Equals("docx"))
             {
                 mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-                Response.AddHeader("Content-Disposition", "attachment;filename=wdm.docx");
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + vds.FileName + "");
             }
             if (extension.Equals("rtf"))
             {
                 mime = "application/rtf";
-                Response.AddHeader("Content-Disposition", "attachment;filename=wdm.rtf");
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + vds.FileName + "");
             }
             Response.Clear();
             Response.Buffer = true;
