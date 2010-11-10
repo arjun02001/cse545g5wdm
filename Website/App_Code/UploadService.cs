@@ -94,7 +94,7 @@ public class UploadService : System.Web.Services.WebService
                 SqlCommand uploadCommand = new SqlCommand("group5.sp_AddNewDocument", connect);
                 uploadCommand.CommandType = CommandType.StoredProcedure;
                 uploadCommand.Parameters.Add(new SqlParameter("@par_userid", SqlDbType.Int)).Value = userid;
-                uploadCommand.Parameters.Add(new SqlParameter("@par_title", SqlDbType.NChar)).Value = documentName + fileExtension;
+                uploadCommand.Parameters.Add(new SqlParameter("@par_title", SqlDbType.NChar)).Value = documentName;
                 uploadCommand.Parameters.Add(new SqlParameter("@par_doc_type", SqlDbType.NChar)).Value = fileExtension;
                 uploadCommand.Parameters.Add(new SqlParameter("@par_doc", SqlDbType.VarBinary, fileLength)).Value = docData;
                 uploadCommand.Parameters.Add(new SqlParameter("@RETURNVALUE", SqlDbType.Int)).Value = returnvalue;
