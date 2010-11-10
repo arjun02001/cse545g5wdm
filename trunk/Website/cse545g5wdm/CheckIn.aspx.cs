@@ -19,10 +19,19 @@ public partial class CheckIn : System.Web.UI.Page
             string result = "Failure.";
             if (cb_Confirm.Checked)
             {
-               // DeleteDocumentService deleteDocument = new DeleteDocumentService();
+                CheckInService checkInObj = new CheckInService();
                 ListItem selectedItem = ddl_ChooseDocument.SelectedItem;
                 int itemvalue = Int32.Parse(selectedItem.Value);
-                //result = deleteDocument.DeleteDocument(ddl_ChooseDocument.SelectedValue);
+
+                if (Session["userid"] != null)
+                {
+                    int userId = (int)Session["userid"];
+                    result = checkInObj.CheckInDocument(itemvalue, userId);
+                }
+                else
+                {
+                    Server.Transfer("~/Login.aspx");
+                }
 
             }
 
@@ -30,18 +39,18 @@ public partial class CheckIn : System.Web.UI.Page
             if (result == "Failure.")
             {
             //    lbl_Error.Visible = true;
-              //  lbl_Error.Text = "Could not delete document.";
+              //  lbl_Error.Text = "Could not checkIn document.";
             }
             //update documents
             if (result == "Success.")
             {
-                logAction.LogAction("User has Check In the document " + ddl_ChooseDocument.SelectedValue + ".");
+                logAction.LogAction("User attempted to CheckIn the document " + ddl_ChooseDocument.SelectedValue + ".");
                 //lbl_Error.Visible = false;
                 ddl_ChooseDocument.DataBind();
             }
             else
             {
-                logAction.LogAction("User attempted to delete the documnt " + ddl_ChooseDocument.SelectedValue + " but an error prevented that.");
+                logAction.LogAction("User attempted to CheckIn the document " + ddl_ChooseDocument.SelectedValue + " but an error prevented that.");
                 //lbl_Error.Text = "Selection is not confirmed.";
                 //lbl_Error.Visible = true;
             }
