@@ -23,10 +23,7 @@ public class CheckInService : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public string CheckInDocument(int docId, int userID) {
-       DocListService ds = new DocListService();
-       
-       
+    public string CheckInDocument(int docId, int userID) {       
             if (docId != 0)
             {
                 SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
