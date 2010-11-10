@@ -31,7 +31,7 @@ public class UploadService : System.Web.Services.WebService
     [WebMethod]
     public string UploadFileService(String documentName, FileUpload fileUploadDoc, int userid)
     {
-
+        int returnvalue=0;
         Boolean fileOK = false;
         Boolean extensionOK = false;
         String path = Server.MapPath("Files");
@@ -97,9 +97,11 @@ public class UploadService : System.Web.Services.WebService
                 uploadCommand.Parameters.Add(new SqlParameter("@par_title", SqlDbType.NChar)).Value = documentName + fileExtension;
                 uploadCommand.Parameters.Add(new SqlParameter("@par_doc_type", SqlDbType.NChar)).Value = fileExtension;
                 uploadCommand.Parameters.Add(new SqlParameter("@par_doc", SqlDbType.VarBinary, fileLength)).Value = docData;
+                uploadCommand.Parameters.Add(new SqlParameter("@RETURNVALUE", SqlDbType.Int)).Value = returnvalue;
+                uploadCommand.Parameters["@RETURNVALUE"].Direction = ParameterDirection.ReturnValue;
 
                 connect.Open();
-                uploadCommand.ExecuteNonQuery();
+                uploadCommand.ExecuteScalar();
                 connect.Close();
                 connect.Dispose();
                 uploadCommand.Dispose();
@@ -134,7 +136,15 @@ public class UploadService : System.Web.Services.WebService
             result = "Cannot accept files of this type.";
         }
         DataTable s = new DataTable();
-        result = "Success.";
+        if (returnvalue == 1)
+        {
+            result = "Success.";
+        }
+        else
+        {
+            result = "Failed to add document due to duplicate name or database error.";
+        }
+
         return result;
     }
 
