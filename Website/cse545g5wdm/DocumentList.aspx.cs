@@ -85,7 +85,7 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
             return;
         }
 
-        HttpContext.Current.Response.Write("<script>alert('" +userid + " "+  text[0] +" " +str   + "');history.back()</script>");
+        HttpContext.Current.Response.Write("<script>alert(' Documents has been checked out ');history.back()</script>");
         HttpContext.Current.Response.End(); 
     }
 }
