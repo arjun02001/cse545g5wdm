@@ -5,9 +5,9 @@
     <div class="heading">
         CheckIn Document
     </div>
-		<center>
+		
          <div class="uploadbox">
-            <table width="100%" border="-1">
+            <table >
                 <tr>
                     <td align="right" width="50%">
                         <asp:Label ID="lbl_ChooseDocument" runat="server" Text="Choose Document" AssociatedControlID="ddl_ChooseDocument"></asp:Label>
@@ -36,5 +36,7 @@
                          <asp:Button ID="btn_CheckIn" runat="server" Text="Check In Document" OnClick="btn_CheckIn_Click" />
                      </td>
             </tr>
+            </table>
+            </div>
     </form>
 </asp:Content>
