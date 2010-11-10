@@ -34,6 +34,13 @@ public class ViewDocumentService : System.Web.Services.WebService {
         set { extension = value; }
     }
 
+    private string fileName;
+
+    public string FileName
+    {
+        get { return fileName; }
+        set { fileName = value; }
+    }
     public ViewDocumentService () {
 
         //Uncomment the following line if using designed components 
@@ -58,6 +65,7 @@ public class ViewDocumentService : System.Web.Services.WebService {
             connect.Close();
             vds.Data = (byte[])dt.Rows[0]["doc"];
             vds.Extension = dt.Rows[0]["doc_type"].ToString().Substring(1).Trim();
+            vds.FileName = dt.Rows[0]["doc_title"].ToString().Trim();
             return vds;
         }
         catch (Exception ex)
