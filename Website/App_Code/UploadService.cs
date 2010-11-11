@@ -101,7 +101,8 @@ public class UploadService : System.Web.Services.WebService
                 uploadCommand.Parameters["@RETURNVALUE"].Direction = ParameterDirection.ReturnValue;
 
                 connect.Open();
-                uploadCommand.ExecuteScalar();
+                uploadCommand.ExecuteNonQuery();
+                returnvalue = (int)uploadCommand.Parameters["@RETURNVALUE"].Value;
                 connect.Close();
                 connect.Dispose();
                 uploadCommand.Dispose();
