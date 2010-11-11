@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#"  MasterPageFile ="~/cse545g5wdm/SiteMasterPage.master" AutoEventWireup="true" CodeFile="UpdateWDM.aspx.cs" Inherits="UpdateWDM" %>
+<%@ Page Language="C#"  MasterPageFile ="~/cse545g5wdm/SiteMasterPage.master" AutoEventWireup="true" CodeFile="UpdateWDM.aspx.cs" Inherits="UpdateWDM" %>
 
 
 
@@ -17,10 +17,10 @@
         <td align="left">
                          <asp:DropDownList ID="ddl_ChooseDocument" runat="server" 
                             DataSourceID="wdm_authored_documents_Update" DataTextField="doc_title" 
-                            DataValueField="doc_title"> </asp:DropDownList>
+                            DataValueField="doc_id"> </asp:DropDownList>
                         <asp:SqlDataSource ID="wdm_authored_documents_Update" runat="server" 
                             ConnectionString="<%$ ConnectionStrings:wdmConnectionString %>" 
-                            SelectCommand="getCheckOutDocument" SelectCommandType="StoredProcedure">
+                            SelectCommand="sp_GetDocumentsToUpdate" SelectCommandType="StoredProcedure">
                             <SelectParameters>
                                 <asp:SessionParameter DefaultValue="0" Name="par_userid" SessionField="userid" 
                                     Type="Int32" />
@@ -40,6 +40,10 @@
             <td>
                 <asp:Button ID="btn_Update" runat="server" Text="Update" Visible="true" 
                  OnClick="Update_Button_Click" />
+            </td>
+            <td>
+                <asp:Label id="lbl_Success" runat="server" Visible="false" Text="Successfully updated a document." />
+                <asp:Label ID="lbl_Error" runat="server" Visible="false" ForeColor="Red" />
             </td>
         </tr>
         

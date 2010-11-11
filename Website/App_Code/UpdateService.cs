@@ -25,12 +25,12 @@ public class UpdateService : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public string UpdateFileService(string FileName, FileUpload fileUpdateDoc, int userId)
+    public string UpdateFileService(string FileName, FileUpload fileUpdateDoc, int userId, int docid)
     {
         Boolean fileOK = false;
         Boolean extensionOK = false;
         String path = Server.MapPath("Files");
-
+        int returnvalue = 0;
         String result;
         String fileExtension =
                 System.IO.Path.GetExtension(fileUpdateDoc.FileName).ToLower();
@@ -112,13 +112,15 @@ public class UpdateService : System.Web.Services.WebService {
                     SqlCommand updateCommand = new SqlCommand("group5.sp_UpdateDocument", connect);
                     updateCommand.CommandType = CommandType.StoredProcedure;
                     updateCommand.Parameters.Add(new SqlParameter("@par_userid", SqlDbType.Int)).Value = userId;
-                    updateCommand.Parameters.Add(new SqlParameter("@par_docid", SqlDbType.Int)).Value = docId;
-                    updateCommand.Parameters.Add(new SqlParameter("@par_title", SqlDbType.NChar)).Value = FileName;
+                    updateCommand.Parameters.Add(new SqlParameter("@par_docid", SqlDbType.Int)).Value = docid;
                     updateCommand.Parameters.Add(new SqlParameter("@par_doc", SqlDbType.VarBinary, fileLength)).Value = docData;
-                    updateCommand.Parameters.Add(new SqlParameter("@par_userRole", SqlDbType.Int)).Value = roleid;
+                    updateCommand.Parameters.Add(new SqlParameter("@par_doclength", SqlDbType.Int)).Value = fileLength;
+                    updateCommand.Parameters.Add(new SqlParameter("@RETURNVALUE", SqlDbType.Int)).Value = returnvalue;
+                    updateCommand.Parameters["@RETURNVALUE"].Direction = ParameterDirection.ReturnValue;
 
                     connect.Open();
                     updateCommand.ExecuteNonQuery();
+                    returnvalue = (int)updateCommand.Parameters["@RETURNVALUE"].Value;
                     connect.Close();
                     connect.Dispose();
                     updateCommand.Dispose();
@@ -154,7 +156,14 @@ public class UpdateService : System.Web.Services.WebService {
             result = "Cannot accept files of this type.";
         }
         DataTable s = new DataTable();
-        result = "Success.";
+        if (returnvalue == 1)
+        {
+            result = "Success.";
+        }
+        else
+        {
+            result = "Database error or bad arguments.";
+        }
         return result;
         
     }

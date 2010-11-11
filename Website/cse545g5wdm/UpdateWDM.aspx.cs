@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -14,19 +15,23 @@ public partial class UpdateWDM : System.Web.UI.Page
         Response.Expires = -1500;
         Response.CacheControl = "no-cache";
         //check for if user should not be here
-      /*  if (Roles.IsUserInRole("Guest"))
+        try
         {
-            Server.Transfer("~/DocumentList.aspx");
+            if (Roles.IsUserInRole("Temp"))
+            {
+                Server.Transfer("~/Login.aspx");
+            }
+            if(Roles.IsUserInRole("SystemAdministrator"))
+            {
+                Server.Transfer("~/cse545g5wdm/SystemAdministrator.aspx");
+            }
         }
-        if (Roles.IsUserInRole("Temp"))
+        catch(HttpException)
         {
-            Server.Transfer("~/Login.aspx");
+            Server.Transfer("~/Error.aspx");
         }
-        if(Roles.IsUserInRole("SystemAdministrator"))
-        {
-            Server.Transfer("~/cse545g5wdm/SystemAdministrator.aspx");
-        }*/
     }
+
     protected void Update_Button_Click(object sender, EventArgs e)
     {
         LogService logAction = new LogService();
@@ -35,15 +40,38 @@ public partial class UpdateWDM : System.Web.UI.Page
         UpdateService updateServiceObj = new UpdateService();
         try
         {
-            String returnVal = updateServiceObj.UpdateFileService(fileName, filePath, (int)Session["userid"]);
+            String returnVal = updateServiceObj.UpdateFileService(fileName, filePath, (int)Session["userid"], Int32.Parse(ddl_ChooseDocument.SelectedValue));
             if (returnVal == "Success.")
             {
+                lbl_Success.Visible = true;
+                lbl_Error.Visible = false;
                 logAction.LogAction("User " + (string)Session["username"] + " successfully updated a file.");
             }
             else
             {
+                lbl_Success.Visible = false;
+                lbl_Error.Visible = true;
+                lbl_Error.Text = "Database error.";
                 logAction.LogAction("User " + (string)Session["username"] + " failed to update a file due to " + returnVal + ".");
             }
+        }
+        catch (ArgumentNullException)
+        {
+            lbl_Success.Visible = false;
+            lbl_Error.Visible = true;
+            lbl_Error.Text = "No document found.";
+        }
+        catch (FormatException)
+        {
+            lbl_Success.Visible = false;
+            lbl_Error.Visible = true;
+            lbl_Error.Text = "Not an integer based document.";
+        }
+        catch (OverflowException)
+        {
+            lbl_Success.Visible = false;
+            lbl_Error.Visible = true;
+            lbl_Error.Text = "Cannot convert document value, too large.";
         }
         catch (HttpException)
         {
