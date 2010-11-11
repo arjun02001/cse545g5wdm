@@ -13,7 +13,7 @@ public partial class cse545g5wdm_Update : System.Web.UI.Page
         Response.Expires = -1500;
         Response.CacheControl = "no-cache";
         //check for if user should not be here
-        if (Roles.IsUserInRole("Guest"))
+        /*if (Roles.IsUserInRole("Guest"))
         {
             Server.Transfer("~/DocumentList.aspx");
         }
@@ -24,7 +24,7 @@ public partial class cse545g5wdm_Update : System.Web.UI.Page
         if (Roles.IsUserInRole("SystemAdministrator"))
         {
             Server.Transfer("~/cse545g5wdm/SystemAdministrator.aspx");
-        }
+        }*/
 
     }
 }
