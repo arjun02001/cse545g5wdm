@@ -121,7 +121,7 @@
                         </asp:CreateUserWizardStep>
                         <asp:CompleteWizardStep runat="server" >
                        <ContentTemplate>
-                           <td align="center">
+                           <td align="left">
                                             <asp:Label ID="lbl_Result" runat="server" Visible="false" ForeColor="Black"></asp:Label>
                             </td>
                             <td align="center">
