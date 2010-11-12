@@ -55,7 +55,7 @@ public partial class Register : System.Web.UI.Page
         {
             logAction.LogAction(DateTime.Now.ToString() + ": A new user account has been created by the name of " + username + ".\n");
             Label lbl_Result = (Label)cuw_Register.CompleteStep.ContentTemplateContainer.FindControl("lbl_Result");
-            lbl_Result.Text = ("The User is created " + username).ToString();
+            lbl_Result.Text = ("The User is created " + username).ToString() + ". Please wait for the system admin to grant you access.";
             lbl_Result.Visible = true;
         
         }
