@@ -120,18 +120,17 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
             {
                 CheckBox cbox = (CheckBox)GridView1.Rows[i].FindControl("chkClick");
 
-                foreach (DataTable dtable in dset.Tables)
-                {
-                    foreach (DataRow drow in dtable.Rows)
-                    {
-                        String name = (String)drow["Title"];
-                        if (htable.ContainsKey(name)  && (bool)htable[name] == false)
-                        {
-                            cbox.Visible = false;
-                        }
+                String name = GridView1.Rows[i].Cells[1].Text;
 
-                    }
-                }                
+                //String name = (String)drow["Title"];
+                if (htable.ContainsKey(name) && (bool)htable[name] == false)
+                {
+                    cbox.Visible = false;
+                }
+                else
+                    cbox.Visible = true;
+
+                                
 
                 //cbox.Visible = false;
             }
