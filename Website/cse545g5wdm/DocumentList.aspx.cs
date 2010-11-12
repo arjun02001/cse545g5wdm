@@ -44,6 +44,7 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
                 GridView1.EmptyDataText = "No record found in database";
 
                 Check_ShareOptions(ds);
+                Hide_Checked();
             }
             else
             {
@@ -83,6 +84,8 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
             userid = (int)Session["userid"];
             // Put a check of text is not empty
             checkOutDocService.checkOut(text, userid, emailId);
+            
+            
         }
         else
         {
@@ -92,6 +95,51 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
 
         HttpContext.Current.Response.Write("<script>alert(' Documents has been checked out ');history.back()</script>");
         HttpContext.Current.Response.End(); 
+    }
+
+    private void Hide_Checked()
+    {
+        DocListService doclistService = new DocListService();
+        if (Session["userid"] != null)
+        {
+            DataSet ds = doclistService.CheckedDocumentListData();
+
+            Hashtable htable = new Hashtable();
+
+            foreach (DataTable dtable in ds.Tables)
+            {
+                foreach (DataRow drow in dtable.Rows)
+                {
+                    String title = (String)drow["Title"];
+                    int docid = (int)drow["DocID"];
+                    htable.Add(title, docid);
+                }
+            }
+
+
+            for (int i = 0; i <= GridView1.Rows.Count - 1; i++)
+            {
+                CheckBox cbox = (CheckBox)GridView1.Rows[i].FindControl("chkClick");
+
+                String name = GridView1.Rows[i].Cells[1].Text;
+
+                //String name = (String)drow["Title"];
+                if (htable.ContainsKey(name))
+                {
+                    cbox.Visible = false;
+                }
+                else
+                    cbox.Visible = true;
+
+
+
+                //cbox.Visible = false;
+            }
+        }
+        else
+        {
+            Server.Transfer("~/Login.aspx");
+        }
     }
 
     private void Check_ShareOptions(DataSet dset)
