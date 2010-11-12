@@ -40,7 +40,25 @@ public partial class cse545g5wdm_DeleteDocument : System.Web.UI.Page
                 DeleteDocumentService deleteDocument = new DeleteDocumentService();
                 ListItem selectedItem = ddl_ChooseDocument.SelectedItem;
                 int itemvalue = Int32.Parse(selectedItem.Value);
-                result = deleteDocument.DeleteDocument(ddl_ChooseDocument.SelectedValue);
+                try
+                {
+                    result = deleteDocument.DeleteDocument(Int32.Parse(ddl_ChooseDocument.SelectedValue));
+                }
+                catch (ArgumentNullException)
+                {
+                    lbl_Error.Visible = true;
+                    lbl_Error.Text = result;
+                }
+                catch (FormatException)
+                {
+                    lbl_Error.Visible = true;
+                    lbl_Error.Text = result;
+                }
+                catch (OverflowException)
+                {
+                    lbl_Error.Visible = true;
+                    lbl_Error.Text = result;
+                }
 
             }
 
