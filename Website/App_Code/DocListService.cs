@@ -132,5 +132,39 @@ public class DocListService : System.Web.Services.WebService
         return docId;
     }
 
+    [WebMethod]
+    public DataSet CheckedDocumentListData()
+    {
+        String result = "Failure.";
+
+        SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+        SqlCommand doclist = new SqlCommand("group5.StoredProcedure6", connect);
+        doclist.CommandType = CommandType.StoredProcedure;
+
+        DataSet ds = new DataSet();
+
+        SqlDataAdapter da = new SqlDataAdapter();
+        try
+        {
+            connect.Open();
+
+            da.SelectCommand = doclist;
+            da.Fill(ds);
+            connect.Close();
+
+            result = "Success.";
+        }
+        catch (SqlException)
+        {
+            result = "Failed to load checked document.";
+        }
+        if (da != null)
+        {
+
+        }
+
+        return ds;
+    }
+
 }
 
