@@ -60,7 +60,7 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
         //HttpContext.Current.Response.End(); 
         string str = "";
         string[] text = new string[GridView1.Rows.Count];
-       
+        string[] emailId = new string[GridView1.Rows.Count];
         int j = 0;
         int userid = 0;
         CheckOut checkOutDocService = new CheckOut();
@@ -72,15 +72,17 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
             if (cbox.Checked == true)
             {
                 str += i + " ";
-                text[j++] = GridView1.Rows[i].Cells[1].Text;
-              
+                text[j] = GridView1.Rows[i].Cells[1].Text;
+                emailId[j] = GridView1.Rows[i].Cells[5].Text.Trim();
+              j++;
             }
         }
         if (Session["userid"] != null)
-        {
+        { 
+            
             userid = (int)Session["userid"];
             // Put a check of text is not empty
-            checkOutDocService.checkOut(text, userid);
+            checkOutDocService.checkOut(text, userid, emailId);
         }
         else
         {
