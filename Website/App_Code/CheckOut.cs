@@ -23,15 +23,44 @@ public class CheckOut : System.Web.Services.WebService {
     }
 
     [WebMethod]
-    public string checkOut(String []docName, int userID) {
+    public string checkOut(String []docName, int userID, String []emailID) {
 
         DocListService ds = new DocListService();
+        SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+        SqlCommand userIDCommand = new SqlCommand("group5.sp_GetUserID", connect);
+        userIDCommand.CommandType = CommandType.StoredProcedure;
+
+
         int []docId = new int[docName.Length];
+        int[] userIDVal = new int[emailID.Length];
+
         for (int i = 0; i < docName.Length; i++)
         {
             if (docName[i] != null)
             {
-                docId[i] = ds.DocumentListData(userID, docName[i]);
+                userIDCommand.Parameters.Add(new SqlParameter("@par_email", SqlDbType.NChar)).Value = emailID[i];
+
+                DataTable dataTableUserId = new DataTable();
+
+                SqlDataAdapter da = new SqlDataAdapter(userIDCommand);
+                
+                try
+                {
+                    connect.Open();
+                    da.Fill(dataTableUserId);
+
+                    if (dataTableUserId.Rows.Count == 1)
+                    {
+                        userIDVal[i] = (int)dataTableUserId.Rows[0]["user_id"];
+                    }
+
+                    connect.Close();
+                }
+                catch (SqlException)
+                {
+                    Server.Transfer("~/Login.aspx");
+                }
+                docId[i] = ds.DocumentListData(userIDVal[i], docName[i]);
             }
             else
             {
@@ -42,8 +71,7 @@ public class CheckOut : System.Web.Services.WebService {
         {
             if (docId[i] != 0)
             {
-                SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
-                SqlCommand doclist = new SqlCommand("group5.sp_DocumentCheckIn", connect);
+                 SqlCommand doclist = new SqlCommand("group5.sp_DocumentCheckIn", connect);
                 doclist.CommandType = CommandType.StoredProcedure;
                 doclist.Parameters.Add(new SqlParameter("@par_userid", SqlDbType.Int)).Value = userID;
                 doclist.Parameters.Add(new SqlParameter("@par_docid", SqlDbType.Int)).Value = docId[i];
