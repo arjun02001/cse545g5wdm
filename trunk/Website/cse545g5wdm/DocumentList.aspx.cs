@@ -84,7 +84,7 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
             userid = (int)Session["userid"];
             // Put a check of text is not empty
             checkOutDocService.checkOut(text, userid, emailId);
-            
+
             
         }
         else
@@ -94,7 +94,9 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
         }
 
         HttpContext.Current.Response.Write("<script>alert(' Documents has been checked out ');history.back()</script>");
-        HttpContext.Current.Response.End(); 
+        //HttpContext.Current.Response.End();
+
+        Response.Write("<script language=javascript>window.location.href='" + Request.Url.ToString() + "'</script>");
     }
 
     private void Hide_Checked()
