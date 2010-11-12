@@ -35,6 +35,10 @@
                     <td align="right" width="100%">
                          <asp:Button ID="btn_CheckIn" runat="server" Text="Check In Document" OnClick="btn_CheckIn_Click" />
                      </td>
+                     <td>
+                        <asp:Label ID="lbl_Error" runat="server" ForeColor="Red" Visible="false" />
+                        <asp:Label ID="lbl_Success" runat="server" Text="Successfully checked in the document." Visible="false" />
+                     </td>
             </tr>
             </table>
             </div>
