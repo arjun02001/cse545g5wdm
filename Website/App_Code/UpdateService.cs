@@ -50,6 +50,12 @@ public class UpdateService : System.Web.Services.WebService {
         HttpPostedFile uploadedFile = fileUpdateDoc.PostedFile;
         int fileLength = uploadedFile.ContentLength;
 
+        if (fileLength < 1)
+        {
+            result = "No file found.";
+            return result;
+        }
+
         //check for msword
         if (uploadedFile.ContentType == "application/msword")
         {
