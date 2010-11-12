@@ -27,6 +27,7 @@ public class ShareDocumentService : System.Web.Services.WebService {
     [WebMethod]
     public string ShareDocument(string username_target, int userid_source, int docid, bool read, bool update, bool check)
     {
+        int returnvalue = 0;
         //no XSS injection for you
         username_target = Server.HtmlEncode(username_target);
 
@@ -76,7 +77,10 @@ public class ShareDocumentService : System.Web.Services.WebService {
             sharedocument.Parameters.Add(new SqlParameter("@par_read", SqlDbType.Bit)).Value = read;
             sharedocument.Parameters.Add(new SqlParameter("@par_update", SqlDbType.Bit)).Value = update;
             sharedocument.Parameters.Add(new SqlParameter("@par_check", SqlDbType.Bit)).Value = check;
+            sharedocument.Parameters.Add(new SqlParameter("@RETURNVALUE", SqlDbType.Int)).Value = returnvalue;
+            sharedocument.Parameters["@RETURNVALUE"].Direction = ParameterDirection.ReturnValue;
             sharedocument.ExecuteNonQuery();
+            returnvalue = (int)sharedocument.Parameters["@RETURNVALUE"].Value;
             connect.Close();
 
 
@@ -106,6 +110,12 @@ public class ShareDocumentService : System.Web.Services.WebService {
         {
             return "Argument failure.";
         }
+
+        if (returnvalue == 0)
+        {
+            return "Duplicate share.";
+        }
+
 
         return "Success.";
     }
