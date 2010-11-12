@@ -63,6 +63,41 @@ public class DocListService : System.Web.Services.WebService
     }
 
     [WebMethod]
+    public DataSet DocumentListShareOnService(int userid)
+    {
+        String result = "Failure.";
+
+        SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+        SqlCommand doclist = new SqlCommand("group5.StoredProcedure1", connect);
+        doclist.CommandType = CommandType.StoredProcedure;
+        doclist.Parameters.Add(new SqlParameter("@par_userid", SqlDbType.Int)).Value = userid;
+
+        DataSet ds = new DataSet();
+
+        SqlDataAdapter da = new SqlDataAdapter();
+        try
+        {
+            connect.Open();
+
+            da.SelectCommand = doclist;
+            da.Fill(ds);
+            connect.Close();
+
+            result = "Success.";
+        }
+        catch (SqlException)
+        {
+            result = "Failed to delete document.";
+        }
+        if (da != null)
+        {
+
+        }
+
+        return ds;
+    }
+
+    [WebMethod]
     public int DocumentListData(int userid,string doc_title)
     {
 
