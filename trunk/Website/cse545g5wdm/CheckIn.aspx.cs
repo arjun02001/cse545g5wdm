@@ -40,27 +40,31 @@ public partial class CheckIn : System.Web.UI.Page
             //handle failure
             if (result == "Failure.")
             {
-            //    lbl_Error.Visible = true;
-              //  lbl_Error.Text = "Could not checkIn document.";
+                lbl_Error.Visible = true;
+                lbl_Success.Visible = false;
+                lbl_Error.Text = "Could not checkIn document.";
             }
             //update documents
-            if (result == "Success.")
+            if (result == "Document Checked in")
             {
                 logAction.LogAction("User attempted to CheckIn the document " + ddl_ChooseDocument.SelectedValue + ".");
-                //lbl_Error.Visible = false;
+                lbl_Error.Visible = false;
+                lbl_Success.Visible = true;
                 ddl_ChooseDocument.DataBind();
             }
             else
             {
                 logAction.LogAction("User attempted to CheckIn the document " + ddl_ChooseDocument.SelectedValue + " but an error prevented that.");
-                //lbl_Error.Text = "Selection is not confirmed.";
-                //lbl_Error.Visible = true;
+                lbl_Error.Text = "Selection is not confirmed.";
+                lbl_Success.Visible = false;
+                lbl_Error.Visible = true;
             }
         }
         else
         {
-           // lbl_Error.Visible = true;
-           // lbl_Error.Text = "No document selected.";
+           lbl_Error.Visible = true;
+           lbl_Success.Visible = false;
+           lbl_Error.Text = "No document selected.";
         }
     }
 }
