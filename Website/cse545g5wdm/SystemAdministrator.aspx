@@ -88,6 +88,7 @@
         System Log
     </div>
     <div class="basicbox">
+    <asp:Panel runat="server" ScrollBars="Vertical" Height="300">
     <asp:GridView ID="log_GridView" runat="server" AutoGenerateColumns="False" 
             CellPadding="4" ForeColor="#333333" GridLines="None"
         HorizontalAlign="Center" DataKeyNames="logid" DataSourceID="sql_log">
@@ -106,6 +107,7 @@
         <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
         <AlternatingRowStyle BackColor="White" />    
     </asp:GridView> 
+    </asp:Panel>
         <asp:SqlDataSource ID="sql_log" runat="server" 
             ConnectionString="<%$ ConnectionStrings:wdmConnectionString %>" 
             SelectCommand="sp_GetAllLogs" SelectCommandType="StoredProcedure">
