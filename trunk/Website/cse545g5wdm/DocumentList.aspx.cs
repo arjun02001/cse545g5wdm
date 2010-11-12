@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Collections;
 
 public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
 {
@@ -41,6 +42,8 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
                 GridView1.DataBind();
                 GridView1.Visible = true;
                 GridView1.EmptyDataText = "No record found in database";
+
+                Check_ShareOptions(ds);
             }
             else
             {
@@ -87,5 +90,55 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
 
         HttpContext.Current.Response.Write("<script>alert(' Documents has been checked out ');history.back()</script>");
         HttpContext.Current.Response.End(); 
+    }
+
+    private void Check_ShareOptions(DataSet dset)
+    {
+        DocListService doclistService = new DocListService();
+        if (Session["userid"] != null)
+        {
+            userid = (int)Session["userid"];
+
+            //userid = 41;
+            Console.WriteLine(userid);
+            DataSet ds = doclistService.DocumentListShareOnService(userid);
+
+            Hashtable htable = new Hashtable();
+
+            foreach (DataTable dtable in ds.Tables)
+            {
+                foreach (DataRow drow in dtable.Rows)
+                {
+                    String name = (String)drow["Title"];
+                    bool check = (bool)drow["Check"];
+                    htable.Add(name, check);
+                }
+            }
+
+
+            for (int i = 0; i <= GridView1.Rows.Count - 1; i++)
+            {
+                CheckBox cbox = (CheckBox)GridView1.Rows[i].FindControl("chkClick");
+
+                foreach (DataTable dtable in dset.Tables)
+                {
+                    foreach (DataRow drow in dtable.Rows)
+                    {
+                        String name = (String)drow["Title"];
+                        if (htable.ContainsKey(name)  && (bool)htable[name] == false)
+                        {
+                            cbox.Visible = false;
+                        }
+
+                    }
+                }                
+
+                //cbox.Visible = false;
+            }
+        }
+        else
+        {
+            Server.Transfer("~/Login.aspx");
+        }
     }
 }
