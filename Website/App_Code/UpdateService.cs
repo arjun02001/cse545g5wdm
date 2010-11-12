@@ -34,6 +34,14 @@ public class UpdateService : System.Web.Services.WebService {
         String result;
         String fileExtension =
                 System.IO.Path.GetExtension(fileUpdateDoc.FileName).ToLower();
+
+        ViewDocumentService vds = new ViewDocumentService();
+        vds.GetFileService(docid);
+
+        MemoryStream memoryStream = new MemoryStream(vds.Data);
+
+        if(vds.Extension == fileExtension && vds.)
+
         if (fileUpdateDoc.HasFile)
         {
             String[] allowedExtensions = { ".pdf", ".doc", ".txt", ".docx", ".rtf" };
