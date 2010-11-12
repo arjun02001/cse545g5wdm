@@ -29,6 +29,13 @@
 	width: auto;
 	margin: 0px 40% 0px 40%;
 }
+.passwordbox
+{
+    text-align:center;
+	width: auto;
+	margin: 0px 20% 0px 20%;
+}
+
 
 .centertext
 {
@@ -49,6 +56,9 @@
     <form id="form1" runat="server">
     <div class="heading">
         Web Document Management
+    </div>
+    <div class="passwordbox">
+        <asp:Label ID="lbl_PasswordRequirement" runat="server" Text="Passwords must be at least 7 characters with at least one number, letter, and symbol." />
     </div>
     <div class="loginbox">
         <br />
