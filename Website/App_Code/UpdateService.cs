@@ -40,7 +40,7 @@ public class UpdateService : System.Web.Services.WebService {
 
         MemoryStream memoryStream = new MemoryStream(vds.Data);
 
-        if(vds.Extension == fileExtension && vds.)
+        //if(vds.Extension == fileExtension && vds.)
 
         if (fileUpdateDoc.HasFile)
         {
