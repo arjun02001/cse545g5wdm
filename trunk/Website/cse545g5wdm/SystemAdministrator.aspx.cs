@@ -40,6 +40,49 @@ public partial class cse545g5wdm_SystemAdministrator : System.Web.UI.Page
         }
     }
 
+    protected void user_GridView_Databound(object sender, EventArgs e)
+    {
+        int i;
+        try
+        {
+            for (i = 0; i < user_GridView.Rows.Count; i++)
+            {
+                Label lbl_Position = (Label)user_GridView.Rows[i].FindControl("lbl_GridRole");
+                int position = Int32.Parse(user_GridView.Rows[i].Cells[2].Text);
+                switch (position)
+                {
+                    case 2:
+                        lbl_Position.Text = "Guest User";
+                        break;
+                    case 3:
+                        lbl_Position.Text = "System Administrator";
+                        break;
+                    case 4:
+                        lbl_Position.Text = "Employee";
+                        break;
+                    case 5:
+                        lbl_Position.Text = "Department Manager.";
+                        break;
+                    case 6:
+                        lbl_Position.Text = "CEO";
+                        break;
+                }
+
+            }
+        }
+        catch (ArgumentNullException)
+        {
+        }
+        catch (FormatException)
+        {
+
+        }
+        catch (OverflowException)
+        {
+
+        }
+    }
+
     private void ToggleCheckState(bool checkState)
     {
         try
