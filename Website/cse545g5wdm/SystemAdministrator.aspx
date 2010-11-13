@@ -43,6 +43,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
         Welcome System Admin</div>
+        <asp:HyperLink ID="h1_logout" runat="server" NavigateUrl="~/Logout.aspx" Text="Logout"/>
     &nbsp;&nbsp;&nbsp;&nbsp;<br />
     <br />
     <br />
@@ -58,16 +59,21 @@
     <br />
 &nbsp;<asp:GridView ID="user_GridView" runat="server" AutoGenerateColumns = "False" 
         CellPadding="4" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" 
-        Width="488px">
+        Width="488px" OnDataBound="user_GridView_Databound" >
         <RowStyle BackColor="#FFFBD6" ForeColor="#333333" />
         <Columns>
             <asp:BoundField DataField="user_name" HeaderText="Username" />
             <asp:BoundField DataField="request" HeaderText="Request" />
-            <asp:BoundField DataField="requested_position" HeaderText="Position Requested" />
+            <asp:BoundField DataField="requested_position" HeaderText="Role ID" />
             <asp:TemplateField HeaderText="Select">
                 <ItemTemplate>
                     <asp:CheckBox ID="userSelector_CheckBox" runat="server" />
-                </ItemTemplate>
+                </ItemTemplate> 
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Requested Position">
+                <ItemTemplate>
+                    <asp:Label ID="lbl_GridRole" runat="server" />
+                </ItemTemplate>   
             </asp:TemplateField>
         </Columns>
         <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
