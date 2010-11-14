@@ -39,7 +39,6 @@ public partial class Login : System.Web.UI.Page
         }
         catch (Exception)
         {
-            Server.Transfer("Error.aspx");
         }
 
     }
