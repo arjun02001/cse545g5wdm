@@ -52,7 +52,7 @@
 </style>
     <title>Web Document Management Server</title>
 </head>
-<body>
+<body onload="history.forward()">
     <form id="form1" runat="server">
     <div class="heading">
         Web Document Management
