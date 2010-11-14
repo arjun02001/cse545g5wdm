@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="Register" MasterPageFile="MasterPageLogin.master"%>
 
 
-<asp:Content ID="contentRegsiter" ContentPlaceHolderID="contentNew" Visible="true" runat="server">
+<asp:Content ID="contentNew" ContentPlaceHolderID="contentNew" Visible="true" runat="server">
 
   
     <form id="FormRegister">
