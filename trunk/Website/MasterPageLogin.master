@@ -1,0 +1,48 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPageLogin.master.cs" Inherits="cse545g5wdm_MasterPageLogin" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Web Document Management Group 5</title>
+
+
+<link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+
+    
+</head>
+
+
+<body>
+    
+    
+    <form id="menu" runat="server">
+    
+        <asp:ContentPlaceHolder id="topMenu" runat="server">
+       
+	<!-- end #logo -->
+	<center><h1>&nbsp;Web document Managment</h1></center>
+	<br />
+	
+		
+		
+	
+
+   </asp:ContentPlaceHolder> 
+   <center>
+<asp:ContentPlaceHolder id="contentNew" runat="server" >
+    </asp:ContentPlaceHolder>
+    </center>
+    <center>
+    <asp:ContentPlaceHolder id = "footer" runat ="server">
+    <br />
+    <br />
+     <div class="asu_footer">
+         Group 5 Arizona State University CSE 545 Fall 2010©
+     </div>
+    </asp:ContentPlaceHolder>
+    </center>
+    </form>
+  
+</body>
+</html>
