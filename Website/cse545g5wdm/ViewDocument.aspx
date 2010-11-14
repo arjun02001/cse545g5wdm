@@ -7,7 +7,7 @@
     </div>
     <div>
         
-        <div class="uploadbox">
+        <div class="viewDocumentbox">
             <table>
                 <tr>
                     <td align="right">
