@@ -459,6 +459,26 @@ a:hover {
 
 }
 
+.DocumentListbox
+{
+	float:none;
+	border-bottom-color:Black;
+	border-bottom-style:solid;
+	border-bottom-width:medium;
+	border-left-color:Black;
+	border-left-style:solid;
+	border-left-width:medium;
+	border-top-color:Black;
+	border-top-style: solid;
+	border-top-width:medium;
+	border-right-color:Black;
+	border-right-style:solid;
+	border-right-width:medium;
+	width: auto;
+	margin: 0px 20% 0px 20%;
+
+}
+
 .asu_footer {
    display: block;
    height: 2em;
