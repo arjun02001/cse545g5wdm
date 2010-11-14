@@ -4,6 +4,7 @@
     <div class="heading">
         Share Document
     </div>
+    <center>
     <div class="basicbox">
         <table>
             <tr>
@@ -56,6 +57,7 @@
             </tr>
         </table>
     </div>
+    </center>
 </asp:Content>
 
 
