@@ -26,7 +26,7 @@
             </SelectParameters>
         </asp:SqlDataSource>
         .</div -->
-        <div class="navigationbox">
+        <div class="DocumentListbox">
             <asp:GridView ID="GridView1" runat="server">
                 <Columns>
                 <asp:TemplateField ShowHeader="False" HeaderText="Click">
