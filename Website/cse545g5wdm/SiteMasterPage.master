@@ -42,17 +42,19 @@
 	</div>
 
    </asp:ContentPlaceHolder> 
+   <center>
 <asp:ContentPlaceHolder id="content1" runat="server" >
     </asp:ContentPlaceHolder>
-    
-    <asp:ContentPlaceHolder id = "footer" runat =server>
+    </center>
+    <center>
+    <asp:ContentPlaceHolder id = "footer" runat ="server">
     <br />
     <br />
      <div class="asu_footer">
          Group 5 Arizona State University CSE 545 Fall 2010©
      </div>
     </asp:ContentPlaceHolder>
-    
+    </center>
     </form>
   
 </body>
