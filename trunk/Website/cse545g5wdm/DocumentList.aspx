@@ -5,27 +5,7 @@
         <div class="heading">
             List of Documents
         </div>
-    
-    <!--div class="navigationbox">
-        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" 
-            DataSourceID="sql_related_documents">
-            <Columns>
-                <asp:BoundField DataField="doc_title" HeaderText="doc_title" ReadOnly="True" 
-                    SortExpression="doc_title" />
-                <asp:BoundField DataField="doc_id" HeaderText="doc_id" ReadOnly="True" 
-                    SortExpression="doc_id" />
-            </Columns>
-            
-        </asp:GridView>
-        <asp:SqlDataSource ID="sql_related_documents" runat="server" 
-            ConnectionString="<%$ ConnectionStrings:wdmConnectionString %>" 
-            SelectCommand="sp_GetDocumentsOfUser" SelectCommandType="StoredProcedure">
-            <SelectParameters>
-                <asp:SessionParameter DefaultValue="0" Name="par_userid" SessionField="userid" 
-                    Type="Int32" />
-            </SelectParameters>
-        </asp:SqlDataSource>
-        .</div -->
+     <center>
         <div class="DocumentListbox">
             <asp:GridView ID="GridView1" runat="server">
                 <Columns>
@@ -49,8 +29,9 @@
        </td>
      </tr>
      </table>
-                 
+         </center>          
     </form>
-    
+
+
    </asp:Content>    
     
