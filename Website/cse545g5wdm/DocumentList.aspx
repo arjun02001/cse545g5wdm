@@ -41,8 +41,15 @@
     &nbsp;<br />
     <br />
     &nbsp;
+    <table>
+    <tr align="center">
+        <td align="center">
     <asp:Button ID="Button_CheckOut" runat="server" Text="Check Out" Visible="true" 
                  OnClick="CheckOut_Button_Click" />
+       </td>
+     </tr>
+     </table>
+                 
     </form>
     
    </asp:Content>    
