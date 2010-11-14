@@ -13,7 +13,7 @@
     <td> Document Name
     </td>
         <td>
-        <asp:TextBox ID="txt_fileName" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txt_fileName" runat="server" MaxLength="50"></asp:TextBox>
         </td>
         </tr>
         <tr>
