@@ -67,19 +67,23 @@ public class CheckOut : System.Web.Services.WebService {
                 break;
             }
         }
+        int returnVal = 0;
         for (int i = 0; i < docId.Length; i++)
         {
             if (docId[i] != 0)
             {
+                
                  SqlCommand doclist = new SqlCommand("group5.sp_DocumentCheckIn", connect);
                 doclist.CommandType = CommandType.StoredProcedure;
                 doclist.Parameters.Add(new SqlParameter("@par_userid", SqlDbType.Int)).Value = userID;
                 doclist.Parameters.Add(new SqlParameter("@par_docid", SqlDbType.Int)).Value = docId[i];
-
+                doclist.Parameters.Add(new SqlParameter("@return", SqlDbType.Int));
+                doclist.Parameters["@return"].Direction = ParameterDirection.ReturnValue;
                 try
                 {
                     connect.Open();
                     doclist.ExecuteNonQuery();
+                    returnVal = (int)doclist.Parameters["@return"].Value;
                     connect.Close();
 
                 }
@@ -92,8 +96,14 @@ public class CheckOut : System.Web.Services.WebService {
                 break;
                 }
         }
-
-        return "Document Checked Out";
+        if (returnVal == 0)
+        {
+            return "Document already exists";
+        }
+        else
+        {
+            return "Document Checked Out";
+        }
     }
     
 }
