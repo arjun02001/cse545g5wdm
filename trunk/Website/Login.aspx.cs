@@ -16,6 +16,7 @@ public partial class Login : System.Web.UI.Page
         Response.ExpiresAbsolute = DateTime.Now.AddDays(-1d);
         Response.Expires = -1500;
         Response.CacheControl = "no-cache";
+      
         if(Session.IsNewSession)
         {
             Session.Add("loginAttempts", (object)0);
@@ -38,7 +39,7 @@ public partial class Login : System.Web.UI.Page
         }
         catch (Exception)
         {
-
+            Server.Transfer("Error.aspx");
         }
 
     }
