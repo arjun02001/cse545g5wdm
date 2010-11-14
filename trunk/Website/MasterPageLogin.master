@@ -18,17 +18,24 @@
     
     <form id="menu" runat="server">
     
-        <asp:ContentPlaceHolder id="topMenu" runat="server">
+  <asp:ContentPlaceHolder id="topMenu" runat="server">
        
 	<!-- end #logo -->
 	<center><h1>&nbsp;Web document Managment</h1></center>
 	<br />
-	
+	<div id="header">
+		<div id="menu">
+			<ul>
+				<li><asp:HyperLink ID="hl_Login" runat="server" NavigateUrl="~/Login.aspx" Text="Login"></asp:HyperLink></li>
+          	</ul>
+			
+		</div>
 		
 		
-	
+	</div>
 
    </asp:ContentPlaceHolder> 
+   
    <center>
 <asp:ContentPlaceHolder id="contentNew" runat="server" >
     </asp:ContentPlaceHolder>
