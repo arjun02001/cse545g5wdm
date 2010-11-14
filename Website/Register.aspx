@@ -1,18 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="Register" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="Register" MasterPageFile="MasterPageLogin.master"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
+<asp:Content ID="contentRegsiter" ContentPlaceHolderID="contentNew" Visible="true" runat="server">
 
-  <div style="text-align:center">
-        Web Document Management
-    </div>
-    <form id="FormRegister" runat="server">
-    <div style="text-align:center">
+  
+    <form id="FormRegister">
+    <center>
+ 
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
             ConnectionString="<%$ ConnectionStrings:wdmConnectionString %>" 
             SelectCommand="sp_GetDepartments" SelectCommandType="StoredProcedure">
@@ -21,6 +15,7 @@
             ConnectionString="<%$ ConnectionStrings:wdmConnectionString %>" 
             SelectCommand="sp_GetRoles" SelectCommandType="StoredProcedure">
         </asp:SqlDataSource>
+                
                 <asp:CreateUserWizard ID="cuw_Register" runat="server" RequireEmail="false"
                    OnCreatingUser="cuw_Register_Creating"
                    OnCreatedUser="cuw_Register_Created"
@@ -133,16 +128,8 @@
                         </asp:CompleteWizardStep>
                     </WizardSteps>
                 </asp:CreateUserWizard>       
-            <div>
-        </div>
         
-        
-            
     
-    </div>
-    <div class="copyright">
-         Group 5 Arizona State University CSE 545 Fall 2010©
-         </div>
+   </center>
     </form>
-</body>
-</html>
+</asp:Content>
