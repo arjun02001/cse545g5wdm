@@ -63,6 +63,7 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
         string[] text = new string[GridView1.Rows.Count];
         string[] emailId = new string[GridView1.Rows.Count];
         int j = 0;
+        string returnCheckout = "";
         int userid = 0;
         CheckOut checkOutDocService = new CheckOut();
         for (int i = 0; i <= GridView1.Rows.Count - 1; i++)
@@ -83,9 +84,20 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
             
             userid = (int)Session["userid"];
             // Put a check of text is not empty
-            checkOutDocService.checkOut(text, userid, emailId);
+             returnCheckout = checkOutDocService.checkOut(text, userid, emailId);
 
-            
+             if (returnCheckout == "Document Checked Out")
+             {
+                 HttpContext.Current.Response.Write("<script>alert(' Documents has been checked out ');history.back()</script>");
+                 Response.Write("<script language=javascript>window.location.href='" + Request.Url.ToString() + "'</script>");
+
+             }
+             else
+             {
+                 HttpContext.Current.Response.Write("<script>alert(' Documents cannot be checked out  ');history.back()</script>");
+                 Response.Write("<script language=javascript>window.location.href='" + Request.Url.ToString() + "'</script>");
+
+             }
         }
         else
         {
@@ -93,11 +105,7 @@ public partial class cse545g5wdm_DocumentList : System.Web.UI.Page
             return;
         }
 
-        HttpContext.Current.Response.Write("<script>alert(' Documents has been checked out ');history.back()</script>");
-        //HttpContext.Current.Response.End();
-
-        Response.Write("<script language=javascript>window.location.href='" + Request.Url.ToString() + "'</script>");
-    }
+            }
 
     private void Hide_Checked()
     {
