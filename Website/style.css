@@ -631,3 +631,22 @@ tr.footer td {
 	width: auto;
 	margin: 0px 40% 0px 35%;
 }
+
+   .viewDocumentbox
+{
+	float:none;
+	border-bottom-color:Black;
+	border-bottom-style:solid;
+	border-bottom-width:medium;
+	border-left-color:Black;
+	border-left-style:solid;
+	border-left-width:medium;
+	border-top-color:Black;
+	border-top-style: solid;
+	border-top-width:medium;
+	border-right-color:Black;
+	border-right-style:solid;
+	border-right-width:medium;
+	width: auto;
+	margin: 0px 35% 0px 35%;
+}
