@@ -5,10 +5,8 @@
     <div class="heading">
         Document Viewing
     </div>
-    <div>
-        
-        <div class="viewDocumentbox">
-            <table>
+  
+            <table class="viewDocumentbox">
                 <tr>
                     <td align="right">
                         <asp:Label ID="lbl_ChooseDocument" runat="server" Text="Choose Document" AssociatedControlID="ddl_ChooseDocument"></asp:Label>
@@ -27,13 +25,17 @@
                         </asp:SqlDataSource>
                     </td>
                 </tr>
-            </table>
-            <asp:Button ID="btn_View" runat="server" Text="View Document" 
+                 
+                <tr>
+                <td>
+                <asp:Button ID="btn_View" runat="server" Text="View Document" 
                 onclick="btn_View_Click"/>
+                 </td>
+                </tr>
             <div>
                 <asp:Label id="lbl_Error" runat="server" Visible="false" ForeColor="Red"></asp:Label>   
             </div> 
-        </div>
-    </div>
+            </table>
+            
     </form>
 </asp:Content>

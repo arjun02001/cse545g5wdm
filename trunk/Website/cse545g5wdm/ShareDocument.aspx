@@ -5,8 +5,8 @@
         Share Document
     </div>
     <center>
-    <div class="basicbox">
-        <table>
+
+        <table class="basicbox">
             <tr>
                 <td align="right">
                     Username:
@@ -56,7 +56,6 @@
                 </td>
             </tr>
         </table>
-    </div>
     </center>
 </asp:Content>
 

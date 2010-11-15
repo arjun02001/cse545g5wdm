@@ -6,8 +6,8 @@
         Delete Document
     </div>
 		<center>
-         <div class="uploadbox">
-            <table width="100%" border="-1">
+    
+            <table class="uploadbox">
                 <tr>
                     <td align="right" width="50%">
                         <asp:Label ID="lbl_ChooseDocument" runat="server" Text="Choose Document" AssociatedControlID="ddl_ChooseDocument"></asp:Label>
@@ -39,7 +39,7 @@
             
             </table>
                 <asp:Label id="lbl_Error" runat="server" Visible="false" ForeColor="Red"></asp:Label>   
-            </div> 
+          
        
         
    </center>
