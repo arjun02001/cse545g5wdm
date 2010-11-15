@@ -6,8 +6,8 @@
         CheckIn Document
     </div>
 		
-         <div class="uploadbox">
-            <table >
+      
+            <table class="uploadbox">
                 <tr>
                     <td align="right" width="50%">
                         <asp:Label ID="lbl_ChooseDocument" runat="server" Text="Choose Document" AssociatedControlID="ddl_ChooseDocument"></asp:Label>
@@ -41,6 +41,5 @@
                      </td>
             </tr>
             </table>
-            </div>
     </form>
 </asp:Content>

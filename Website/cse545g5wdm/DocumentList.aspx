@@ -6,8 +6,8 @@
             List of Documents
         </div>
      <center>
-        <div class="DocumentListbox">
-            <asp:GridView ID="GridView1" runat="server">
+    
+            <asp:GridView CssClass="DocumentListbox" ID="GridView1" runat="server">
                 <Columns>
                 <asp:TemplateField ShowHeader="False" HeaderText="Click">
                     <ItemTemplate>
@@ -17,7 +17,6 @@
                 </asp:TemplateField>
                 </Columns>
             </asp:GridView>
-        </div>
     &nbsp;<br />
     <br />
     &nbsp;
