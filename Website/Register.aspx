@@ -22,16 +22,17 @@
                    OnCreateUserError="cuw_Register_Error"
                    ValidationGroup="CreateUserWizard">
                     <WizardSteps>
+                    
                         <asp:CreateUserWizardStep runat="server">
                             <ContentTemplate>
-                                <table border="0" style="font-size: 100%; font-family: Verdana">
+                                <table class ="uploadbox" border="-1" style="font-size: 100%; font-family: Verdana">
                                     <tr>
                                         <td align="center" colspan="2" style="font-weight: bold; color: white; background-color: #5d7b9d">
                                             Sign Up for Your New Account                  
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td align="center">
+                                        <td align="center" colspan="2">
                                             <asp:Label ID="lbl_Error" runat="server" Visible="false" ForeColor="Red"></asp:Label>
                                         </td>
                                        
@@ -114,15 +115,23 @@
                                 </table>  
                             </ContentTemplate>
                         </asp:CreateUserWizardStep>
+                        
                         <asp:CompleteWizardStep runat="server" >
                        <ContentTemplate>
-                           <td align="left">
+                       <table class="uploadbox">
+                       <tr>
+                           <td >
                                             <asp:Label ID="lbl_Result" runat="server" Visible="false" ForeColor="Black"></asp:Label>
                             </td>
-                            <td align="center">
+                              </tr>
+                            <tr>   
+                            <td style="font-weight: bold; color: white; background-color: #5d7b9d">
                                             <asp:HyperLink ID="Login" runat="server" NavigateUrl="~/Login.aspx" Text="Login"></asp:HyperLink>
    
                             </td>
+                            </tr>      
+                          
+                            </table>
                        </ContentTemplate>
                       
                         </asp:CompleteWizardStep>
