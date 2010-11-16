@@ -89,7 +89,57 @@ public class UpdateService : System.Web.Services.WebService {
         {
             fileOK = true;
         }
+        //check for rich text
+        if (uploadedFile.ContentType == "image/jpeg")
+        {
+            fileOK = true;
+        }
+        //check for rich text
+        if (uploadedFile.ContentType == "image/bmp")
+        {
+            fileOK = true;
+        }
 
+        //check for rich text
+        if (uploadedFile.ContentType == "image/png")
+        {
+            fileOK = true;
+        }
+
+        //check for rich text
+        if (uploadedFile.ContentType == "image/tiff")
+        {
+            fileOK = true;
+        }
+
+        //check for rich text
+        if (uploadedFile.ContentType == "image/gif")
+        {
+            fileOK = true;
+        }
+
+        //check for rich text
+        if (uploadedFile.ContentType == "application/vnd.ms-excel")
+        {
+            fileOK = true;
+        }
+        //check for rich text
+        if (uploadedFile.ContentType == "application/vnd.ms-powerpoint")
+        {
+            fileOK = true;
+        }
+
+        //check for mspowerpoint 2007+
+        if (uploadedFile.ContentType == "application/vnd.openxmlformats-officedocument.presentationml.presentation")
+        {
+            fileOK = true;
+        }
+
+        //check for msexcel 2007+
+        if (uploadedFile.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+        {
+            fileOK = true;
+        }
 
         if (fileOK && extensionOK)
         {
