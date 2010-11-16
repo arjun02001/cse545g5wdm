@@ -41,7 +41,7 @@ public class UploadService : System.Web.Services.WebService
                 System.IO.Path.GetExtension(fileUploadDoc.FileName).ToLower();
         if (fileUploadDoc.HasFile)
         {
-            String[] allowedExtensions = { ".pdf", ".doc", ".txt", ".docx", ".rtf" };
+            String[] allowedExtensions = { ".pdf", ".doc", ".txt", ".docx", ".rtf", ".ppt", ".pptx", ".jpg", ".bmp", ".png", ".jpeg", ".gif", ".tiff", ".xls", ".xlsx" };
             for (int i = 0; i < allowedExtensions.Length; i++)
             {
                 if (fileExtension == allowedExtensions[i])
