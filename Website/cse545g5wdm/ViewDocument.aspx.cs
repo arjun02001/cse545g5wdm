@@ -55,6 +55,70 @@ public partial class cse545g5wdm_ViewDocument : System.Web.UI.Page
                 mime = "application/rtf";
                 Response.AddHeader("Content-Disposition", "attachment;filename=" + vds.FileName + "");
             }
+
+            //check for rich text
+
+            if (extension.Equals("jpeg"))
+            {
+                mime = "image/jpeg";
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + vds.FileName + "");
+            }
+
+            if (extension.Equals("jpg"))
+            {
+                mime = "image/jpeg";
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + vds.FileName + "");
+            }
+
+            if (extension.Equals("bmp"))
+            {
+                mime = "image/bmp";
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + vds.FileName + "");
+            }
+
+
+            if (extension.Equals("png"))
+            {
+                mime = "image/png";
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + vds.FileName + "");
+            }
+
+            if (extension.Equals("tiff"))
+            {
+                mime = "image/tiff";
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + vds.FileName + "");
+            }
+
+            if (extension.Equals("gif"))
+            {
+                mime = "image/gif";
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + vds.FileName + "");
+            }
+
+            if (extension.Equals("xls"))
+            {
+                mime = "application/vnd.ms-excel";
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + vds.FileName + "");
+            }
+
+            if (extension.Equals("ppt"))
+            {
+                mime = "application/vnd.ms-powerpoint";
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + vds.FileName + "");
+            }
+
+            if (extension.Equals("pptx"))
+            {
+                mime = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + vds.FileName + "");
+            }
+
+            if (extension.Equals("xlsx"))
+            {
+                mime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + vds.FileName + "");
+            }
+
             Response.Clear();
             Response.Buffer = true;
             Response.ContentType = mime;
