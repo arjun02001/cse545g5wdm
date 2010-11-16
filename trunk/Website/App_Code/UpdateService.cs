@@ -44,7 +44,7 @@ public class UpdateService : System.Web.Services.WebService {
 
         if (fileUpdateDoc.HasFile)
         {
-            String[] allowedExtensions = { ".pdf", ".doc", ".txt", ".docx", ".rtf" };
+            String[] allowedExtensions = { ".pdf", ".doc", ".txt", ".docx", ".rtf", ".ppt",".pptx",".jpg", ".bmp", ".png", ".jpeg", ".gif", ".tiff", ".xls", ".xlsx" };
             for (int i = 0; i < allowedExtensions.Length; i++)
             {
                 if (fileExtension == allowedExtensions[i])
