@@ -89,7 +89,7 @@
         onclick="grantAccess_Button_Click" Text="Grant Access" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Button ID="denyAccess_Button" runat="server" 
-        onclick="denyAccess_Button_Click" Text="Deny Access" />
+        onclick="denyAccess_Button_Click" Text="Deny Access/ Delete User" />
     <div class="logheading">
         System Log
     </div>
