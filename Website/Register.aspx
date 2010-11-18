@@ -6,6 +6,25 @@
   
     <form id="FormRegister">
     <center>
+    
+    <table >
+    <tr>
+    <td>
+    Instruction
+    </td>
+    </tr>
+     <tr>
+    <td>
+  1. Please don't use the same email id as password.
+    </td>
+    </tr>
+     <tr>
+    <td>
+  2. Password should be 7 character long and should contain 1 letter 1 number and 1 symbol.
+   The symbol are # @ * / ( ) % ~ ^ + = 
+    </td>
+    </tr>
+    </table>
  
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
             ConnectionString="<%$ ConnectionStrings:wdmConnectionString %>" 
