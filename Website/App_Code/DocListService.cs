@@ -32,7 +32,7 @@ public class DocListService : System.Web.Services.WebService
     {
         String result = "Failure.";
 
-        SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+        SqlConnection connect = SingletonObject.getInstance();
         SqlCommand doclist = new SqlCommand("group5.StoredProcedure3", connect);
         doclist.CommandType = CommandType.StoredProcedure;
         doclist.Parameters.Add(new SqlParameter("@par_userid", SqlDbType.Int)).Value = userid;

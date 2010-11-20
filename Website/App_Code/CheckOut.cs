@@ -26,7 +26,7 @@ public class CheckOut : System.Web.Services.WebService {
     public string checkOut(String []docName, int userID, String []emailID) {
 
         DocListService ds = new DocListService();
-        SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+        SqlConnection connect = SingletonObject.getInstance();
         SqlCommand userIDCommand = new SqlCommand("group5.sp_GetUserID", connect);
         userIDCommand.CommandType = CommandType.StoredProcedure;
 

@@ -148,7 +148,7 @@ public class UploadService : System.Web.Services.WebService
                 uploadedFile.InputStream.Read(docData, 0, fileLength);
 
                 //upload the file
-                SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+                SqlConnection connect = SingletonObject.getInstance();
                 SqlCommand uploadCommand = new SqlCommand("group5.sp_AddNewDocument", connect);
                 uploadCommand.CommandType = CommandType.StoredProcedure;
                 uploadCommand.Parameters.Add(new SqlParameter("@par_userid", SqlDbType.Int)).Value = userid;
