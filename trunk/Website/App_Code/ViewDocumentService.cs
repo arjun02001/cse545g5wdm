@@ -53,7 +53,7 @@ public class ViewDocumentService : System.Web.Services.WebService {
         try
         {
             ViewDocumentService vds = new ViewDocumentService();
-            SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+            SqlConnection connect = SingletonObject.getInstance();
             SqlCommand command = new SqlCommand("group5.sp_GetDocumentData", connect);
             command.CommandType = System.Data.CommandType.StoredProcedure;
             command.Parameters.Add(new SqlParameter("@doc_id", System.Data.SqlDbType.Int)).Value = itemvalue;

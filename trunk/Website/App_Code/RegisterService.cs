@@ -81,7 +81,7 @@ public class RegisterService : System.Web.Services.WebService {
         request = detectXSS.EncodeString(request);
 
         //if pass all these, connect to sql server
-        SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+        SqlConnection connect = SingletonObject.getInstance();
         SqlCommand command = new SqlCommand("group5.sp_AddNewUser", connect);
         command.CommandType = System.Data.CommandType.StoredProcedure;
         command.Parameters.Add("@par_username", System.Data.SqlDbType.NChar).Value = emailid;

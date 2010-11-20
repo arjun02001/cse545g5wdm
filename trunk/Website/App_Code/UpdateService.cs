@@ -149,7 +149,7 @@ public class UpdateService : System.Web.Services.WebService {
                 uploadedFile.InputStream.Read(docData, 0, fileLength);
                 DocListService docService = new DocListService();
                 int docId = docService.DocumentListData(userId, FileName);
-                SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+                SqlConnection connect = SingletonObject.getInstance();
                
                 int roleid = 0;
 

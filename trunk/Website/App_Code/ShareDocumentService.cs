@@ -33,7 +33,7 @@ public class ShareDocumentService : System.Web.Services.WebService {
 
         try
         {
-            SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+            SqlConnection connect = SingletonObject.getInstance();
             SqlCommand isuserexist = new SqlCommand("group5.sp_IsUserExist", connect);
             isuserexist.CommandType = System.Data.CommandType.StoredProcedure;
             isuserexist.Parameters.Add(new SqlParameter("@par_username", SqlDbType.NChar)).Value = username_target;

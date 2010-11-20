@@ -37,7 +37,7 @@ public class LogService : System.Web.Services.WebService {
     {
         try
         {
-            SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+            SqlConnection connect = SingletonObject.getInstance();
             SqlCommand command = new SqlCommand("group5.sp_AddLog", connect);
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.Add(new SqlParameter("@par_text", SqlDbType.NChar)).Value = action;

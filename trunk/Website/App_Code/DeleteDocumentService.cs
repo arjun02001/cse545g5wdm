@@ -29,7 +29,7 @@ public class DeleteDocumentService : System.Web.Services.WebService {
     {
         string result = "Failure.";
 
-        SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+        SqlConnection connect = SingletonObject.getInstance();
         SqlCommand delete = new SqlCommand("group5.sp_DeleteDocumentByID", connect);
         delete.CommandType = CommandType.StoredProcedure;
         delete.Parameters.Add(new SqlParameter("@par_docid", SqlDbType.Int)).Value = docid;

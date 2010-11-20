@@ -26,7 +26,7 @@ public class CheckInService : System.Web.Services.WebService {
     public string CheckInDocument(int docId, int userID) {       
             if (docId != 0)
             {
-                SqlConnection connect = new SqlConnection(ConfigurationManager.ConnectionStrings["ASPNETDB"].ConnectionString);
+                SqlConnection connect = SingletonObject.getInstance();
                 SqlCommand doclist = new SqlCommand("group5.sp_DocumentCheckout", connect);
                 doclist.CommandType = CommandType.StoredProcedure;
                 doclist.Parameters.Add(new SqlParameter("@par_userid", SqlDbType.Int)).Value = userID;
