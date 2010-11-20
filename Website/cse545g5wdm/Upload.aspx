@@ -29,6 +29,10 @@
                 <asp:Button ID="btn_Upload" runat="server" Text="Upload" Visible="true" 
                  OnClick="Upload_Button_Click" />
             </td>
+            <td>
+                <asp:Label ID="lbl_Error" runat="server" ForeColor="Red" Visible="false" />
+                <asp:Label ID="lbl_Success" runat="server" Text="Successfully uploaded a document." Visible="false" />
+            </td>
         </tr>
         
         
