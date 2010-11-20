@@ -20,8 +20,7 @@
     </tr>
      <tr>
     <td>
-  2. Password should be 7 character long and should contain 1 letter 1 number and 1 symbol.
-   The symbol are # @ * / ( ) % ~ ^ + = 
+  2. Password should be 7 character long and should contain 1 letter 1 number and 1 symbol.  Allowed symbols are "@#$\()*%^&+=".
     </td>
     </tr>
     </table>
@@ -39,7 +38,7 @@
                    OnCreatingUser="cuw_Register_Creating"
                    OnCreatedUser="cuw_Register_Created"
                    OnCreateUserError="cuw_Register_Error"
-                   ValidationGroup="CreateUserWizard">
+                   ValidationGroup="CreateUserWizard" PasswordRegularExpression="^.*(?=.{7,100})(?=.*\\d)(?=.*[a-z])(?=.*[0-9])(?=.*[@#$\\(\\)\\*%^&+=]).*$">
                     <WizardSteps>
                     
                         <asp:CreateUserWizardStep runat="server">
