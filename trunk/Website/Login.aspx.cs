@@ -65,7 +65,7 @@ public partial class Login : System.Web.UI.Page
             Session["loginAttempts"] = (object)((int)Session["loginAttempts"] + 1);
         }
         //validate password
-        Regex passwordRegex = new Regex("([A-z]|[0-9]){6,100}");
+        Regex passwordRegex = new Regex("^.*(?=.{7,100})(?=.*\\d)(?=.*[a-z])(?=.*[0-9])(?=.*[@#$\\(\\)\\*%^&+=]).*$");
         UserTransferObject user = new UserTransferObject();
         LoginService login = new LoginService();
         user = login.Login(passwordRegex, username, password);
