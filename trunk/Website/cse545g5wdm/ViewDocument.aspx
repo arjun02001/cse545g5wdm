@@ -5,15 +5,8 @@
     <div class="heading">
         Document Viewing
     </div>
-<<<<<<< .mine
-   
-        
-       
             <table class="viewDocumentbox">
-=======
-  
-            <table class="viewDocumentbox">
->>>>>>> .r248
+
                 <tr>
                     <td align="right">
                         <asp:Label ID="lbl_ChooseDocument" runat="server" Text="Choose Document" AssociatedControlID="ddl_ChooseDocument"></asp:Label>
@@ -32,32 +25,20 @@
                         </asp:SqlDataSource>
                     </td>
                 </tr>
-<<<<<<< .mine
-                <tr>
-                <td>
-                <asp:Button ID="btn_View" runat="server" Text="View Document" 
-                onclick="btn_View_Click"/>
-                </td>
-                </tr>
-            </table>
-=======
+
                  
                 <tr>
                 <td>
                 <asp:Button ID="btn_View" runat="server" Text="View Document" 
                 onclick="btn_View_Click"/>
->>>>>>> .r248
+
                  </td>
                 </tr>
             <div>
                 <asp:Label id="lbl_Error" runat="server" Visible="false" ForeColor="Red"></asp:Label>   
             </div> 
-<<<<<<< .mine
-            
+
        
-=======
-            </table>
-            
->>>>>>> .r248
+
     </form>
 </asp:Content>
