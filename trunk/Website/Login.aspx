@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Login" ValidateRequest="true"%>
+<%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -69,7 +70,12 @@
          OnLoggedIn="lgn_Login_LoggedIn">
          
         </asp:Login>
-        
+            <!-- localhost, debug -->
+            <!-- <recaptcha:RecaptchaControl ID="recaptcha3" runat="server" PublicKey="6LcRHL8SAAAAAO4DR_ZZUiluqTj6qy8BBFwnLejH" PrivateKey="6LcRHL8SAAAAAF7IdaCSMwuSp1HwhfVx11Nto55F" /> -->
+            <!-- www.mfruchtm.net -->
+            <!-- <recaptcha:RecaptchaControl ID="recaptcha2" runat="server" PublicKey="6LdRHr8SAAAAANf31vpFG59FyioVcZT0duEQ-e0w" PrivateKey="6LdRHr8SAAAAANRWlSRgHZZXqI4uKgFdo4-3FyDm" /> -->
+            <!-- release 10.211.18.1 -->
+            <!-- <recaptcha:RecaptchaControl ID="recaptcha" runat="server" PublicKey="6LcTHL8SAAAAAHDsP4ccn3Ank7k-82XRK9iWmeUc" PrivateKey="6LcTHL8SAAAAAORLvskx0afkyRWHZ26pdguINnxq" /> -->
             <asp:Label ID="lbl_AttemptError" runat="server" Visible="false" ForeColor="Red"></asp:Label>
            
         <br />

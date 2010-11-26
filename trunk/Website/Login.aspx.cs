@@ -55,61 +55,63 @@ public partial class Login : System.Web.UI.Page
 
     private void LoginHandler(string username, string password)
     {
-        LogService logService = new LogService();
-        if (Session["loginAttempts"] == null)
+        if (Page.IsValid)
         {
-            Session["loginAttempts"] = (object)((int) 1);
-        }
-        else
-        {
-            Session["loginAttempts"] = (object)((int)Session["loginAttempts"] + 1);
-        }
-        //validate password
-        Regex passwordRegex = new Regex("^.*(?=.{7,100})(?=.*\\d)(?=.*[a-z])(?=.*[0-9])(?=.*[@#$\\(\\)\\*%^&+=]).*$");
-        UserTransferObject user = new UserTransferObject();
-        LoginService login = new LoginService();
-        user = login.Login(passwordRegex, username, password);
-
-        //if userid is found and login attempts not yet 5
-        if (user.userid != 0 && ((int)Session["loginAttempts"] < 5))
-        {
-            //add user variables
-            Session.Add("userid", user.userid);
-            Session.Add("username", user.username);
-            Session.Add("role", user.role);
-            Session.Remove("loginAttempts");
-            //decide what kind of user, check if sysadmin
-            if (user.role == (int)Enumeration.Role.SystemAdministrator)
+            LogService logService = new LogService();
+            if (Session["loginAttempts"] == null)
             {
-                //record login
-                logService.LogAction("User " + (string)Session["username"] + " has logged in as System Administrator.");
-                Server.Transfer("cse545g5wdm/SystemAdministrator.aspx");
+                Session["loginAttempts"] = (object)((int)1);
             }
             else
             {
-                //record login
-                logService.LogAction("User " + (string)Session["username"] + " has logged on as a standard user.");
-                Server.Transfer("cse545g5wdm/DocumentList.aspx");
+                Session["loginAttempts"] = (object)((int)Session["loginAttempts"] + 1);
             }
-        }
-        else
-        {
-            //record failures
-            if ((int)Session["loginAttempts"] >= 5)
+            //validate password
+            Regex passwordRegex = new Regex("^.*(?=.{7,100})(?=.*\\d)(?=.*[a-z])(?=.*[0-9])(?=.*[@#$\\(\\)\\*%^&+=]).*$");
+            UserTransferObject user = new UserTransferObject();
+            LoginService login = new LoginService();
+            user = login.Login(passwordRegex, username, password);
+
+            //if userid is found and login attempts not yet 5
+            if (user.userid != 0 && ((int)Session["loginAttempts"] < 5))
             {
-                logService.LogAction(DateTime.Now.ToString() + ": Unknown user has exceeded their login attempts.");
-               
-                lbl_AttemptError.Text = ("Unknown user has exceeded their login attempts.").ToString();
-                lbl_AttemptError.Visible = true;
+                //add user variables
+                Session.Add("userid", user.userid);
+                Session.Add("username", user.username);
+                Session.Add("role", user.role);
+                Session.Remove("loginAttempts");
+                //decide what kind of user, check if sysadmin
+                if (user.role == (int)Enumeration.Role.SystemAdministrator)
+                {
+                    //record login
+                    logService.LogAction("User " + (string)Session["username"] + " has logged in as System Administrator.");
+                    Server.Transfer("cse545g5wdm/SystemAdministrator.aspx");
+                }
+                else
+                {
+                    //record login
+                    logService.LogAction("User " + (string)Session["username"] + " has logged on as a standard user.");
+                    Server.Transfer("cse545g5wdm/DocumentList.aspx");
+                }
             }
             else
             {
-                logService.LogAction("Unknown user has failed to login.\n");
-                lbl_AttemptError.Text = ("Unknow user has failed to login.").ToString();
-                lbl_AttemptError.Visible = true;
+                //record failures
+                if ((int)Session["loginAttempts"] >= 5)
+                {
+                    logService.LogAction(DateTime.Now.ToString() + ": Unknown user has exceeded their login attempts.");
+
+                    lbl_AttemptError.Text = ("Unknown user has exceeded their login attempts.").ToString();
+                    lbl_AttemptError.Visible = true;
+                }
+                else
+                {
+                    logService.LogAction("Unknown user has failed to login.\n");
+                    lbl_AttemptError.Text = ("Unknow user has failed to login.").ToString();
+                    lbl_AttemptError.Visible = true;
+                }
             }
         }
-
     }
 
 }
