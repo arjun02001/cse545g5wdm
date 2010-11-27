@@ -45,7 +45,22 @@ public partial class Login : System.Web.UI.Page
 
     protected void lgn_Login_OnLoggingIn(object sender, LoginCancelEventArgs e)
     {
-        
+        LogService logService = new LogService();
+        if (Session["loginAttempts"] == null)
+        {
+            Session["loginAttempts"] = (object)((int)1);
+        }
+        else
+        {
+            Session["loginAttempts"] = (object)((int)Session["loginAttempts"] + 1);
+        }
+        if (((int)Session["loginAttempts"] > 5))
+        {
+            logService.LogAction(DateTime.Now.ToString() + ": Unknown user has exceeded their login attempts.");
+
+            lbl_AttemptError.Text = ("Unknown user has exceeded their login attempts.").ToString();
+            lbl_AttemptError.Visible = true;
+        }
     }
 
     protected void lgn_Login_LoggedIn(object sender, EventArgs e)
@@ -58,14 +73,6 @@ public partial class Login : System.Web.UI.Page
         if (Page.IsValid)
         {
             LogService logService = new LogService();
-            if (Session["loginAttempts"] == null)
-            {
-                Session["loginAttempts"] = (object)((int)1);
-            }
-            else
-            {
-                Session["loginAttempts"] = (object)((int)Session["loginAttempts"] + 1);
-            }
             //validate password
             Regex passwordRegex = new Regex("^.*(?=.{7,100})(?=.*\\d)(?=.*[a-z])(?=.*[0-9])(?=.*[@#$\\(\\)\\*%^&+=]).*$");
             UserTransferObject user = new UserTransferObject();
@@ -73,7 +80,7 @@ public partial class Login : System.Web.UI.Page
             user = login.Login(passwordRegex, username, password);
 
             //if userid is found and login attempts not yet 5
-            if (user.userid != 0 && ((int)Session["loginAttempts"] < 5))
+            if (user.userid != 0 && ((int)Session["loginAttempts"] <= 5))
             {
                 //add user variables
                 Session.Add("userid", user.userid);
@@ -96,20 +103,9 @@ public partial class Login : System.Web.UI.Page
             }
             else
             {
-                //record failures
-                if ((int)Session["loginAttempts"] >= 5)
-                {
-                    logService.LogAction(DateTime.Now.ToString() + ": Unknown user has exceeded their login attempts.");
-
-                    lbl_AttemptError.Text = ("Unknown user has exceeded their login attempts.").ToString();
-                    lbl_AttemptError.Visible = true;
-                }
-                else
-                {
-                    logService.LogAction("Unknown user has failed to login.\n");
-                    lbl_AttemptError.Text = ("Unknow user has failed to login.").ToString();
-                    lbl_AttemptError.Visible = true;
-                }
+                logService.LogAction("Unknown user has failed to login.\n");
+                lbl_AttemptError.Text = ("Unknow user has failed to login.").ToString();
+                lbl_AttemptError.Visible = true;
             }
         }
     }
