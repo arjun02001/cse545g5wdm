@@ -35,12 +35,13 @@ public partial class UpdateWDM : System.Web.UI.Page
     protected void Update_Button_Click(object sender, EventArgs e)
     {
         LogService logAction = new LogService();
-        String fileName = ddl_ChooseDocument.Text;
+        String fileName = ddl_ChooseDocument.SelectedItem.Text;
         FileUpload filePath = FileUploadPath;
         UpdateService updateServiceObj = new UpdateService();
         try
         {
-            String returnVal = updateServiceObj.UpdateFileService(fileName, filePath, (int)Session["userid"], Int32.Parse(ddl_ChooseDocument.SelectedValue));
+            int filenumber = Int32.Parse(ddl_ChooseDocument.SelectedValue);
+            String returnVal = updateServiceObj.UpdateFileService(fileName, filePath, (int)Session["userid"], filenumber);
             if (returnVal == "Success.")
             {
                 lbl_Success.Visible = true;

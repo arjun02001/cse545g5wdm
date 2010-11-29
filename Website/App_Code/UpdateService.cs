@@ -35,10 +35,10 @@ public class UpdateService : System.Web.Services.WebService {
         String fileExtension =
                 System.IO.Path.GetExtension(fileUpdateDoc.FileName).ToLower();
 
-        ViewDocumentService vds = new ViewDocumentService();
-        vds.GetFileService(docid);
+        //ViewDocumentService vds = new ViewDocumentService();
+        //vds.GetFileService(docid);
 
-        MemoryStream memoryStream = new MemoryStream(vds.Data);
+        //MemoryStream memoryStream = new MemoryStream(vds.Data);
 
         //if(vds.Extension == fileExtension && vds.)
 
