@@ -1,0 +1,1 @@
+The goal of the project is to build a secure, small, web document management system as an exercise in building secure systems.  The primary goal of the project is deliver a number of features in a secure manner on a website.  Among these features are document upload, sharing, access rights, editing, and logging.
